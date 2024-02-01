@@ -6,7 +6,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./index.component.scss']
 })
 export class IndexComponent {
-  services = [
+  searchText: string = '';
+
+  allServices = [
     {
       icon: 'flaticon-barbershop',
       name: 'Coiffure & stylisme',
@@ -33,4 +35,14 @@ export class IndexComponent {
       description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry'
     }
   ]
+
+  services = this.allServices;
+
+  searchInsideService(){
+    if(this.searchText){
+      this.services = this.allServices.filter((service) => (service.name.toLowerCase().includes(this.searchText.toLowerCase())));
+    }else{
+      this.services = this.allServices;
+    }
+  }
 }

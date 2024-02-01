@@ -9,6 +9,7 @@ import { IndexComponent } from './components/service-list/index.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { ServiceDetailComponent } from './components/service-detail/service-detail.component';
 import { LoginComponent } from './components/login/login.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { LoginComponent } from './components/login/login.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
