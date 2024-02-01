@@ -1,0 +1,99 @@
+<div class="content-inner-2 bg-white hair-services d-flex align-items-center" style="min-height: 83.4vh">
+
+  <!-- contact area -->
+  <div class="shop-account w-100 p-0">
+    <!-- Product -->
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12 text-center">
+          <h3 class="font-weight-700 m-t0 m-b20">Login Your Account</h3>
+        </div>
+      </div>
+      <div>
+        <div class="max-w500 m-auto m-b30">
+          <div class="p-a30 border-1 seth">
+            <div class="tab-content nav">
+
+              <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+                <h4 class="font-weight-700">LOGIN</h4>
+                <p class="font-weight-600">
+                  If you have an account with us, please log in.
+                </p>
+                <div class="form-group">
+                  <label class="font-weight-700">E-MAIL *</label>
+                  <input
+                    id="mail"
+                    required=""
+                    class="form-control"
+                    placeholder="Your Email Id"
+                    type="email"
+                    formControlName="email"
+                  />
+                </div>
+                <div class="form-group">
+                  <label class="font-weight-700">PASSWORD *</label>
+                  <input
+                    id="mdp"
+                    required=""
+                    class="form-control"
+                    placeholder="Type Password"
+                    type="password"
+                    formControlName="mdp"
+                  />
+                </div>
+                <div class="pb-3">
+                  <a
+                    data-toggle="tab"
+                    href="login.html#forgot-password"
+                    class="m-l5"
+                    >Don't have an account? Register</a
+                  >
+                </div>
+                <div class="text-left">
+                  <button class="btn btn-danger btn-pink">
+                    Login
+                  </button>
+                </div>
+              </form>
+
+              <form
+                id="forgot-password"
+                class="tab-pane fade col-12 p-a0"
+              >
+                <h4 class="font-weight-700">FORGET PASSWORD ?</h4>
+                <p class="font-weight-600">
+                  We will send you an email to reset your password.
+                </p>
+                <div class="form-group">
+                  <label class="font-weight-700">E-MAIL *</label>
+                  <input
+                    name="dzName"
+                    required=""
+                    class="form-control"
+                    placeholder="Your Email Id"
+                    type="email"
+                  />
+                </div>
+                <div class="text-left">
+                  <a
+                    class="site-button outline gray button-lg radius-no"
+                    data-toggle="tab"
+                    href="login.html#login"
+                    >Back</a
+                  >
+                  <button
+                    class="site-button pull-right button-lg radius-no"
+                  >
+                    Submit
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Product END -->
+  </div>
+
+</div>

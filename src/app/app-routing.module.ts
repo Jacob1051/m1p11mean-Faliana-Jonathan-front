@@ -1,8 +1,8 @@
-import { NotFoundComponent } from './components/not-found/not-found.component';
+import { NotFoundComponent } from './routes/not-found/not-found.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { IndexComponent } from './components/service-list/index.component';
-import { LoginComponent } from './components/login/login.component';
+import { IndexComponent } from './routes/service-list/index.component';
+import { LoginComponent } from './routes/login/login.component';
 
 const routes: Routes = [
   { path:'', component: IndexComponent },
