@@ -1,0 +1,16 @@
+.DZ-bt-support-now,
+.DZ-bt-buy-now {
+  display: none !important;
+}
+
+.site-header.header.mo-left{
+  height: auto !important;
+}
+
+.btn-pink{
+  background-color: #ed3d8b;
+  font-weight: bold;
+}
+.btn-pink:hover{
+  background-color: rgb(191, 49, 112);
+}
