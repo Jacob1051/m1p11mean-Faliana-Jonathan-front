@@ -6,7 +6,7 @@
     <div class="container">
       <div class="row">
         <div class="col-md-12 text-center">
-          <h3 class="font-weight-700 m-t0 m-b20">Login Your Account</h3>
+          <h3 class="font-weight-700 m-t0 m-b20">Connectez-vous à votre compte</h3>
         </div>
       </div>
       <div>
@@ -15,28 +15,26 @@
             <div class="tab-content nav">
 
               <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-                <h4 class="font-weight-700">LOGIN</h4>
-                <p class="font-weight-600">
-                  If you have an account with us, please log in.
-                </p>
+                <h4 class="font-weight-700">SE CONNECTER</h4>
+                <p class="font-weight-600"></p>
                 <div class="form-group">
-                  <label class="font-weight-700">E-MAIL *</label>
+                  <label class="font-weight-700">E-Mail *</label>
                   <input
                     id="mail"
                     required=""
                     class="form-control"
-                    placeholder="Your Email Id"
+                    placeholder="Votre Email"
                     type="email"
                     formControlName="email"
                   />
                 </div>
                 <div class="form-group">
-                  <label class="font-weight-700">PASSWORD *</label>
+                  <label class="font-weight-700">Mot de Passe *</label>
                   <input
                     id="mdp"
                     required=""
                     class="form-control"
-                    placeholder="Type Password"
+                    placeholder="Votre Mot de Passe"
                     type="password"
                     formControlName="mdp"
                   />
@@ -46,12 +44,12 @@
                     data-toggle="tab"
                     href="login.html#forgot-password"
                     class="m-l5"
-                    >Don't have an account? Register</a
+                    >Vous n'avez pas de compte ?</a
                   >
                 </div>
                 <div class="text-left">
                   <button class="btn btn-danger btn-pink">
-                    Login
+                    Se Connecter
                   </button>
                 </div>
               </form>
