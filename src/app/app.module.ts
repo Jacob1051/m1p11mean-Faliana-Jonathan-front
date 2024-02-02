@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, importProvidersFrom } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -11,25 +11,28 @@ import { ServiceDetailComponent } from './routes/service-detail/service-detail.c
 import { LoginComponent } from './routes/login/login.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RegisterComponent } from './routes/register/register.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    NotFoundComponent,
-    HeaderComponent,
-    IndexComponent,
-    FooterComponent,
-    ServiceDetailComponent,
-    LoginComponent,
-    RegisterComponent
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    FormsModule,
-    ReactiveFormsModule
-  ],
-  providers: [],
-  bootstrap: [AppComponent]
+    declarations: [
+        AppComponent,
+        NotFoundComponent,
+        HeaderComponent,
+        IndexComponent,
+        FooterComponent,
+        ServiceDetailComponent,
+        LoginComponent,
+        RegisterComponent
+    ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        FormsModule,
+        ReactiveFormsModule
+    ],
+    providers: [
+        importProvidersFrom(HttpClientModule)
+    ],
+    bootstrap: [AppComponent]
 })
 export class AppModule { }

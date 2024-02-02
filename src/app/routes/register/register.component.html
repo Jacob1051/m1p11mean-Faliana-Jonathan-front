@@ -1,49 +1,123 @@
 <div class="page-content bg-white">
-  <!-- contact area -->
-  <div class="section-full content-inner shop-account">
-      <!-- Product -->
-      <div class="container">
-          <div class="row">
-    <div class="col-md-12 text-center">
-      <h3 class="font-weight-700 m-t0 m-b20">Créer un compte</h3>
-    </div>
-  </div>
-          <div class="row">
-    <div class="col-md-12 m-b30">
-      <div class="p-a30 border-1  max-w500 m-auto">
-        <div class="tab-content">
-          <form id="login" class="tab-pane active">
-            <h4 class="font-weight-700">Informations Personnelles</h4>
-            <div class="form-group">
-              <label class="font-weight-700">Nom</label>
-              <input name="dzName" required="" class="form-control" placeholder="Nom" type="text">
+    <!-- contact area -->
+    <div class="section-full content-inner shop-account">
+        <!-- Product -->
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <h3 class="font-weight-700 m-t0 m-b20">Créer un compte</h3>
+                </div>
             </div>
-            <div class="form-group">
-              <label class="font-weight-700">Prénom</label>
-              <input name="dzName" required="" class="form-control" placeholder="Prénom" type="text">
+            <div class="row">
+                <div class="col-md-12 m-b30">
+                    <div class="p-a30 border-1 max-w500 m-auto">
+                        <div class="tab-content">
+                            <form
+                                id="login"
+                                class="tab-pane active"
+                                [formGroup]="registerForm"
+                                (submit)="onSubmit()"
+                            >
+                                <h4 class="font-weight-700">
+                                    Informations Personnelles
+                                </h4>
+                                <div class="form-group">
+                                    <label class="font-weight-700">Nom</label>
+                                    <input
+                                        formControlName="firstName"
+                                        class="form-control"
+                                        placeholder="Nom"
+                                        type="text"
+                                    />
+                                    @if(formControl['firstName'].touched || submitted){
+                                        @if(formControl['firstName'].errors?.['required']){
+                                            <span class="text-danger">Nom requis.</span>
+                                        }
+                                    }
+                                </div>
+                                <div class="form-group">
+                                    <label class="font-weight-700"
+                                        >Prénom</label
+                                    >
+                                    <input
+                                        formControlName="lastName"
+                                        class="form-control"
+                                        placeholder="Prénom"
+                                        type="text"
+                                    />
+                                    @if(formControl['lastName'].touched || submitted){
+                                        @if(formControl['lastName'].errors?.['required']){
+                                            <span class="text-danger">Prénom requis.</span>
+                                        }
+                                    }
+                                </div>
+                                <div class="form-group">
+                                    <label class="font-weight-700"
+                                        >E-Mail</label
+                                    >
+                                    <input
+                                        formControlName="email"
+                                        class="form-control"
+                                        placeholder="E-Mail"
+                                        type="email"
+                                    />
+                                    @if(formControl['email'].touched || submitted){
+                                        @if(formControl['email'].errors?.['required']){
+                                            <span class="text-danger">E-mail requis.</span>
+                                        }
+                                        @if(formControl['email'].errors?.['email']){
+                                            <span class="text-danger">Pas un format d'e-mail valide.</span>
+                                        }
+                                    }
+                                </div>
+                                <div class="form-group">
+                                    <label class="font-weight-700"
+                                        >Mot De Passe</label
+                                    >
+                                    <input
+                                        formControlName="password"
+                                        class="form-control"
+                                        placeholder="Mot De Passe"
+                                        type="password"
+                                    />
+                                    @if(formControl['password'].touched || submitted){
+                                        @if(formControl['password'].errors?.['required']){
+                                            <span class="text-danger">Mot de passe requis.</span>
+                                        }
+                                    }
+                                </div>
+                                <div class="form-group">
+                                    <label class="font-weight-700"
+                                        >Confirmez votre Mot de Passe</label
+                                    >
+                                    <input
+                                        formControlName="confirmPassword"
+                                        class="form-control"
+                                        placeholder="Mot de Passe"
+                                        type="password"
+                                    />
+                                    @if(formControl['confirmPassword'].touched || submitted){
+                                        @if(registerForm.hasError('PasswordNoMatch')){
+                                            <span class="text-danger">Mot de passe ne correspond pas.</span>
+                                        }
+                                    }
+                                </div>
+                                <div class="text-left">
+                                    <button
+                                        class="site-button button-lg radius-no outline outline-2"
+                                        [disabled]="loading"
+                                    >
+                                        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" *ngIf="loading"></span>
+                                        Créer
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="form-group">
-              <label class="font-weight-700">E-Mail</label>
-              <input name="dzName" required="" class="form-control" placeholder="E-Mail" type="email">
-            </div>
-            <div class="form-group">
-              <label class="font-weight-700">Mot De Passe</label>
-              <input name="dzName" required="" class="form-control " placeholder="Mot De Passe" type="password">
-            </div>
-            <div class="form-group">
-              <label class="font-weight-700">Confirmez votre Mot de Passe</label>
-              <input name="dzName" required="" class="form-control " placeholder="Mot de Passe" type="password">
-            </div>
-            <div class="text-left">
-              <button class="site-button button-lg radius-no outline outline-2">Créer</button>
-            </div>
-          </form>
         </div>
-      </div>
+        <!-- Product END -->
     </div>
-  </div>
-</div>
-      <!-- Product END -->
-</div>
-  <!-- contact area  END -->
+    <!-- contact area  END -->
 </div>
