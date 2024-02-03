@@ -1,13 +1,20 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ServiceService {
 
-  constructor() { }
+  constructor(private http: HttpClient) {
+    this.apiUrl = environment.apiUrl;
+   }
+
+  apiUrl:string;
 
   getAllServices() {
+
     return [
       {
         icon: 'flaticon-barbershop',
@@ -35,5 +42,9 @@ export class ServiceService {
         description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry'
       }
     ]
+  }
+
+  getListeService(){
+    return this.http.get(`${this.apiUrl}/Service/getListeService`);
   }
 }

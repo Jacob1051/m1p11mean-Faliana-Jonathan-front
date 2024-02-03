@@ -71,6 +71,7 @@ export class RegisterComponent {
                 error: error => {
                     console.error(error);
                     this.toastr.error(`Une erreur s'est produite`, 'Erreur!', TOAST_OPTIONS_BOTTOM_RIGHT);
+                    this.loading = false;
                 },
             });
         }
