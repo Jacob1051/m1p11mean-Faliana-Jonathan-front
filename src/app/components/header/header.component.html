@@ -1,3 +1,7 @@
+<!-- LOADER -->
+@if(isLoading){
+  <div id="loading-area"></div>
+}
 <!-- header -->
 <header class="site-header header mo-left">
     <!-- main header -->
@@ -322,11 +326,10 @@
                                 </li>
                                 <li>
                                     <a
-                                        href=""
+                                        (click)="logout()"
                                         class="dez-page"
                                         style="color: #ed3d8b"
-                                        ><i class="fa fa-sign-out pe-1"></i> Se
-                                        déconnecter</a
+                                        ><i class="fa fa-sign-out pe-1"></i> Se déconnecter</a
                                     >
                                 </li>
                             </ul>
