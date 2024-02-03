@@ -12,16 +12,20 @@
                     <i class="flaticon-spa text-primary"></i>
                 </div>
             </div>
-            <input
-                type="search"
-                class="form-control"
-                name=""
-                id=""
-                placeholder="Service"
-                style="text-align: center"
-                (input)="searchInsideService()"
-                [(ngModel)]="searchText"
-            />
+
+            <div class="d-flex align-items-center py-2 justify-content-center">
+                <input
+                    type="search"
+                    class="form-control"
+                    name=""
+                    id=""
+                    placeholder="Rechercher un service..."
+                    style="text-align: center; border-top: none; border-left: none; border-right: none; max-width: 500px;"
+                    (input)="searchInsideService()"
+                    [(ngModel)]="searchText"
+                />
+                <i class="fa fa-search text-body-tertiary"></i>
+            </div>
         </div>
 
         <div class="row">
@@ -55,7 +59,10 @@
                             }}</a>
                         </h5>
 
-                        <div class="text-left" style="display: inline-block; margin: auto">
+                        <div
+                            class="text-left"
+                            style="display: inline-block; margin: auto"
+                        >
                             <p class="m-0">
                                 <span class="text-pink"><b>Durée:</b></span>
                                 {{ service.duree }} min
@@ -90,7 +97,7 @@
         </div>
       </div> -->
 
-            <div *ngIf="services.length === 0">
+            <div *ngIf="listeService.length === 0">
                 <div style="text-align: center">Pas de resultat.</div>
             </div>
         </div>

@@ -12,8 +12,9 @@ import { ServiceService } from '../../services/service/service.service';
 export class IndexComponent {
     searchText: string = '';
     allServices;
-    services;
+    // services;
     listeService: any[] = [];
+    listeServiceBackup: any[] = [];
     apiUrl:string;
 
     constructor(
@@ -21,8 +22,8 @@ export class IndexComponent {
         private toastr: ToastrService
     ) {
         this.allServices = service.getAllServices();
-        this.services = this.allServices;
         this.getListeService();
+        // this.services = this.allServices;
         this.apiUrl = environment.apiUrl;
     }
 
@@ -30,13 +31,19 @@ export class IndexComponent {
 
     searchInsideService() {
         if (this.searchText) {
-            this.services = this.allServices.filter((service) =>
-                service.name
-                    .toLowerCase()
-                    .includes(this.searchText.toLowerCase())
-            );
+            // this.services = this.allServices.filter((service) =>
+            //     service.name
+            //         .toLowerCase()
+            //         .includes(this.searchText.toLowerCase())
+            // );
+
+            this.listeService = this.listeService.filter((element)=>{
+                // console.log(element);
+                return element.nomService.toLowerCase().includes(this.searchText.toLowerCase()) || element.description.toLowerCase().includes(this.searchText.toLowerCase()) || element.duree.toString().includes(this.searchText.toLowerCase()) || element.prix.toString().includes(this.searchText.toLowerCase());
+            });
         } else {
-            this.services = this.allServices;
+            // this.services = this.allServices;
+            this.listeService = this.listeServiceBackup;
         }
     }
 
@@ -46,6 +53,7 @@ export class IndexComponent {
             next: (response: any) => {
                 if (response.status == 200) {
                     this.listeService = response.data;
+                    this.listeServiceBackup.length == 0 ? this.listeServiceBackup = this.listeService : null;
                 } else {
                     console.error(response.message);
                     this.toastr.error(
