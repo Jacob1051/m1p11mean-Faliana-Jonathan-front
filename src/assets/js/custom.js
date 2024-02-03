@@ -241,8 +241,11 @@ var BeautyZone = function(){
 
 		jQuery(window).bind("scroll", function() {
 			var scroll = jQuery(window).scrollTop();
-			if (scroll > 900) {
-				jQuery("button.scroltop").fadeIn(1000);
+			// if (scroll > 900) {
+				// console.log(window.innerHeight);
+			if (scroll > 100) {
+				// jQuery("button.scroltop").fadeIn(1000);
+				jQuery("button.scroltop").fadeIn(500);
 			} else {
 				jQuery("button.scroltop").fadeOut(1000);
 			}

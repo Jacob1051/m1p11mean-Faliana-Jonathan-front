@@ -11,7 +11,7 @@
                 <!-- website logo -->
                 <div class="logo-header mostion">
                     <a routerLink="/" class="dez-page"
-                        ><img src="assets/images/logo-2.png" alt=""
+                        ><img src="assets/images/logo-2.webp" alt=""
                     /></a>
                 </div>
                 <!-- nav toggle button -->
@@ -35,16 +35,16 @@
                 >
                     <ul class="nav navbar-nav">
                         <li class="active">
-                            <a href="#">Home </a>
+                            <a >Home </a>
                         </li>
                         <li>
-                            <a href="#"
+                            <a 
                                 >Pages <i class="fa fa-chevron-down"></i
                             ></a>
                             <ul class="sub-menu">
                                 <li>
                                     <a
-                                        href="#"
+                                        
                                         class="dez-page"
                                         >Header <i class="fa fa-angle-right"></i
                                     ></a>
@@ -88,7 +88,7 @@
                                 </li>
                                 <li>
                                     <a
-                                        href="#"
+                                        
                                         class="dez-page"
                                         >Footer <i class="fa fa-angle-right"></i
                                     ></a>
@@ -171,7 +171,7 @@
                                 </li>
                                 <li>
                                     <a
-                                        href="images/overlay/rrdiagonal-line.png.html"
+                                        href="images/overlay/rrdiagonal-line.webp.html"
                                         class="dez-page"
                                         >Error 404</a
                                     >
@@ -194,7 +194,7 @@
                             </ul>
                         </li>
                         <li>
-                            <a href="#"
+                            <a 
                                 >Our Service <i class="fa fa-chevron-down"></i
                             ></a>
                             <ul class="sub-menu">
@@ -213,7 +213,7 @@
                             </ul>
                         </li>
                         <li>
-                            <a href="#"
+                            <a 
                                 >Blog <i class="fa fa-chevron-down"></i
                             ></a>
                             <ul class="sub-menu">
@@ -258,7 +258,7 @@
                             </ul>
                         </li>
                         <li>
-                            <a href="#"
+                            <a 
                                 >Our Portfolio <i class="fa fa-chevron-down"></i
                             ></a>
                             <ul class="sub-menu">
@@ -286,10 +286,9 @@
                             </ul>
                         </li>
 
-                        @if(user){
-                        <li>
-                            <a href="#"
-                                ><i class="fa fa-user pe-1"></i> Mon compte
+                        
+                        <li [class.d-block]="user" [class.d-none]="!user">
+                            <a><i class="fa fa-user pe-1"></i> Mon compte
                                 <i class="fa fa-chevron-down"></i
                             ></a>
                             <ul class="sub-menu left">
@@ -298,12 +297,12 @@
                                     <b class="text-pink"
                                         ><span class="text-uppercase">
                                           {{
-                                            user.role == "Client" ? userInformation?.nomClient : ""
+                                            user && user.role == "Client" ? userInformation?.nomClient : ""
                                           }}
                                         </span
                                         >
                                         {{
-                                          user.role == "Client" ? userInformation?.prenomClient : ""
+                                          user && user.role == "Client" ? userInformation?.prenomClient : ""
                                         }}
                                         </b
                                 ></span>
@@ -334,10 +333,8 @@
                                 </li>
                             </ul>
                         </li>
-                        } @else{
-                        <li
-                            class="d-flex align-items-center justify-content-center"
-                        >
+                        
+                        <li [ngClass]="{'d-flex align-items-center justify-content-center': !user, 'd-none': user}">
                             <button
                                 (click)="goToLogin()"
                                 class="btn btn-danger btn-pink w-100"
@@ -346,7 +343,7 @@
                                 Se Connecter
                             </button>
                         </li>
-                        }
+                        
                     </ul>
                 </div>
             </div>
