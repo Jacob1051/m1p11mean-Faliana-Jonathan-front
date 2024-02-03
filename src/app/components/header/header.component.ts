@@ -9,6 +9,8 @@ import { Router } from '@angular/router';
 export class HeaderComponent {
   constructor(private router: Router){}
 
+  user = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')!) : null;
+
   goToLogin(){
     this.router.navigateByUrl("/login");
   }

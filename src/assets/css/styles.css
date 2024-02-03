@@ -1,16 +1,29 @@
 .DZ-bt-support-now,
 .DZ-bt-buy-now {
-  display: none !important;
+    display: none !important;
 }
 
-.site-header.header.mo-left{
-  height: auto !important;
+.site-header.header.mo-left {
+    height: auto !important;
 }
 
-.btn-pink{
-  background-color: #ed3d8b;
-  font-weight: bold;
+.btn-pink {
+    background-color: #ed3d8b;
+    font-weight: bold;
 }
-.btn-pink:hover{
-  background-color: rgb(191, 49, 112);
+.btn-pink:hover {
+    background-color: rgb(191, 49, 112);
+}
+.header-menu-paragraph {
+    padding-left: 20px;
+    padding-right: 20px;
+    box-sizing: border-box;
+    width: 100%;
+    display: inline-block;
+    text-transform: none;
+    border-bottom: 1px solid #ed3d8b;
+    word-wrap: break-word;
+}
+.text-pink{
+  color: #ed3d8b;
 }

@@ -30,7 +30,7 @@ export class AuthService {
 
                 localStorage.setItem('user', JSON.stringify(res.data));
                 this.userSubject.next(res.data);
-                return res.data;
+                return res;
             }));
     }
 

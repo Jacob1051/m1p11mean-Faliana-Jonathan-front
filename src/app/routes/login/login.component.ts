@@ -27,8 +27,8 @@ export class LoginComponent implements OnInit {
 
     ngOnInit(): void {
         this.loginForm = this.formBuilder.group({
-            email:['', { validators: [Validators.required , Validators.email ]}],
-            password: ['', Validators.required],
+            email:['client@gmail.com', { validators: [Validators.required , Validators.email ]}],
+            password: ['0123456789', Validators.required],
         });
     }
 
@@ -48,15 +48,23 @@ export class LoginComponent implements OnInit {
                 .pipe(first())
                 .subscribe({
                     next: (response: any) => {
+
+                        // console.log(response);
+
                         if(response.status==200){
                             this.toastr.success('Vous vous êtes connecté avec succès!', 'Succès!',  TOAST_OPTIONS_BOTTOM_RIGHT);
+                            
+                            console.log(response.data);
+                            
                             const returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+
                             this.router.navigateByUrl(returnUrl);
                         }
                         else{
                             console.error(response.message);
                             this.toastr.error(`Une erreur s'est produite!`, 'Erreur!', TOAST_OPTIONS_BOTTOM_RIGHT);
                         }
+                        this.loading = false;
                     },
                     error: (error) => {
                         // this.error = error;
