@@ -33,11 +33,12 @@
                         class="icon-lg radius m-b20 d-flex align-items-center justify-content-center w-100"
                         style="min-height: 90.5px"
                     >
-                        <img
-                            src="{{ apiUrl + '/Service/' + service.image }}"
-                            alt=""
-                            width="84px"
-                        />
+                        <a href="#" class="icon-cell">
+                            <img
+                                src="{{ apiUrl + '/Service/' + service.image }}"
+                                alt=""
+                                width="84px"
+                        /></a>
                     </div>
                     } @else{
                     <div class="icon-lg radius m-b20">
@@ -53,8 +54,18 @@
                                 service.nomService
                             }}</a>
                         </h5>
-                        <p class="m-0"><span class="text-pink">Durée:</span> {{ service.duree }} min</p>
-                        <p class="mb-2"><span class="text-pink">Prix:</span> {{ service.prix }} min</p>
+
+                        <div class="text-left" style="display: inline-block; margin: auto">
+                            <p class="m-0">
+                                <span class="text-pink">Durée:</span>
+                                {{ service.duree }} min
+                            </p>
+                            <p class="mb-2">
+                                <span class="text-pink">Prix:</span>
+                                {{ service.prix }} min
+                            </p>
+                        </div>
+
                         <p>{{ service.description }}</p>
                     </div>
                 </div>
