@@ -292,11 +292,14 @@
                                 <span class="header-menu-paragraph pb-2">
                                     Bonjour,<br />
                                     <b class="text-pink"
-                                        ><span class="text-uppercase">{{
-                                            user.userInformation.nom
-                                        }}</span
+                                        ><span class="text-uppercase">
+                                          {{
+                                            user.role == "Client" ? userInformation?.nomClient : ""
+                                          }}
+                                        </span
                                         >
-                                        {{ user.userInformation.prenom
+                                        {{
+                                          user.role == "Client" ? userInformation?.prenomClient : ""
                                         }}</b
                                 ></span>
                                 <li>
