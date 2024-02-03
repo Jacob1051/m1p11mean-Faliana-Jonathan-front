@@ -1,48 +1,67 @@
 @if(isLoading){
-  <div id="loading-area"></div>
+<div id="loading-area"></div>
 }
 
 <!-- <div class="section-full content-inner-2 bg-white hair-services"> -->
 <div class="content-inner-2 bg-white hair-services">
-
-  <div class="container">
-    <div class="section-head text-black text-center">
-      <h2 class="text-primary m-b10">Nos services</h2>
-      <div class="dlab-separator-outer m-b0">
-        <div class="dlab-separator text-primary style-icon">
-          <i class="flaticon-spa text-primary"></i>
-        </div>
-      </div>
-      <input type="search" class="form-control" name="" id="" placeholder="Service" style="text-align: center;" (input)="searchInsideService()" [(ngModel)]='searchText'/>
-    </div>
-
-    <div class="row">
-
-      @for(service of listeService; track $index){
-        <div class="col-lg-4 col-md-6 col-sm-6 p-lr0">
-          <div class="icon-bx-wraper center p-a30">
-            
-            @if(service.icone){
-              <div class="icon-lg radius m-b20">
-                <a href="#" class="icon-cell"
-                  ><i class="{{ service.icone }}"></i
-                ></a>
-              </div>
-            }
-            
-            <div class="icon-content">
-              <h5 class="dez-tilte">
-                <a href="services-details.html">{{ service.nomService }}</a>
-              </h5>
-              <p>{{ service.description }}</p>
+    <div class="container">
+        <div class="section-head text-black text-center">
+            <h2 class="text-primary m-b10">Nos services</h2>
+            <div class="dlab-separator-outer m-b0">
+                <div class="dlab-separator text-primary style-icon">
+                    <i class="flaticon-spa text-primary"></i>
+                </div>
             </div>
-
-          </div>
+            <input
+                type="search"
+                class="form-control"
+                name=""
+                id=""
+                placeholder="Service"
+                style="text-align: center"
+                (input)="searchInsideService()"
+                [(ngModel)]="searchText"
+            />
         </div>
-      }
-      
 
-      <!-- <div class="col-lg-4 col-md-6 col-sm-6 p-lr0" *ngFor="let service of services">
+        <div class="row">
+            @for(service of listeService; track $index){
+            <div class="col-lg-4 col-md-6 col-sm-6 p-lr0">
+                <div class="icon-bx-wraper center p-a30">
+                    @if(service.image){
+                    <div
+                        class="icon-lg radius m-b20 d-flex align-items-center justify-content-center w-100"
+                        style="min-height: 90.5px"
+                    >
+                        <img
+                            src="{{ apiUrl + '/Service/' + service.image }}"
+                            alt=""
+                            width="84px"
+                        />
+                    </div>
+                    } @else{
+                    <div class="icon-lg radius m-b20">
+                        <a href="#" class="icon-cell"
+                            ><i class="{{ service.icone }}"></i>
+                        </a>
+                    </div>
+                    }
+
+                    <div class="icon-content">
+                        <h5 class="dez-tilte">
+                            <a href="services-details.html">{{
+                                service.nomService
+                            }}</a>
+                        </h5>
+                        <p class="m-0"><span class="text-pink">Durée:</span> {{ service.duree }} min</p>
+                        <p class="mb-2"><span class="text-pink">Prix:</span> {{ service.prix }} min</p>
+                        <p>{{ service.description }}</p>
+                    </div>
+                </div>
+            </div>
+            }
+
+            <!-- <div class="col-lg-4 col-md-6 col-sm-6 p-lr0" *ngFor="let service of services">
         <div class="icon-bx-wraper center p-a30">
 
           <div class="icon-lg radius m-b20">
@@ -60,12 +79,9 @@
         </div>
       </div> -->
 
-      <div *ngIf="services.length===0">
-        <div style="text-align: center;">Pas de resultat.</div>
-      </div>
-
+            <div *ngIf="services.length === 0">
+                <div style="text-align: center">Pas de resultat.</div>
+            </div>
+        </div>
     </div>
-
-  </div>
-
 </div>

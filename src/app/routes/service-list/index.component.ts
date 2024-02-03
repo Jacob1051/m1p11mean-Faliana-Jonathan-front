@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { TOAST_OPTIONS_BOTTOM_RIGHT } from 'src/app/utils/toast/toast-options';
+import { environment } from "../../../environments/environment";
 import { ServiceService } from '../../services/service/service.service';
 
 @Component({
@@ -13,6 +14,7 @@ export class IndexComponent {
     allServices;
     services;
     listeService: any[] = [];
+    apiUrl:string;
 
     constructor(
         private service: ServiceService,
@@ -21,6 +23,7 @@ export class IndexComponent {
         this.allServices = service.getAllServices();
         this.services = this.allServices;
         this.getListeService();
+        this.apiUrl = environment.apiUrl;
     }
 
     isLoading: boolean = false;
