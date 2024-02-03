@@ -64,7 +64,7 @@ var BeautyZone = function(){
 				});
 			}   
 		});
-		jQuery('body').scrollspy({target: ".navbar", offset: headerHeight + 2});  
+		// jQuery('body').scrollspy({target: ".navbar", offset: headerHeight + 2});  
 		
 		/* One Page Setup */
 		if(jQuery('.navbar-nav-scroll').length > 0){
