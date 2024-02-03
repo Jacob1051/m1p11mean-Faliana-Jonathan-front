@@ -1,17 +1,19 @@
 import { NgModule, importProvidersFrom } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
+import { HttpClientModule } from '@angular/common/http';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { NotFoundComponent } from './routes/not-found/not-found.component';
-import { HeaderComponent } from './components/header/header.component';
-import { IndexComponent } from './routes/service-list/index.component';
 import { FooterComponent } from './components/footer/footer.component';
-import { ServiceDetailComponent } from './routes/service-detail/service-detail.component';
+import { HeaderComponent } from './components/header/header.component';
 import { LoginComponent } from './routes/login/login.component';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NotFoundComponent } from './routes/not-found/not-found.component';
 import { RegisterComponent } from './routes/register/register.component';
-import { HttpClientModule } from '@angular/common/http';
+import { ServiceDetailComponent } from './routes/service-detail/service-detail.component';
+import { IndexComponent } from './routes/service-list/index.component';
 
 @NgModule({
     declarations: [
@@ -28,7 +30,9 @@ import { HttpClientModule } from '@angular/common/http';
         BrowserModule,
         AppRoutingModule,
         FormsModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        BrowserAnimationsModule,
+        ToastrModule.forRoot(), 
     ],
     providers: [
         importProvidersFrom(HttpClientModule)

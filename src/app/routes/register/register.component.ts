@@ -1,8 +1,13 @@
-import { RegisterService } from './../../services/client/register/register.service';
+
 import { Component } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { confirmPasswordValidator } from 'src/app/utils/form/password-validator.validator';
+import { TOAST_OPTIONS_BOTTOM_RIGHT } from 'src/app/utils/toast/toast-options';
+import { RegisterService } from './../../services/client/register/register.service';
+
+
 
 @Component({
     selector: 'app-register',
@@ -10,16 +15,24 @@ import { confirmPasswordValidator } from 'src/app/utils/form/password-validator.
     styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent {
+
+    constructor(
+        private service: RegisterService,
+        private route: ActivatedRoute,
+        private router: Router,
+        private toastr: ToastrService
+    ) { }
+
     submitted: boolean = false;
     loading: boolean = false;
 
     registerForm: FormGroup = new FormGroup(
         {
-            firstName: new FormControl<string>('', [Validators.required]),
-            lastName: new FormControl<string>('', [Validators.required]),
-            email: new FormControl<string>('', { validators: [Validators.required , Validators.email ]}),
-            password: new FormControl<string>('', { validators: [Validators.required , Validators.minLength(8)]}),
-            confirmPassword: new FormControl<string>('', [Validators.required]),
+            firstName: new FormControl<string>('client', [Validators.required]),
+            lastName: new FormControl<string>('client', [Validators.required]),
+            email: new FormControl<string>('client@gmail.com', { validators: [Validators.required , Validators.email ]}),
+            password: new FormControl<string>('0123456789', { validators: [Validators.required , Validators.minLength(8)]}),
+            confirmPassword: new FormControl<string>('0123456789', [Validators.required]),
         },
         {validators: confirmPasswordValidator});
 
@@ -29,6 +42,9 @@ export class RegisterComponent {
         this.submitted = true;
 
         if(this.registerForm.valid) {
+
+            // console.log("ok?");
+
             this.loading = true;
 
             const auth = this.registerForm.value;
@@ -40,20 +56,29 @@ export class RegisterComponent {
                 password: auth.password,
                 confirmPassword: auth.confirmPassword
             }).subscribe({
-                error: error => {
-                    console.log(error);
-                },
-                complete: () => {
-                    this.router.navigate(['/login'], { relativeTo: this.route });
+                next: (response: any) => {
+                    // console.log(response);
+                    if(response.status == 200){
+                        this.toastr.success('Vous vous êtes inscrit avec succès!', 'Succès!',  TOAST_OPTIONS_BOTTOM_RIGHT);
+                        this.router.navigate(['/login'], { relativeTo: this.route });
+                    }
+                    else{
+                        console.error(response.message);
+                        this.toastr.error(`Une erreur s'est produite!`, 'Erreur!', TOAST_OPTIONS_BOTTOM_RIGHT);
+                    }
                     this.loading = false;
-                }
+                },
+                error: error => {
+                    console.error(error);
+                    this.toastr.error(`Une erreur s'est produite`, 'Erreur!', TOAST_OPTIONS_BOTTOM_RIGHT);
+                },
             });
+        }
+        else{
+            // console.log("not ok?");
+            // this.toastr.success('Vous vous êtes inscrit avec succès!', 'Succès!',  TOAST_OPTIONS_BOTTOM_RIGHT);
         }
     }
 
-    constructor(
-        private service: RegisterService,
-        private route: ActivatedRoute,
-        private router: Router
-    ) { }
+    
 }
