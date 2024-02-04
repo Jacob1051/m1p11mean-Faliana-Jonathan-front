@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { ServiceService } from 'src/app/services/service/service.service';
 import { TOAST_OPTIONS_BOTTOM_RIGHT } from 'src/app/utils/toast/toast-options';
+import { environment } from '../../../environments/environment';
 
 @Component({
     selector: 'app-service-detail',
@@ -16,18 +17,13 @@ export class ServiceDetailComponent {
         private router: Router,
         private toastr: ToastrService
     ) {
-      this.getService();
+        this.getService();
     }
 
     isLoading: boolean = false;
     id: string | null = this.activeRoute.snapshot.paramMap.get('id');
     service: any;
-
-    ngOnInit() {
-        const scriptCode = `BeautyZone.handleMasonryFilter();`;
-        // Utilisation de eval() pour exécuter le code
-        eval(scriptCode);
-    }
+    apiUrl = environment.apiUrl;
 
     getService() {
         this.isLoading = true;

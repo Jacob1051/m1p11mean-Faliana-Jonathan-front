@@ -14,7 +14,22 @@
                             ><i class="{{ service.icone }}"></i>
                         </a>
                     </div>
-                    } @else { }
+                    } @else {
+                    <div
+                        class="icon-lg radius d-flex align-items-center justify-content-center w-100"
+                        style="min-height: 82px"
+                    >
+                        <a
+                            routerLink="/service/{{ service._id }}"
+                            class="icon-cell"
+                        >
+                            <img
+                                src="{{ apiUrl + '/Service/' + service.image }}"
+                                alt=""
+                                width="61.5px"
+                        /></a>
+                    </div>
+                    }
 
                     <div>{{ service.nomService }}</div>
                 </div>
@@ -80,10 +95,12 @@
                     style="position: relative; height: 910.1px"
                 >
                     @for(image of service.galerie; track $index){
-                      {{$index}}
+                    <!-- <p>{{$index}}</p> -->
+
                     <li
-                        class="image-{{$index}} card-container col-lg-4 col-md-4 col-sm-6"
-                        style="position: absolute; left: 0px; top: 0px"
+                        class="image-{{
+                            $index + 1
+                        }} card-container col-lg-4 col-md-4 col-sm-6"
                     >
                         <div class="dlab-box dlab-gallery-box">
                             <div
@@ -91,14 +108,16 @@
                             >
                                 <a href="javascript:void(0);">
                                     <img
-                                        src="assets/images/gallery/masonry/image-1.jpg"
+                                        src="{{ apiUrl }}/Service/{{ image }}"
                                         alt=""
                                     />
                                 </a>
                                 <div class="overlay-bx">
                                     <div class="overlay-icon">
                                         <a
-                                            href="assets/images/gallery/masonry/image-1.jpg"
+                                            href="{{ apiUrl }}/Service/{{
+                                                image
+                                            }}"
                                             class="mfp-link"
                                             title="DexignZone"
                                         >
@@ -117,4 +136,5 @@
         </div>
     </div>
 </div>
+
 }

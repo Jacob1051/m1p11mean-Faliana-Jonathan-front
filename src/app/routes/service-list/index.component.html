@@ -40,7 +40,7 @@
                 <div class="icon-bx-wraper center p-a30 h-100">
                     @if(service.icone){
                     <div class="icon-lg radius m-b20">
-                        <a href="#" class="icon-cell"
+                        <a routerLink="/service/{{ service._id }}" class="icon-cell"
                             ><i class="{{ service.icone }}"></i>
                         </a>
                     </div>
@@ -50,7 +50,7 @@
                         class="icon-lg radius m-b20 d-flex align-items-center justify-content-center w-100"
                         style="min-height: 90.5px"
                     >
-                        <a href="#" class="icon-cell">
+                        <a routerLink="/service/{{ service._id }}" class="icon-cell">
                             <img
                                 src="{{ apiUrl + '/Service/' + service.image }}"
                                 alt=""
@@ -61,7 +61,7 @@
 
                     <div class="icon-content">
                         <h5 class="dez-tilte">
-                            <a href="services-details.html">{{
+                            <a routerLink="/service/{{ service._id }}">{{
                                 service.nomService
                             }}</a>
                         </h5>
