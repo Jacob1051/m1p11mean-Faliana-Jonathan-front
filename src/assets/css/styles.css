@@ -27,3 +27,11 @@
 .text-pink{
   color: #ed3d8b;
 }
+
+.reverse-pink-link{
+    color: #6f6f6f;
+}
+
+.reverse-pink-link:hover{
+    color: #ed3d8b;
+}
