@@ -47,4 +47,8 @@ export class ServiceService {
   getListeService(){
     return this.http.get(`${this.apiUrl}/Service/getListeService`);
   }
+
+  getService(id:string){
+    return this.http.get(`${this.apiUrl}/Service/getService/${id}`);
+  }
 }

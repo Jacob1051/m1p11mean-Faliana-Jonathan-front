@@ -1,248 +1,120 @@
+@if(isLoading){
+<div id="loading-area"></div>
+} @if(service){
 <div class="section-full content-inner-2 bg-white hair-services pb-2">
-  <div class="container">
-    <div class="section-head text-black text-center">
-      <h2 class="text-primary m-b10">
-        <div
-          class="d-flex align-items-center justify-content-center flex-column"
-        >
-          <div class="icon-lg radius m-b20">
-            <a role="button" class="icon-cell text-pink"
-              ><i class="flaticon-makeup"></i
-            ></a>
-          </div>
-          <div>Maquillage</div>
+    <div class="container">
+        <div class="section-head text-black text-center">
+            <h2 class="text-primary m-b10">
+                <div
+                    class="d-flex align-items-center justify-content-center flex-column"
+                >
+                    @if(service.icone){
+                    <div class="icon-lg radius m-b20">
+                        <a role="button" class="icon-cell text-pink"
+                            ><i class="{{ service.icone }}"></i>
+                        </a>
+                    </div>
+                    } @else { }
+
+                    <div>{{ service.nomService }}</div>
+                </div>
+            </h2>
+            <div class="dlab-separator-outer m-b0">
+                <div class="dlab-separator text-primary style-icon">
+                    <i class="flaticon-spa text-primary"></i>
+                </div>
+            </div>
+            <p>
+                {{ service.description }}
+            </p>
         </div>
-      </h2>
-      <div class="dlab-separator-outer m-b0">
-        <div class="dlab-separator text-primary style-icon">
-          <i class="flaticon-spa text-primary"></i>
-        </div>
-      </div>
-      <p>
-        Lorem Ipsum is simply dummy text of the printing and typesetting
-        industry. Lorem Ipsum has been the industry's standard dummy text
-        ever since the.
-      </p>
     </div>
-  </div>
 </div>
 
 <div
-  class="section-full content-inner bg-blue-light"
-  style="
-    background-image: url(assets/images/background/bg5.jpg);
-    background-position: bottom;
-    background-size: cover;
-    background-repeat: no-repeat;
-  "
+    class="section-full content-inner bg-blue-light"
+    style="
+        background-image: url(assets/images/background/bg5.jpg);
+        background-position: bottom;
+        background-size: cover;
+        background-repeat: no-repeat;
+    "
 >
-  <div class="container">
-    <div class="pb-5">
-      <div class="section-head text-black text-center m-b20">
-        <h2 class="text-primary m-b10">Tarifs</h2>
-        <div class="dlab-separator-outer m-b0">
-          <div class="dlab-separator text-primary style-icon">
-            <i class="flaticon-spa text-primary"></i>
-          </div>
+    <div class="container">
+        <div class="pb-5">
+            <div class="section-head text-black text-center m-b20">
+                <h2 class="text-primary m-b10">Tarifs</h2>
+                <div class="dlab-separator-outer m-b0">
+                    <div class="dlab-separator text-primary style-icon">
+                        <i class="flaticon-spa text-primary"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="price-tbl d-flex">
+                <div class="flex-grow-1">
+                    <h4 class="text-primary">Durée</h4>
+                    <p>environ {{ service.duree }} minutes</p>
+                </div>
+                <div class="price-val align-self-center">
+                    <h3 class="text-secondry">
+                        $ {{ service.prix.toFixed(2) }}
+                    </h3>
+                </div>
+            </div>
         </div>
-      </div>
-      <div class="price-tbl d-flex">
-        <div class="flex-grow-1">
-          <h4 class="text-primary">Durée</h4>
-          <p>environ 60 minutes</p>
-        </div>
-        <div class="price-val align-self-center">
-          <h3 class="text-secondry">$34.00</h3>
-        </div>
-      </div>
-    </div>
 
-    <div class="pb-5">
-      <div class="section-head text-black text-center m-b20">
-        <h2 class="text-primary m-b10">Galerie</h2>
-        <div class="dlab-separator-outer m-b0">
-          <div class="dlab-separator text-primary style-icon">
-            <i class="flaticon-spa text-primary"></i>
-          </div>
-        </div>
-      </div>
+        <div class="pb-5">
+            <div class="section-head text-black text-center m-b20">
+                <h2 class="text-primary m-b10">Galerie</h2>
+                <div class="dlab-separator-outer m-b0">
+                    <div class="dlab-separator text-primary style-icon">
+                        <i class="flaticon-spa text-primary"></i>
+                    </div>
+                </div>
+            </div>
 
-      <div class="section-content">
-        <ul
-          id="masonry2"
-          class="row dlab-gallery-listing gallery-grid-4 m-lr0 mfp-gallery"
-          style="position: relative; height: 910.1px"
-        >
-          <li
-            class="image-1 card-container col-lg-4 col-md-4 col-sm-6"
-            style="position: absolute; left: 0px; top: 0px"
-          >
-            <div class="dlab-box dlab-gallery-box">
-              <div
-                class="dlab-thum dlab-img-overlay1 dlab-img-effect zoom-slow"
-              >
-                <a href="javascript:void(0);">
-                  <img
-                    src="assets/images/gallery/masonry/image-1.jpg"
-                    alt=""
-                  />
-                </a>
-                <div class="overlay-bx">
-                  <div class="overlay-icon">
-                    <a
-                      href="assets/images/gallery/masonry/image-1.jpg"
-                      class="mfp-link"
-                      title="DexignZone"
+            <div class="section-content">
+                <ul
+                    id="masonry2"
+                    class="row dlab-gallery-listing gallery-grid-4 m-lr0 mfp-gallery"
+                    style="position: relative; height: 910.1px"
+                >
+                    @for(image of service.galerie; track $index){
+                      {{$index}}
+                    <li
+                        class="image-{{$index}} card-container col-lg-4 col-md-4 col-sm-6"
+                        style="position: absolute; left: 0px; top: 0px"
                     >
-                      <i class="ti-fullscreen icon-bx-xs"></i>
-                    </a>
-                  </div>
-                </div>
-              </div>
+                        <div class="dlab-box dlab-gallery-box">
+                            <div
+                                class="dlab-thum dlab-img-overlay1 dlab-img-effect zoom-slow"
+                            >
+                                <a href="javascript:void(0);">
+                                    <img
+                                        src="assets/images/gallery/masonry/image-1.jpg"
+                                        alt=""
+                                    />
+                                </a>
+                                <div class="overlay-bx">
+                                    <div class="overlay-icon">
+                                        <a
+                                            href="assets/images/gallery/masonry/image-1.jpg"
+                                            class="mfp-link"
+                                            title="DexignZone"
+                                        >
+                                            <i
+                                                class="ti-fullscreen icon-bx-xs"
+                                            ></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    }
+                </ul>
             </div>
-          </li>
-          <li
-            class="image-2 card-container col-lg-4 col-md-4 col-sm-6"
-            style="position: absolute; left: 390px; top: 0px"
-          >
-            <div class="dlab-box dlab-gallery-box">
-              <div
-                class="dlab-thum dlab-img-overlay1 dlab-img-effect zoom-slow"
-              >
-                <a href="javascript:void(0);">
-                  <img
-                    src="assets/images/gallery/masonry/image-5.jpg"
-                    alt=""
-                  />
-                </a>
-                <div class="overlay-bx">
-                  <div class="overlay-icon">
-                    <a
-                      href="assets/images/gallery/masonry/image-5.jpg"
-                      class="mfp-link"
-                      title="DexignZone"
-                    >
-                      <i class="ti-fullscreen icon-bx-xs"></i>
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </li>
-          <li
-            class="image-3 card-container col-lg-4 col-md-4 col-sm-6"
-            style="position: absolute; left: 780px; top: 0px"
-          >
-            <div class="dlab-box dlab-gallery-box">
-              <div
-                class="dlab-thum dlab-img-overlay1 dlab-img-effect zoom-slow"
-              >
-                <a href="javascript:void(0);">
-                  <img
-                    src="assets/images/gallery/masonry/image-3.jpg"
-                    alt=""
-                  />
-                </a>
-                <div class="overlay-bx">
-                  <div class="overlay-icon">
-                    <a
-                      href="assets/images/gallery/masonry/image-3.jpg"
-                      class="mfp-link"
-                      title="DexignZone"
-                    >
-                      <i class="ti-fullscreen icon-bx-xs"></i>
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </li>
-          <li
-            class="image-4 card-container col-lg-4 col-md-4 col-sm-6"
-            style="position: absolute; left: 0px; top: 390px"
-          >
-            <div class="dlab-box dlab-gallery-box">
-              <div
-                class="dlab-thum dlab-img-overlay1 dlab-img-effect zoom-slow"
-              >
-                <a href="javascript:void(0);">
-                  <img
-                    src="assets/images/gallery/masonry/image-4.jpg"
-                    alt=""
-                  />
-                </a>
-                <div class="overlay-bx">
-                  <div class="overlay-icon">
-                    <a
-                      href="assets/images/gallery/masonry/image-4.jpg"
-                      class="mfp-link"
-                      title="DexignZone"
-                    >
-                      <i class="ti-fullscreen icon-bx-xs"></i>
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </li>
-          <li
-            class="image-1 card-container col-lg-4 col-md-4 col-sm-6"
-            style="position: absolute; left: 780px; top: 390px"
-          >
-            <div class="dlab-box dlab-gallery-box">
-              <div
-                class="dlab-thum dlab-img-overlay1 dlab-img-effect zoom-slow"
-              >
-                <a href="javascript:void(0);">
-                  <img
-                    src="assets/images/gallery/masonry/image-6.jpg"
-                    alt=""
-                  />
-                </a>
-                <div class="overlay-bx">
-                  <div class="overlay-icon">
-                    <a
-                      href="assets/images/gallery/masonry/image-6.jpg"
-                      class="mfp-link"
-                      title="DexignZone"
-                    >
-                      <i class="ti-fullscreen icon-bx-xs"></i>
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </li>
-          <li
-            class="image-2 card-container col-lg-4 col-md-4 col-sm-6"
-            style="position: absolute; left: 390px; top: 520px"
-          >
-            <div class="dlab-box dlab-gallery-box">
-              <div
-                class="dlab-thum dlab-img-overlay1 dlab-img-effect zoom-slow"
-              >
-                <a href="javascript:void(0);">
-                  <img
-                    src="assets/images/gallery/masonry/image-2.jpg"
-                    alt=""
-                  />
-                </a>
-                <div class="overlay-bx">
-                  <div class="overlay-icon">
-                    <a
-                      href="assets/images/gallery/masonry/image-2.jpg"
-                      class="mfp-link"
-                      title="DexignZone"
-                    >
-                      <i class="ti-fullscreen icon-bx-xs"></i>
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </li>
-        </ul>
-      </div>
+        </div>
     </div>
-  </div>
 </div>
+}
