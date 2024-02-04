@@ -35,7 +35,7 @@ import { IndexComponent } from './routes/service-list/index.component';
         ToastrModule.forRoot(), 
     ],
     providers: [
-        importProvidersFrom(HttpClientModule)
+        importProvidersFrom(HttpClientModule),
     ],
     bootstrap: [AppComponent]
 })
