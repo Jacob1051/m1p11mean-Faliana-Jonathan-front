@@ -10,6 +10,7 @@ import { environment } from '../../../environments/environment';
     templateUrl: './service-detail.component.html',
     styleUrls: ['./service-detail.component.scss'],
 })
+
 export class ServiceDetailComponent {
     constructor(
         private serviceService: ServiceService,
@@ -24,6 +25,7 @@ export class ServiceDetailComponent {
     id: string | null = this.activeRoute.snapshot.paramMap.get('id');
     service: any;
     apiUrl = environment.apiUrl;
+    isInitBeautyZone: boolean = false;
 
     getService() {
         this.isLoading = true;
@@ -53,6 +55,15 @@ export class ServiceDetailComponent {
                     this.isLoading = false;
                 },
             });
+        }
+    }
+
+    initBeautyZone(){
+        if(!this.isInitBeautyZone){
+            const beautyZone = (<any>window).BeautyZoneCopy;
+            console.log(beautyZone);
+            beautyZone.handleMasonryFilter();
+            this.isInitBeautyZone = true;
         }
     }
 }

@@ -130,6 +130,12 @@
                             </div>
                         </div>
                     </li>
+
+                        <!-- <p style="z-index: 9999999999;">{{$index}} {{ service.galerie.length - 1 }}</p> -->
+                        @if($index == service.galerie.length - 1){
+                            {{ initBeautyZone() }}
+                        }
+                        
                     }
                 </ul>
             </div>

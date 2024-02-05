@@ -942,3 +942,6 @@ jQuery(window).on('resize',function () {
 	BeautyZone.resize();
 });
 /*  Window Resize END */
+
+window.BeautyZoneCopy = BeautyZone;
+// console.log(window.BeautyZoneCopy);
