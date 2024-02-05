@@ -49,7 +49,7 @@
 <div
     class="section-full content-inner bg-blue-light"
     style="
-        background-image: url(assets/images/background/bg5.jpg);
+        background-image: url(assets/images/background/bg5_2.webp);
         background-position: bottom;
         background-size: cover;
         background-repeat: no-repeat;
@@ -89,7 +89,9 @@
             </div>
 
             <div class="section-content">
-                <ul
+                
+                @if(service.galerie && service.galerie.length>0){
+                    <ul
                     id="masonry2"
                     class="row dlab-gallery-listing gallery-grid-4 m-lr0 mfp-gallery"
                     style="position: relative; height: 910.1px"
@@ -140,6 +142,15 @@
 
                     }
                 </ul>
+                }
+                @else {
+                    <div class="row d-flex justify-content-center">
+                        <div class="col-md-4">
+                            <img src="assets/images/gallery_icone.webp" alt="">
+                        </div>
+                    </div>
+                }
+
             </div>
         </div>
     </div>
