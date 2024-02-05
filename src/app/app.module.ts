@@ -14,6 +14,7 @@ import { NotFoundComponent } from './core/routes/not-found/not-found.component';
 import { RegisterComponent } from './core/routes/register/register.component';
 import { ServiceDetailComponent } from './core/routes/service-detail/service-detail.component';
 import { IndexComponent } from './core/routes/service-list/index.component';
+import { LayoutComponent } from './core/components/layout/layout.component';
 
 @NgModule({
     declarations: [
@@ -24,7 +25,8 @@ import { IndexComponent } from './core/routes/service-list/index.component';
         FooterComponent,
         ServiceDetailComponent,
         LoginComponent,
-        RegisterComponent
+        RegisterComponent,
+        LayoutComponent
     ],
     imports: [
         BrowserModule,

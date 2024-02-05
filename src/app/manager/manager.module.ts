@@ -2,17 +2,24 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ManagerRoutingModule } from './manager-routing.module';
 import { ManagerComponent } from './manager.component';
+import { HeaderComponent } from './components/header/header.component';
+import { LayoutComponent } from './components/layout/layout.component';
+import { LoginComponent } from './routes/login/login.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
     declarations: [
-        ManagerComponent
+        ManagerComponent,
+        HeaderComponent,
+        LayoutComponent,
+        LoginComponent
     ],
     imports: [
         CommonModule,
-        ManagerRoutingModule
+        ManagerRoutingModule,
+        FormsModule,
+        ReactiveFormsModule,
     ],
-    // exports: [ManagerComponent],
-    // bootstrap: [ManagerComponent]
 })
 export class ManagerModule { }
