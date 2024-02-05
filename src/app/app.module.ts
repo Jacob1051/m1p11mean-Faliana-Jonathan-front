@@ -7,13 +7,13 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { FooterComponent } from './components/footer/footer.component';
-import { HeaderComponent } from './components/header/header.component';
-import { LoginComponent } from './routes/login/login.component';
-import { NotFoundComponent } from './routes/not-found/not-found.component';
-import { RegisterComponent } from './routes/register/register.component';
-import { ServiceDetailComponent } from './routes/service-detail/service-detail.component';
-import { IndexComponent } from './routes/service-list/index.component';
+import { FooterComponent } from './core/components/footer/footer.component';
+import { HeaderComponent } from './core/components/header/header.component';
+import { LoginComponent } from './core/routes/login/login.component';
+import { NotFoundComponent } from './core/routes/not-found/not-found.component';
+import { RegisterComponent } from './core/routes/register/register.component';
+import { ServiceDetailComponent } from './core/routes/service-detail/service-detail.component';
+import { IndexComponent } from './core/routes/service-list/index.component';
 
 @NgModule({
     declarations: [

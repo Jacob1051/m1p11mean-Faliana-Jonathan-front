@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { first } from 'rxjs/operators';
-import { AuthService } from 'src/app/services/client/auth/auth.service';
+import { AuthService } from 'src/app/core/services/client/auth/auth.service';
 import { TOAST_OPTIONS_BOTTOM_RIGHT } from 'src/app/utils/toast/toast-options';
 
 @Component({
@@ -53,9 +53,9 @@ export class LoginComponent implements OnInit {
 
                         if(response.status==200){
                             this.toastr.success('Vous vous êtes connecté avec succès!', 'Succès!',  TOAST_OPTIONS_BOTTOM_RIGHT);
-                            
+
                             console.log(response.data);
-                            
+
                             const returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
 
                             this.router.navigateByUrl(returnUrl);
