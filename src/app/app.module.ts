@@ -32,7 +32,7 @@ import { IndexComponent } from './routes/service-list/index.component';
         FormsModule,
         ReactiveFormsModule,
         BrowserAnimationsModule,
-        ToastrModule.forRoot(), 
+        ToastrModule.forRoot(),
     ],
     providers: [
         importProvidersFrom(HttpClientModule),

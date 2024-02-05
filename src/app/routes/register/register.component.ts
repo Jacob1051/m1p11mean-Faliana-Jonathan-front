@@ -5,7 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { confirmPasswordValidator } from 'src/app/utils/form/password-validator.validator';
 import { TOAST_OPTIONS_BOTTOM_RIGHT } from 'src/app/utils/toast/toast-options';
-import { RegisterService } from './../../services/client/register/register.service';
+import { RegisterService } from '../../services/client/register/register.service';
 
 
 
@@ -81,5 +81,5 @@ export class RegisterComponent {
         }
     }
 
-    
+
 }
