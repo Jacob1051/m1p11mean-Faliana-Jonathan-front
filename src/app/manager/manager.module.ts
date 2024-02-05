@@ -1,19 +1,27 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ManagerRoutingModule } from './manager-routing.module';
-import { ManagerComponent } from './manager.component';
 import { HeaderComponent } from './components/header/header.component';
 import { LayoutComponent } from './components/layout/layout.component';
 import { LoginComponent } from './routes/login/login.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { EmpAddComponent } from './routes/emp-add/emp-add.component';
+import { EmpListComponent } from './routes/emp-list/emp-list.component';
+import { ServiceListComponent } from './routes/service-list/service-list.component';
+import { ServiceAddComponent } from './routes/service-add/service-add.component';
+import { UploadImagesComponent } from '../core/components/upload-images/upload-images.component';
 
 
 @NgModule({
     declarations: [
-        ManagerComponent,
         HeaderComponent,
         LayoutComponent,
-        LoginComponent
+        LoginComponent,
+        EmpAddComponent,
+        EmpListComponent,
+        ServiceListComponent,
+        ServiceAddComponent,
+        UploadImagesComponent
     ],
     imports: [
         CommonModule,
