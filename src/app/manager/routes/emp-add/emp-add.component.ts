@@ -3,9 +3,9 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { EmployeeService } from '../../services/employee/employee.service';
 import { Component, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
-import { confirmPasswordValidator } from 'src/app/utils/form/password-validator.validator';
+import { confirmPasswordValidator } from 'src/app/_utils/form/password-validator.validator';
 import { ActivatedRoute, Router } from '@angular/router';
-import { TOAST_OPTIONS_BOTTOM_RIGHT } from 'src/app/utils/toast/toast-options';
+import { TOAST_OPTIONS_BOTTOM_RIGHT } from 'src/app/_utils/toast/toast-options';
 
 @Component({
     selector: 'app-emp-add',

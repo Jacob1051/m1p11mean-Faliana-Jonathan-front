@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
-import { TOAST_OPTIONS_BOTTOM_RIGHT } from 'src/app/utils/toast/toast-options';
+import { TOAST_OPTIONS_BOTTOM_RIGHT } from 'src/app/_utils/toast/toast-options';
 import { environment } from "../../../../environments/environment";
 import { ServiceService } from '../../services/service/service.service';
 

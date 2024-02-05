@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from 'src/app/core/services/client/auth/auth.service';
 import { UserInformationService } from 'src/app/core/services/user/userInformation/user-information.service';
-import { TOAST_OPTIONS_BOTTOM_RIGHT } from 'src/app/utils/toast/toast-options';
+import { TOAST_OPTIONS_BOTTOM_RIGHT } from 'src/app/_utils/toast/toast-options';
 
 @Component({
     selector: 'app-header',

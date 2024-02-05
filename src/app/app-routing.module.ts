@@ -11,10 +11,6 @@ import { LayoutComponent } from './core/components/layout/layout.component';
 const managerModule = () => import('./manager/manager.module').then(x => x.ManagerModule);
 
 const routes: Routes = [
-    // { path: '', component: IndexComponent, canActivate: [authGuard] },
-    // { path: 'login', component: LoginComponent },
-    // { path: 'register', component: RegisterComponent },
-    // { path: 'service/:id', component: ServiceDetailComponent },
     {
         path: '', component: LayoutComponent,
         children: [

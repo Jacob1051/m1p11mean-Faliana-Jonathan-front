@@ -3,21 +3,21 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ManagerComponent } from './manager.component';
 
 describe('ManagerComponent', () => {
-  let component: ManagerComponent;
-  let fixture: ComponentFixture<ManagerComponent>;
+    let component: ManagerComponent;
+    let fixture: ComponentFixture<ManagerComponent>;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      imports: [ManagerComponent]
-    })
-    .compileComponents();
-    
-    fixture = TestBed.createComponent(ManagerComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+    beforeEach(async () => {
+        await TestBed.configureTestingModule({
+            imports: [ManagerComponent]
+        })
+            .compileComponents();
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
+        fixture = TestBed.createComponent(ManagerComponent);
+        component = fixture.componentInstance;
+        fixture.detectChanges();
+    });
+
+    it('should create', () => {
+        expect(component).toBeTruthy();
+    });
 });

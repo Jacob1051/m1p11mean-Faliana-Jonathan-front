@@ -3,8 +3,8 @@ import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { confirmPasswordValidator } from 'src/app/utils/form/password-validator.validator';
-import { TOAST_OPTIONS_BOTTOM_RIGHT } from 'src/app/utils/toast/toast-options';
+import { confirmPasswordValidator } from 'src/app/_utils/form/password-validator.validator';
+import { TOAST_OPTIONS_BOTTOM_RIGHT } from 'src/app/_utils/toast/toast-options';
 import { RegisterService } from '../../services/client/register/register.service';
 
 

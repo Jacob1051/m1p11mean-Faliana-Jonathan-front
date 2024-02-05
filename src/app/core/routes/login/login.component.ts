@@ -4,7 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { first } from 'rxjs/operators';
 import { AuthService } from 'src/app/core/services/client/auth/auth.service';
-import { TOAST_OPTIONS_BOTTOM_RIGHT } from 'src/app/utils/toast/toast-options';
+import { TOAST_OPTIONS_BOTTOM_RIGHT } from 'src/app/_utils/toast/toast-options';
 
 @Component({
     selector: 'app-login',

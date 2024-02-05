@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { TOAST_OPTIONS_BOTTOM_RIGHT } from 'src/app/utils/toast/toast-options';
+import { TOAST_OPTIONS_BOTTOM_RIGHT } from 'src/app/_utils/toast/toast-options';
 import { ServiceService } from '../../services/service/service.service';
 
 @Component({
@@ -31,7 +31,6 @@ export class ServiceAddComponent {
             formData.append('description', service.description);
             formData.append('icone', service.icone);
 
-            // Append files to the form data
             for (let i = 0; i < service.image.length; i++) {
                 formData.append('file', service.image[i], service.image[i].name);
             }
