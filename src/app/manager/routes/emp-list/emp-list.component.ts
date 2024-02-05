@@ -28,11 +28,13 @@ export class EmpListComponent implements OnInit{
     ) {}
 
     ngOnInit(): void {
+        this.isLoading = true;
         this.service.getListeEmployee()
             .subscribe({
                 next: (data: any) => {
                     this.listeEmployee = data.data;
                     this.listeEmployeeBackup = this.listeEmployee;
+                    this.isLoading = false;
                 }
             })
     }
