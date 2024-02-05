@@ -35,3 +35,7 @@
 .reverse-pink-link:hover{
     color: #ed3d8b;
 }
+
+.mfp-title{
+    display: none!important;
+}

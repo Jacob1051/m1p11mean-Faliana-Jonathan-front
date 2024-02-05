@@ -62,6 +62,7 @@ export class ServiceDetailComponent {
         if(!this.isInitBeautyZone){
             const beautyZone = (<any>window).BeautyZoneCopy;
             console.log(beautyZone);
+            beautyZone.init();
             beautyZone.handleMasonryFilter();
             this.isInitBeautyZone = true;
         }
