@@ -1,0 +1,141 @@
+<div
+    class="content-inner-2 bg-white hair-services d-flex align-items-center"
+    style="min-height: 83.4vh"
+>
+    <!-- contact area -->
+    <div class="shop-account w-100 p-0">
+        <!-- Product -->
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <h3 class="font-weight-700 m-t0 m-b20">
+                        Connectez-vous à votre compte
+                    </h3>
+                </div>
+            </div>
+            <div class="row">
+                <div class="max-w500 m-auto m-b30">
+                    <div class="p-a30 border-1 seth">
+                        <div class="tab-content nav">
+                            <form
+                                [formGroup]="loginForm"
+                                (ngSubmit)="onSubmit()"
+                                class="w-100"
+                            >
+                                <h4 class="font-weight-700">SE CONNECTER</h4>
+                                @if(error){
+                                <div class="alert alert-danger" role="alert">
+                                    {{ error }}
+                                </div>
+                                }
+                                <div class="form-group">
+                                    <label class="font-weight-700"
+                                        >E-Mail *</label
+                                    >
+                                    <input
+                                        id="mail"
+                                        required=""
+                                        class="form-control"
+                                        placeholder="Votre Email"
+                                        type="email"
+                                        formControlName="email"
+                                    />
+                                    @if(formControl['email'].touched ||
+                                    submitted){
+                                    @if(formControl['email'].errors?.['required']){
+                                    <span class="text-danger"
+                                        >E-mail requis.</span
+                                    >
+                                    }
+                                    @if(formControl['email'].errors?.['email']){
+                                    <span class="text-danger"
+                                        >Pas un format d'e-mail valide.</span
+                                    >
+                                    } }
+                                </div>
+                                <div class="form-group">
+                                    <label class="font-weight-700"
+                                        >Mot de Passe *</label
+                                    >
+                                    <input
+                                        id="mdp"
+                                        required=""
+                                        class="form-control"
+                                        placeholder="Votre Mot de Passe"
+                                        type="password"
+                                        formControlName="password"
+                                    />
+                                    @if(formControl['password'].touched ||
+                                    submitted){
+                                    @if(formControl['password'].errors?.['required']){
+                                    <span class="text-danger"
+                                        >Mot de passe requis.</span
+                                    >
+                                    } }
+                                </div>
+                                <div class="pb-3">
+                                    <a routerLink="/register" class="m-l5"
+                                        >Vous n'avez pas de compte ?</a
+                                    >
+                                </div>
+                                <div class="text-left">
+                                    <button
+                                        class="btn btn-danger btn-pink"
+                                        [disabled]="loading"
+                                    >
+                                        <span
+                                            class="spinner-border spinner-border-sm"
+                                            role="status"
+                                            aria-hidden="true"
+                                            *ngIf="loading && submitted"
+                                        ></span>
+                                        Se Connecter
+                                    </button>
+                                </div>
+                            </form>
+
+                            <form
+                                id="forgot-password"
+                                class="tab-pane fade col-12 p-a0"
+                            >
+                                <h4 class="font-weight-700">
+                                    FORGET PASSWORD ?
+                                </h4>
+                                <p class="font-weight-600">
+                                    We will send you an email to reset your
+                                    password.
+                                </p>
+                                <div class="form-group">
+                                    <label class="font-weight-700"
+                                        >E-MAIL *</label
+                                    >
+                                    <input
+                                        name="dzName"
+                                        required=""
+                                        class="form-control"
+                                        placeholder="Your Email Id"
+                                        type="email"
+                                    />
+                                </div>
+                                <div class="text-left">
+                                    <a
+                                        class="site-button outline gray button-lg radius-no"
+                                        data-toggle="tab"
+                                        href="login.html#login"
+                                        >Back</a
+                                    >
+                                    <button
+                                        class="site-button pull-right button-lg radius-no"
+                                    >
+                                        Submit
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Product END -->
+    </div>
+</div>

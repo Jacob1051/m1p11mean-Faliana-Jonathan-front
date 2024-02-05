@@ -1,0 +1,117 @@
+@if(isLoading){
+<div id="loading-area"></div>
+}
+
+<!-- <div class="section-full content-inner-2 bg-white hair-services"> -->
+<div class="content-inner-2 bg-white hair-services">
+    <div class="container">
+        <div class="section-head text-black text-center">
+            <h2 class="text-primary m-b10">Nos services</h2>
+            <div class="dlab-separator-outer m-b0">
+                <div class="dlab-separator text-primary style-icon">
+                    <i class="flaticon-spa text-primary"></i>
+                </div>
+            </div>
+
+            <div class="d-flex align-items-center py-2 justify-content-center">
+                <input
+                    type="search"
+                    class="form-control"
+                    name=""
+                    id=""
+                    placeholder="Rechercher un service..."
+                    style="
+                        text-align: center;
+                        border-top: none;
+                        border-left: none;
+                        border-right: none;
+                        max-width: 500px;
+                    "
+                    (input)="searchInsideService()"
+                    [(ngModel)]="searchText"
+                />
+                <i class="fa fa-search text-body-tertiary"></i>
+            </div>
+        </div>
+
+        <div class="row d-flex">
+            @for(service of listeService; track $index){
+            <div class="col-lg-4 col-md-6 col-sm-6 p-lr0">
+                <div class="icon-bx-wraper center p-a30 h-100">
+                    @if(service.icone){
+                    <div class="icon-lg radius m-b20">
+                        <a
+                            [routerLink]="['/service/' + service._id]"
+                            class="icon-cell"
+                            ><i class="{{ service.icone }}"></i>
+                        </a>
+                    </div>
+                    } @else{
+
+                    <div
+                        class="icon-lg radius m-b20 d-flex align-items-center justify-content-center w-100"
+                        style="min-height: 90.5px"
+                    >
+                        <a
+                            [routerLink]="['/service/' + service._id]"
+                            class="icon-cell"
+                        >
+                            <img
+                                src="{{ apiUrl + '/Service/' + service.image }}"
+                                alt=""
+                                width="84px"
+                        /></a>
+                    </div>
+                    }
+
+                    <div class="icon-content">
+                        <h5 class="dez-tilte">
+                            <a [routerLink]="['/service/' + service._id]">{{
+                                service.nomService
+                            }}</a>
+                        </h5>
+
+                        <div
+                            class="text-left"
+                            style="display: inline-block; margin: auto"
+                        >
+                            <p class="m-0">
+                                <span class="text-pink"><b>Durée:</b></span>
+                                {{ service.duree }} min
+                            </p>
+                            <p class="mb-2">
+                                <span class="text-pink"><b>Prix:</b></span>
+                                {{ service.prix }} $
+                            </p>
+                        </div>
+
+                        <p>{{ service.description }}</p>
+                    </div>
+                </div>
+            </div>
+            }
+
+            <!-- <div class="col-lg-4 col-md-6 col-sm-6 p-lr0" *ngFor="let service of services">
+            <div class="icon-bx-wraper center p-a30">
+
+              <div class="icon-lg radius m-b20">
+                <a href="services-details.html" class="icon-cell"
+                  ><i class="{{ service.icon }}"></i
+                ></a>
+              </div>
+
+              <div class="icon-content">
+                <h5 class="dez-tilte">
+                  <a href="services-details.html">{{ service.name }}</a>
+                </h5>
+                <p>{{ service.description }}</p>
+              </div>
+            </div>
+          </div> -->
+
+            <div *ngIf="listeService.length === 0">
+                <div style="text-align: center">Pas de resultat.</div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,145 @@
+<!-- LOADER -->
+@if(isLoading){
+  <div id="loading-area"></div>
+}
+<!-- header -->
+<header class="site-header header mo-left">
+    <!-- main header -->
+    <div class="sticky-header main-bar-wraper navbar-expand-lg">
+        <div class="main-bar clearfix">
+            <div class="container clearfix">
+                <!-- website logo -->
+                <div class="logo-header mostion">
+                    <a routerLink="/" class="dez-page"
+                        ><img src="assets/images/logo-2.webp" alt=""
+                    /></a>
+                </div>
+                <!-- nav toggle button -->
+                <button
+                    class="navbar-toggler collapsed navicon justify-content-end"
+                    type="button"
+                    data-toggle="collapse"
+                    data-target="#navbarNavDropdown"
+                    aria-controls="navbarNavDropdown"
+                    aria-expanded="false"
+                    aria-label="Toggle navigation"
+                >
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <!-- main nav -->
+                <div
+                    class="header-nav navbar-collapse collapse justify-content-end"
+                    id="navbarNavDropdown"
+                >
+                    <ul class="nav navbar-nav">
+                        <li>
+                            <a
+                                >Employee <i class="fa fa-chevron-down"></i
+                            ></a>
+                            <ul class="sub-menu">
+                                <li>
+                                    <a
+                                        [routerLink]="['/manager/emp/list']"
+                                        class="dez-page"
+                                        >Liste</a
+                                    >
+                                </li>
+                                <li>
+                                    <a
+                                        [routerLink]="['/manager/emp/add']"
+                                        class="dez-page"
+                                        >Ajout</a
+                                    >
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li>
+                            <a
+                                >Service <i class="fa fa-chevron-down"></i
+                            ></a>
+                            <ul class="sub-menu">
+                                <li>
+                                    <a
+                                        [routerLink]="['/manager/service/list']"
+                                        class="dez-page"
+                                        >Liste</a
+                                    >
+                                </li>
+                                <li>
+                                    <a
+                                        [routerLink]="['/manager/service/add']"
+                                        class="dez-page"
+                                        >Ajout</a
+                                    >
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li [class.d-block]="user" [class.d-none]="!user">
+                            <a><i class="fa fa-user pe-1"></i> Mon compte
+                                <i class="fa fa-chevron-down"></i
+                            ></a>
+                            <ul class="sub-menu left">
+                                <span class="header-menu-paragraph pb-2">
+                                    Bonjour,<br />
+                                    <b class="text-pink"
+                                        ><span class="text-uppercase">
+                                          {{
+                                            user && user.role == "Client" ? userInformation?.nomClient : ""
+                                          }}
+                                        </span
+                                        >
+                                        {{
+                                          user && user.role == "Client" ? userInformation?.prenomClient : ""
+                                        }}
+                                        </b
+                                ></span>
+                                <li>
+                                    <a href="shop-columns.html" class="dez-page"
+                                        >Shop Columns</a
+                                    >
+                                </li>
+                                <li>
+                                    <a href="shop-login.html" class="dez-page"
+                                        >Shop Login</a
+                                    >
+                                </li>
+                                <li>
+                                    <a
+                                        href="shop-register.html"
+                                        class="dez-page"
+                                        >Shop Register</a
+                                    >
+                                </li>
+                                <li role="button">
+                                    <a
+                                        (click)="logout()"
+                                        class="dez-page"
+                                        style="color: #ed3d8b"
+                                        ><i class="fa fa-sign-out pe-1"></i> Se déconnecter</a
+                                    >
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li [ngClass]="{'d-flex align-items-center justify-content-center': !user, 'd-none': user}">
+                            <button
+                                (click)="goToLogin()"
+                                class="btn btn-danger btn-pink w-100"
+                                style="height: 50px"
+                            >
+                                Se Connecter
+                            </button>
+                        </li>
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- main header END -->
+</header>
+<!-- header END -->

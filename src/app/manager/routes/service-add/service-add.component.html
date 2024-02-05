@@ -1,0 +1,174 @@
+<!-- @if(isLoading){
+    <div id="loading-area"></div>
+} -->
+
+<!-- <div class="section-full content-inner-2 bg-white hair-services"> -->
+<div class="content-inner-2 bg-white hair-services">
+    <div class="container">
+        <div class="section-head text-black text-center">
+            <h2 class="text-primary m-b10">Ajout service</h2>
+            <div class="dlab-separator-outer m-b0">
+                <div class="dlab-separator text-primary style-icon">
+                    <i class="flaticon-spa text-primary"></i>
+                </div>
+            </div>
+        </div>
+
+        <div class="shop-account w-100 p-0">
+            <div class="container">
+                <div class="row">
+                    <div class="max-w500 m-auto m-b30">
+                        <div class="p-a30 border-1 seth">
+                            <div class="tab-content nav">
+                                <form
+                                    enctype="multipart/form-data"
+                                    [formGroup]="addServiceForm"
+                                    (ngSubmit)="submit()"
+                                    class="w-100"
+                                >
+                                    <div class="form-group">
+                                        <label class="font-weight-700"
+                                            >Nom *</label
+                                        >
+                                        <input
+                                            id="nom"
+                                            class="form-control"
+                                            placeholder="Nom du service"
+                                            type="text"
+                                            formControlName="nomService"
+                                        />
+                                        @if(formControl['nomService'].touched ||
+                                        submitted){
+                                        @if(formControl['nomService'].errors?.['required']){
+                                        <span class="text-danger"
+                                            >Nom requis.</span
+                                        >
+                                        } }
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="font-weight-700"
+                                            >Prix *</label
+                                        >
+                                        <input
+                                            id="prix"
+                                            class="form-control"
+                                            placeholder="Prix du service"
+                                            type="number"
+                                            formControlName="prix"
+                                        />
+                                        @if(formControl['prix'].touched ||
+                                        submitted){
+                                        @if(formControl['prix'].errors?.['required']){
+                                        <span class="text-danger"
+                                            >Prix requis.</span
+                                        >
+                                        } }
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="font-weight-700"
+                                            >Duree *</label
+                                        >
+                                        <input
+                                            id="duree"
+                                            required=""
+                                            class="form-control"
+                                            placeholder="Duree en minute"
+                                            type="number"
+                                            formControlName="duree"
+                                        />
+                                        @if(formControl['duree'].touched ||
+                                        submitted){
+                                        @if(formControl['duree'].errors?.['required']){
+                                        <span class="text-danger"
+                                            >Duree requis.</span
+                                        >
+                                        } }
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="font-weight-700"
+                                            >Commission *</label
+                                        >
+                                        <input
+                                            id="mdp"
+                                            required=""
+                                            class="form-control"
+                                            placeholder="Commission en pourcentage"
+                                            type="number"
+                                            formControlName="commission"
+                                        />
+                                        @if(formControl['commission'].touched ||
+                                        submitted){
+                                        @if(formControl['commission'].errors?.['required']){
+                                        <span class="text-danger"
+                                            >Commission requis.</span
+                                        >
+                                        } }
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="font-weight-700"
+                                            >Description</label
+                                        >
+                                        <input
+                                            formControlName="description"
+                                            class="form-control"
+                                            placeholder="Description du service"
+                                            type="text"
+                                        />
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="font-weight-700"
+                                            >Icone *</label
+                                        >
+                                        <input
+                                            id="mdp"
+                                            required=""
+                                            class="form-control"
+                                            placeholder="Icone"
+                                            type="text"
+                                            formControlName="icone"
+                                            (input)="checkIcon()"
+                                        />
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="font-weight-700"
+                                            >Image *</label
+                                        >
+                                        <app-upload-images
+                                            [formData]="addServiceForm"
+                                            [formField]="'image'"
+                                        ></app-upload-images>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="font-weight-700"
+                                            >Galerie *</label
+                                        >
+                                        <app-upload-images
+                                            [multiple]="true"
+                                            [formData]="addServiceForm"
+                                            [formField]="'galerie'"
+                                        ></app-upload-images>
+                                    </div>
+
+                                    <div class="text-left">
+                                        <button
+                                            class="btn btn-danger btn-pink"
+                                            [disabled]="loading"
+                                        >
+                                            <span
+                                                class="spinner-border spinner-border-sm"
+                                                role="status"
+                                                aria-hidden="true"
+                                                *ngIf="loading && submitted"
+                                            ></span>
+                                            Ajouter
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

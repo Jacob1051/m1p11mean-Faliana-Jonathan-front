@@ -1,0 +1,94 @@
+@if(isLoading){
+<div id="loading-area"></div>
+}
+
+<!-- <div class="section-full content-inner-2 bg-white hair-services"> -->
+<div class="content-inner-2 bg-white hair-services">
+    <div class="container">
+        <div class="section-head text-black text-center">
+            <h2 class="text-primary m-b10">Les employees</h2>
+            <div class="dlab-separator-outer m-b0">
+                <div class="dlab-separator text-primary style-icon">
+                    <i class="flaticon-spa text-primary"></i>
+                </div>
+            </div>
+
+            <div class="d-flex align-items-center py-2 justify-content-center">
+                <input
+                    type="search"
+                    class="form-control"
+                    name=""
+                    id=""
+                    placeholder="Rechercher un(e) employe(e)..."
+                    style="
+                        text-align: center;
+                        border-top: none;
+                        border-left: none;
+                        border-right: none;
+                        max-width: 500px;
+                    "
+                    (input)="searchInsideEmpList()"
+                    [(ngModel)]="searchText"
+                />
+                <i class="fa fa-search text-body-tertiary"></i>
+            </div>
+        </div>
+
+        <div class="row d-flex">
+            @if(listeEmployee){
+                @for(employee of listeEmployee; track $index){
+                    <div class="col-lg-4 col-md-6 col-sm-6 p-lr0">
+                        <div class="icon-bx-wraper center p-a30 h-100">
+
+                            <div
+                                class="icon-lg radius m-b20 d-flex align-items-center justify-content-center w-100"
+                                style="min-height: 90.5px"
+                            >
+                                <a routerLink="" class="icon-cell">
+                                    <img
+                                        src=""
+                                        alt=""
+                                        width="84px"
+                                /></a>
+                            </div>
+
+                            <div class="icon-content">
+                                <h5 class="dez-tilte">
+                                    <a routerLink="/">{{
+                                        employee.nomEmploye+" "+employee.prenomEmploye
+                                    }}</a>
+                                </h5>
+
+                                <!-- <div
+                                    class="text-left"
+                                    style="display: inline-block; margin: auto"
+                                >
+                                    <p class="m-0">
+                                        <span class="text-pink"><b>Durée:</b></span>
+                                        {{ service.duree }} min
+                                    </p>
+                                    <p class="mb-2">
+                                        <span class="text-pink"><b>Prix:</b></span>
+                                        {{ service.prix }} $
+                                    </p>
+                                </div>
+
+                                <p>{{ service.description }}</p> -->
+                            </div>
+                        </div>
+                    </div>
+                }
+            }@else{
+                <div class="text-center">
+                    <div class="spinner-border" role="status">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                </div>
+            }
+
+            <!-- <div *ngIf="listeService.length === 0">
+                <div style="text-align: center">Pas de resultat.</div>
+            </div> -->
+        </div>
+    </div>
+</div>
