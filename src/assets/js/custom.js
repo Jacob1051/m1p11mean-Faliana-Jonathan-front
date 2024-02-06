@@ -64,6 +64,7 @@ var BeautyZone = function(){
 				});
 			}   
 		});
+		
 		// jQuery('body').scrollspy({target: ".navbar", offset: headerHeight + 2});  
 		// soloina
 		
@@ -113,6 +114,7 @@ var BeautyZone = function(){
 			var refElement = jQuery(elementLink.attr("href"));
 			
 			var headerFullHeight =   parseInt($('.main-bar').css('height'), 10);
+
 			if (refElement.offset().top - headerFullHeight - 20 <= scrollPos && refElement.offset().top + refElement.height() > scrollPos) {
 			
 				jQuery('.navbar-nav-scroll a').parent('li').removeClass("active");
@@ -120,6 +122,7 @@ var BeautyZone = function(){
 			}else{
 				elementLink.parent('li').removeClass("active");
 			}
+			
 		});
 	} 
 	
@@ -857,7 +860,7 @@ var BeautyZone = function(){
 			boxHover();
 			wow_animation();
 			priceslider();
-			onePageLayout();
+			// onePageLayout(); //soloina
 			dzTheme();
 			handleResizeElement();
 			homeSearch();
