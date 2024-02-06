@@ -1,4 +1,4 @@
-import { Employee } from "./employee";
+import { Employee } from "./employe";
 import { Service } from "./service";
 import { Statut } from "./statut";
 

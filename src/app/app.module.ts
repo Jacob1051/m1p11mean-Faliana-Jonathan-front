@@ -9,12 +9,13 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FooterComponent } from './core/components/footer/footer.component';
 import { HeaderComponent } from './core/components/header/header.component';
+import { LayoutComponent } from './core/components/layout/layout.component';
+import { HomeComponent } from './core/routes/home/home.component';
 import { LoginComponent } from './core/routes/login/login.component';
 import { NotFoundComponent } from './core/routes/not-found/not-found.component';
 import { RegisterComponent } from './core/routes/register/register.component';
 import { ServiceDetailComponent } from './core/routes/service-detail/service-detail.component';
 import { IndexComponent } from './core/routes/service-list/index.component';
-import { LayoutComponent } from './core/components/layout/layout.component';
 
 @NgModule({
     declarations: [
@@ -26,7 +27,8 @@ import { LayoutComponent } from './core/components/layout/layout.component';
         ServiceDetailComponent,
         LoginComponent,
         RegisterComponent,
-        LayoutComponent
+        LayoutComponent,
+        HomeComponent
     ],
     imports: [
         BrowserModule,

@@ -24,34 +24,36 @@
     border-bottom: 1px solid #ed3d8b;
     word-wrap: break-word;
 }
-.text-pink{
-  color: #ed3d8b;
-}
-
-.reverse-pink-link{
-    color: #6f6f6f;
-}
-
-.reverse-pink-link:hover{
+.text-pink {
     color: #ed3d8b;
 }
 
-.mfp-title{
-    display: none!important;
+.reverse-pink-link {
+    color: #6f6f6f;
 }
 
-.btn-pink[disabled]{
+.reverse-pink-link:hover {
+    color: #ed3d8b;
+}
+
+.mfp-title {
+    display: none !important;
+}
+
+.btn-pink[disabled] {
     background: #ed3d8b;
     opacity: 0.7;
 }
-.modal-header{
+.modal-header {
     background: #ed3d8b;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
 }
-.modal-content{
+.modal-content {
     border-radius: 20px;
 }
 
-.circledImageContainer{
+.circledImageContainer {
     width: 100px; /* Changer la largeur et la hauteur selon vos besoins */
     height: 100px;
     border-radius: 50%; /* Pour créer un cercle */
@@ -61,11 +63,16 @@
     align-items: center; /* Centrer verticalement */
     background-color: #f0f0f0; /* Couleur de fond de la div */
 }
-.circledImageContainer img{
+.circledImageContainer img {
     width: 100%; /* L'image occupe 100% de la largeur de la div */
     height: 100%; /* L'image occupe 100% de la hauteur de la div */
     object-fit: cover; /* L'image est redimensionnée pour remplir entièrement le conteneur tout en préservant son ratio d'aspect */
     object-position: center; /* L'image est centrée à l'intérieur du conteneur */
     display: block; /* Assurer un affichage en bloc */
     border-radius: 50%; /* Assurer que l'image reste un cercle même si elle est rectangulaire */
+}
+
+.sub-menu li a.active {
+    color: #ed3d8b !important;
+    background: rgb(242, 242, 242) !important;
 }

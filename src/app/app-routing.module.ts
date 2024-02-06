@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LayoutComponent } from './core/components/layout/layout.component';
+import { HomeComponent } from './core/routes/home/home.component';
 import { LoginComponent } from './core/routes/login/login.component';
 import { NotFoundComponent } from './core/routes/not-found/not-found.component';
 import { RegisterComponent } from './core/routes/register/register.component';
@@ -14,10 +15,11 @@ const routes: Routes = [
     {
         path: '', component: LayoutComponent,
         children: [
-            { path: '', component: IndexComponent },
+            { path: 'home', component: HomeComponent },
             { path: 'login', component: LoginComponent },
             { path: 'register', component: RegisterComponent },
             { path: 'takerdv', component: TakerdvComponent },
+            { path: 'listeService', component: IndexComponent },
             { path: 'service/:id', component: ServiceDetailComponent },
         ]
     },

@@ -24,7 +24,7 @@
                             <div class="tab-content nav">
 
                                 <form
-                                    [formGroup]="addEmployeeForm"
+                                    [formGroup]="addEmployeForm"
                                     (ngSubmit)="onSubmit()"
                                     class="w-100"
                                 >
@@ -112,7 +112,7 @@
                                             type="password"
                                         />
                                         @if(formControl['confirmPassword'].touched || submitted){
-                                            @if(addEmployeeForm.hasError('PasswordNoMatch')){
+                                            @if(addEmployeForm.hasError('PasswordNoMatch')){
                                                 <span class="text-danger">Mot de passe ne correspond pas.</span>
                                             }
                                         }

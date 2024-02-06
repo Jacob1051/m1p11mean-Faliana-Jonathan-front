@@ -1,7 +1,7 @@
 import { Service } from "./service";
 import { User } from "./user";
 
-export interface Employee {
+export interface Employe {
     _id: string;
     nomEmploye: string;
     prenomEmploye: string;
