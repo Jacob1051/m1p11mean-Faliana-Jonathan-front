@@ -1,3 +1,4 @@
+import { Service } from "./service";
 import { User } from "./user";
 
 export interface Employee {
@@ -6,4 +7,6 @@ export interface Employee {
     prenomEmploye: string;
     user: User;
     image: string;
+    mesServices: [Service];
+    isDeleted: boolean;
 }

@@ -5,6 +5,7 @@ import { LoginComponent } from './core/routes/login/login.component';
 import { NotFoundComponent } from './core/routes/not-found/not-found.component';
 import { RegisterComponent } from './core/routes/register/register.component';
 import { ServiceDetailComponent } from './core/routes/service-detail/service-detail.component';
+import { IndexComponent } from './core/routes/service-list/index.component';
 import { TakerdvComponent } from './core/routes/takerdv/takerdv.component';
 
 const managerModule = () => import('./manager/manager.module').then(x => x.ManagerModule);

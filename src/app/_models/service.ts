@@ -8,4 +8,5 @@ export interface Service {
     image: string;
     icone: string;
     galerie: [];
+    isDeleted: boolean;
 }
