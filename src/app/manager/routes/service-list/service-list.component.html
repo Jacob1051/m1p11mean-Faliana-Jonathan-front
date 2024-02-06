@@ -41,7 +41,7 @@
                     @if(service.icone){
                     <div class="icon-lg radius m-b20">
                         <a
-                            [routerLink]="['/service/' + service._id]"
+                            [routerLink]="['/manager/service/edit', service._id]"
                             class="icon-cell"
                             ><i class="{{ service.icone }}"></i>
                         </a>
@@ -53,7 +53,7 @@
                         style="min-height: 90.5px"
                     >
                         <a
-                            [routerLink]="['/service/' + service._id]"
+                            [routerLink]="['/manager/service/edit', service._id]"
                             class="icon-cell"
                         >
                             <img
@@ -66,7 +66,7 @@
 
                     <div class="icon-content">
                         <h5 class="dez-tilte">
-                            <a [routerLink]="['/service/' + service._id]">{{
+                            <a [routerLink]="['/manager/service/edit', service._id]">{{
                                 service.nomService
                             }}</a>
                         </h5>

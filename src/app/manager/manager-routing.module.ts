@@ -20,6 +20,7 @@ const routes: Routes = [
         children: [
             { path: 'list', component: EmpListComponent },
             { path: 'add', component: EmpAddComponent },
+            { path: 'edit/:id', component: EmpAddComponent },
         ]
     },
     {
@@ -27,6 +28,7 @@ const routes: Routes = [
         children: [
             { path: 'list', component: ServiceListComponent },
             { path: 'add', component: ServiceAddComponent },
+            { path: 'edit/:id', component: ServiceAddComponent },
         ]
     }
 ];
