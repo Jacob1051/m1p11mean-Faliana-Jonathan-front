@@ -39,3 +39,33 @@
 .mfp-title{
     display: none!important;
 }
+
+.btn-pink[disabled]{
+    background: #ed3d8b;
+    opacity: 0.7;
+}
+.modal-header{
+    background: #ed3d8b;
+}
+.modal-content{
+    border-radius: 20px;
+}
+
+.circledImageContainer{
+    width: 100px; /* Changer la largeur et la hauteur selon vos besoins */
+    height: 100px;
+    border-radius: 50%; /* Pour créer un cercle */
+    overflow: hidden; /* Masquer tout contenu qui déborde de la zone définie */
+    display: flex; /* Utilisation de Flexbox pour centrer l'image */
+    justify-content: center; /* Centrer horizontalement */
+    align-items: center; /* Centrer verticalement */
+    background-color: #f0f0f0; /* Couleur de fond de la div */
+}
+.circledImageContainer img{
+    width: 100%; /* L'image occupe 100% de la largeur de la div */
+    height: 100%; /* L'image occupe 100% de la hauteur de la div */
+    object-fit: cover; /* L'image est redimensionnée pour remplir entièrement le conteneur tout en préservant son ratio d'aspect */
+    object-position: center; /* L'image est centrée à l'intérieur du conteneur */
+    display: block; /* Assurer un affichage en bloc */
+    border-radius: 50%; /* Assurer que l'image reste un cercle même si elle est rectangulaire */
+}
