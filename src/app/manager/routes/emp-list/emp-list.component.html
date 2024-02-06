@@ -54,26 +54,10 @@
 
                             <div class="icon-content">
                                 <h5 class="dez-tilte">
-                                    <a routerLink="/">{{
+                                    <a [routerLink]="['/manager/emp/edit', employee._id]">{{
                                         employee.nomEmploye+" "+employee.prenomEmploye
                                     }}</a>
                                 </h5>
-
-                                <!-- <div
-                                    class="text-left"
-                                    style="display: inline-block; margin: auto"
-                                >
-                                    <p class="m-0">
-                                        <span class="text-pink"><b>Durée:</b></span>
-                                        {{ service.duree }} min
-                                    </p>
-                                    <p class="mb-2">
-                                        <span class="text-pink"><b>Prix:</b></span>
-                                        {{ service.prix }} $
-                                    </p>
-                                </div>
-
-                                <p>{{ service.description }}</p> -->
                             </div>
                         </div>
                     </div>

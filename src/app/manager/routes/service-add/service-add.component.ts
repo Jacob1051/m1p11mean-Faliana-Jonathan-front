@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { TOAST_OPTIONS_BOTTOM_RIGHT } from 'src/app/_utils/toast/toast-options';
 import { ServiceService } from '../../services/service/service.service';
+import { first } from 'rxjs/operators';
 
 @Component({
     selector: 'app-service-add',
@@ -14,6 +15,9 @@ export class ServiceAddComponent {
     addServiceForm!: FormGroup;
     submitted: boolean = false;
     loading: boolean = false;
+    isLoading: boolean = false;
+    id?: string;
+    title?: string = 'Ajout service';
 
     submit() {
         this.submitted = true;
@@ -38,10 +42,9 @@ export class ServiceAddComponent {
                 formData.append('files', service.galerie[i], service.galerie[i].name);
             }
 
-            this.service.addService(formData)
+            this.saveService(formData)
                 .subscribe({
                     next: (response: any) => {
-                        // console.log(response);
                         if (response.status == 200) {
                             this.toastr.success('Vous vous êtes inscrit avec succès!', 'Succès!', TOAST_OPTIONS_BOTTOM_RIGHT);
                             this.router.navigate(['/manager/service/list']);
@@ -74,6 +77,8 @@ export class ServiceAddComponent {
     get formControl() { return this.addServiceForm.controls; }
 
     ngOnInit(): void {
+        this.id = this.route.snapshot.params['id'];
+
         this.addServiceForm = new FormGroup(
             {
                 nomService: new FormControl<string>('Service', [Validators.required]),
@@ -86,5 +91,22 @@ export class ServiceAddComponent {
                 galerie: new FormControl(null),
             }
         );
+
+        if (this.id) {
+            this.title = 'Modification service';
+            this.isLoading = true;
+            this.service.getService(this.id)
+                .pipe(first())
+                .subscribe((x: any) => {
+                    this.addServiceForm.patchValue(x.data);
+                    this.isLoading = false;
+                });
+        }
+    }
+
+    private saveService(formData: any) {
+        return this.id
+            ? this.service.updateService(this.id!, formData)
+            : this.service.addService(formData);
     }
 }

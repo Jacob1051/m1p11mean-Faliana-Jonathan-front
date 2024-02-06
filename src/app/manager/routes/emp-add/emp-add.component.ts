@@ -1,4 +1,3 @@
-import { Employee } from 'src/app/_models/employee';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { EmployeeService } from '../../services/employee/employee.service';
 import { Component, OnInit } from '@angular/core';
@@ -6,6 +5,7 @@ import { ToastrService } from 'ngx-toastr';
 import { confirmPasswordValidator } from 'src/app/_utils/form/password-validator.validator';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TOAST_OPTIONS_BOTTOM_RIGHT } from 'src/app/_utils/toast/toast-options';
+import { first } from 'rxjs/operators';
 
 @Component({
     selector: 'app-emp-add',
@@ -16,6 +16,8 @@ export class EmpAddComponent implements OnInit{
     addEmployeeForm!:FormGroup;
     submitted: boolean = false;
     loading: boolean = false;
+    id?: string;
+    title: string = 'Ajout employee';
 
     constructor(
         private service: EmployeeService,
@@ -26,6 +28,8 @@ export class EmpAddComponent implements OnInit{
     }
 
     ngOnInit(): void {
+        this.id = this.route.snapshot.params['id'];
+
         this.addEmployeeForm = new FormGroup(
             {
                 nomEmploye: new FormControl<string>('Emp', [Validators.required]),
@@ -33,8 +37,21 @@ export class EmpAddComponent implements OnInit{
                 email: new FormControl<string>('employe@gmail.com', { validators: [Validators.required , Validators.email ]}),
                 password: new FormControl<string>('0123456789', { validators: [Validators.required , Validators.minLength(8)]}),
                 confirmPassword: new FormControl<string>('0123456789', [Validators.required]),
+                user: new FormControl(null)
             },
             {validators: confirmPasswordValidator});
+
+            if (this.id) {
+                this.title = 'Modification employee';
+                this.isLoading = true;
+                this.service.getEmploye(this.id)
+                    .pipe(first())
+                    .subscribe((x: any) => {
+                        this.addEmployeeForm.patchValue(x.data);
+                        this.addEmployeeForm.patchValue({'user': x.data.user._id});
+                        this.isLoading = false;
+                    });
+            }
     }
 
     get formControl() { return this.addEmployeeForm.controls; }
@@ -47,15 +64,15 @@ export class EmpAddComponent implements OnInit{
 
             const auth = this.addEmployeeForm.value;
 
-            this.service.addEmployee({
+            this.saveEmploye({
                 nomEmploye: auth.nomEmploye,
                 prenomEmploye: auth.prenomEmploye,
                 email: auth.email,
                 password: auth.password,
-                confirmPassword: auth.confirmPassword
+                confirmPassword: auth.confirmPassword,
+                user: auth.user
             }).subscribe({
                 next: (response: any) => {
-                    // console.log(response);
                     if(response.status == 200){
                         this.toastr.success('Vous vous êtes inscrit avec succès!', 'Succès!',  TOAST_OPTIONS_BOTTOM_RIGHT);
                         this.router.navigate(['/'], { relativeTo: this.route });
@@ -73,6 +90,12 @@ export class EmpAddComponent implements OnInit{
                 },
             });
         }
+    }
+
+    private saveEmploye(formData: any) {
+        return this.id
+            ? this.service.updateEmploye(this.id!, formData)
+            : this.service.addEmployee(formData);
     }
 
     isLoading: boolean = false;

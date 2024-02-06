@@ -19,4 +19,12 @@ export class ServiceService {
     addService(empData: any) {
         return this.http.post(`${this.apiUrl}/Service/addService`, empData);
     }
+
+    getService(id: string){
+        return this.http.get(`${this.apiUrl}/Service/getService/${id}`);
+    }
+
+    updateService(id: string, serviceData: any) {
+        return this.http.put(`${this.apiUrl}/Service/updateService/${id}`, serviceData);
+    }
 }
