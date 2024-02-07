@@ -2,7 +2,6 @@
 <div id="loading-area"></div>
 }
 
-
 <div class="section-full content-inner-2 bg-white hair-services">
     <div class="container">
         <div class="section-head text-black text-center">
@@ -18,7 +17,7 @@
             <div class="col-md-10 m-b30 m-auto">
                 <div class="p-a30">
                     <div class="tab-content">
-                        <form id="login" class="tab-pane active">
+                        <form id="login" class="tab-pane active" [formGroup] = "rdvForm">
                             <div class="form-group">
                                 <label class="font-weight-700"
                                     >Date du rendez-vous</label
@@ -28,7 +27,7 @@
                                     class="form-control"
                                     placeholder=""
                                     type="datetime-local"
-                                    [value] = "dateRdv.toISOString().substring(0, 16)"
+                                    formControlName="dateRdv"
                                 />
                             </div>
 
@@ -50,7 +49,7 @@
                                                         class="circledImageContainer"
                                                     >
                                                         <img
-                                                            src="https://i.pinimg.com/474x/4c/3e/3b/4c3e3b91f05a5765aa544ac7557d6642.jpg"
+                                                            src="{{ apiUrl }}/Employe/{{ tache.employe.image }}"
                                                             alt=""
                                                         />
                                                     </div>
@@ -94,6 +93,7 @@
                                     class="btn btn-pink text-white"
                                     data-bs-toggle="modal"
                                     data-bs-target="#exampleModal"
+                                    (click) = "changerDateDebutTache()"
                                 >
                                     <i class="fa fa-plus"></i>
                                     <span class="ps-2"></span> Ajouter un
@@ -188,6 +188,7 @@
                                                         <input
                                                             type="datetime-local"
                                                             class="form-control"
+                                                            id = "dateDebutTacheInput"
                                                             formControlName="dateDebut"
                                                         />
                                                         @if(tacheForm.controls['dateDebut'].touched || isSubmitted){

@@ -17,6 +17,7 @@ import { RegisterComponent } from './core/routes/register/register.component';
 import { ServiceDetailComponent } from './core/routes/service-detail/service-detail.component';
 import { IndexComponent } from './core/routes/service-list/index.component';
 import { TakerdvComponent } from './core/routes/takerdv/takerdv.component';
+import { LocalTimezoneService } from './core/services/localTimezone/local-timezone.service';
 
 @NgModule({
     declarations: [
@@ -41,6 +42,7 @@ import { TakerdvComponent } from './core/routes/takerdv/takerdv.component';
         ToastrModule.forRoot(),
     ],
     providers: [
+        LocalTimezoneService,
         importProvidersFrom(HttpClientModule),
     ],
     bootstrap: [AppComponent]

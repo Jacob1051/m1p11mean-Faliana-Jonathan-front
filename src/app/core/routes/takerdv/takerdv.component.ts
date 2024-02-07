@@ -1,13 +1,16 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import * as moment from 'moment';
+import 'moment-timezone';
 import { ToastrService } from 'ngx-toastr';
 import { Employe } from 'src/app/_models/employe';
 import { Service } from 'src/app/_models/service';
 import { Statut } from 'src/app/_models/statut';
-import { addDureeToDate } from 'src/app/_utils/addDureeToDate.util';
+import { addDureeToDate, addOneMinute } from 'src/app/_utils/addDureeToDate.util';
 import { TOAST_OPTIONS_BOTTOM_RIGHT } from 'src/app/_utils/toast/toast-options';
+import { environment } from 'src/environments/environment';
 import { EmployeService } from '../../services/employe/employe.service';
+import { LocalTimezoneService } from '../../services/localTimezone/local-timezone.service';
 import { ServiceService } from '../../services/service/service.service';
 import { StatutService } from '../../services/statut/statut.service';
 
@@ -22,15 +25,19 @@ export class TakerdvComponent {
         private employeService: EmployeService,
         private statutService: StatutService,
         private formBuilder: FormBuilder,
+        private localTimezoneService: LocalTimezoneService,
         private toastr: ToastrService
     ) {
+      localTimezoneService.setDefaultTimezone();
       this.getListeService();
       this.getListeEmploye();
       this.getStatutEnCours();
+      // console.log("AAAA", moment(new Date()).toDate());
     }
 
     isLoading = false;
     isSubmitted = false;
+    apiUrl: string = environment.apiUrl;
 
     listeService: Service[] = [];
     listeServiceBackup: Service[] = [];
@@ -38,21 +45,26 @@ export class TakerdvComponent {
     listeEmployeDispo: Employe[] = [];
     listeTache: any = [];
 
-    dateRdv: Date = new Date();
+    currentDate: Date = moment(new Date()).toDate();
     statutEnCours: Statut | any;
 
-    tacheForm= new FormGroup({
-      dateDebut: new FormControl((new Date()).toISOString().substring(0, 16), Validators.required),
+    tacheForm: any = new FormGroup({
+      dateDebut: new FormControl(moment(new Date()).format('YYYY-MM-DD HH:mm'), Validators.required),
       service: new FormControl("", Validators.required),
       employe: new FormControl("", Validators.required),
+    });
+
+    rdvForm = new FormGroup({
+      dateRdv: new FormControl(moment(new Date()).format('YYYY-MM-DD HH:mm'), Validators.required),
     });
 
     tacheFormSubmit = () => {
       this.isSubmitted = true;
       
-      // console.log(this.tacheForm.value);
+      console.log(this.tacheForm.value);
       if (this.tacheForm.valid) {
         console.log(this.tacheForm.value);
+
         let dateDebut = new Date(this.tacheForm.value.dateDebut ? this.tacheForm.value.dateDebut : "");
         // console.log(dateDebut);
 
@@ -78,8 +90,20 @@ export class TakerdvComponent {
         }
 
         console.log("new tache:", newTache);
+
         this.listeTache.push(newTache);
         this.tacheForm.reset();
+
+        // Trier le tableau d'objets par dateDebut
+        this.listeTache.sort((a: any, b: any) => {
+          const dateA = new Date(a.dateDebut);
+          const dateB = new Date(b.dateDebut);
+          return dateA.getTime() - dateB.getTime();
+        });
+        this.rdvForm = new FormGroup({
+          dateRdv: new FormControl(moment(this.listeTache[0].dateDebut).format('YYYY-MM-DD HH:mm'), Validators.required),
+        });
+
         (<any>window).closeModal();
       }
     };
@@ -104,6 +128,37 @@ export class TakerdvComponent {
       }
       
       // this.tacheForm.value.employe = null; //Il faut reset la valeur sinon faut cliquer 2 fois
+    }
+
+    changerDateDebutTache = () => {
+      if(this.listeTache.length>0){
+        // console.log("hello2");
+
+        // Trier le tableau d'objets par dateDebut
+        this.listeTache.sort((a: any, b: any) => {
+          const dateA = new Date(a.dateDebut);
+          const dateB = new Date(b.dateDebut);
+          return dateA.getTime() - dateB.getTime();
+        });
+
+        let lastDate = this.listeTache[this.listeTache.length-1].dateFin;
+        lastDate = addOneMinute(lastDate);
+        // console.log(lastDate);
+        // console.log(moment(lastDate).format('YYYY-MM-DD HH:mm'));
+
+        this.tacheForm = new FormGroup({
+          dateDebut: new FormControl(moment(lastDate).format('YYYY-MM-DD HH:mm'), Validators.required),
+          service: new FormControl("", Validators.required),
+          employe: new FormControl("", Validators.required),
+        });
+      }
+      else{
+        this.tacheForm = new FormGroup({
+          dateDebut: new FormControl(this.rdvForm.value.dateRdv, Validators.required),
+          service: new FormControl("", Validators.required),
+          employe: new FormControl("", Validators.required),
+        });
+      }
     }
 
     formatDateTache = (date: Date) =>{

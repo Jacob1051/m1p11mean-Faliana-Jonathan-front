@@ -7,3 +7,13 @@ export const addDureeToDate = (dateDebut: Date, duree: number): Date => {
   // console.log(dateFin);
   return dateFin;
 }
+
+export function addOneMinute(date:Date) {
+  // Crée une copie de la date pour ne pas modifier l'original
+  const newDate = new Date(date);
+  
+  // Ajoute une minute à la date
+  newDate.setMinutes(newDate.getMinutes() + 1);
+  
+  return newDate;
+}
