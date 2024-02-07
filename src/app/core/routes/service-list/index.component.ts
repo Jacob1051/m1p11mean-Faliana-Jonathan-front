@@ -12,10 +12,6 @@ import { Router } from '@angular/router';
     styleUrls: ['./index.component.scss'],
 })
 export class IndexComponent implements OnInit{
-    ngOnInit() {
-        this.router.navigate(['/home']);
-    }
-
     searchText: string = '';
     allServices;
     // services;
@@ -73,5 +69,9 @@ export class IndexComponent implements OnInit{
                 this.isLoading = false;
             },
         });
+    }
+
+    ngOnInit() {
+        this.router.navigate(['/home']);
     }
 }
