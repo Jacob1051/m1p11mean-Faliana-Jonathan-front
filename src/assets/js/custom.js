@@ -397,7 +397,7 @@ var BeautyZone = function(){
     var menuHeight = menu.offsetHeight;
 
     window.addEventListener('scroll', function() {
-        if (window.pageYOffset > menuOffsetTop) {
+        if (window.scrollY > menuOffsetTop) {
             menu.classList.add('is-fixed');
             document.body.style.marginTop = menuHeight + 'px';
         } else {
