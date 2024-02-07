@@ -1,11 +1,15 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import * as moment from 'moment';
 import { ToastrService } from 'ngx-toastr';
 import { Employe } from 'src/app/_models/employe';
 import { Service } from 'src/app/_models/service';
+import { Statut } from 'src/app/_models/statut';
+import { addDureeToDate } from 'src/app/_utils/addDureeToDate.util';
 import { TOAST_OPTIONS_BOTTOM_RIGHT } from 'src/app/_utils/toast/toast-options';
 import { EmployeService } from '../../services/employe/employe.service';
 import { ServiceService } from '../../services/service/service.service';
+import { StatutService } from '../../services/statut/statut.service';
 
 @Component({
     selector: 'app-takerdv',
@@ -16,11 +20,13 @@ export class TakerdvComponent {
     constructor(
         private serviceService: ServiceService,
         private employeService: EmployeService,
+        private statutService: StatutService,
         private formBuilder: FormBuilder,
         private toastr: ToastrService
     ) {
       this.getListeService();
       this.getListeEmploye();
+      this.getStatutEnCours();
     }
 
     isLoading = false;
@@ -30,14 +36,10 @@ export class TakerdvComponent {
     listeServiceBackup: Service[] = [];
     listeEmploye: Employe[] = [];
     listeEmployeDispo: Employe[] = [];
-    listeTache: [] = [];
-    dateRdv: Date = new Date();
+    listeTache: any = [];
 
-    states = [
-      { _id: 1, nomService: 'Service 1' },
-      { _id: 2, nomService: 'Service 2' },
-      { _id: 3, nomService: 'Service 3' }
-    ];
+    dateRdv: Date = new Date();
+    statutEnCours: Statut | any;
 
     tacheForm= new FormGroup({
       dateDebut: new FormControl((new Date()).toISOString().substring(0, 16), Validators.required),
@@ -52,32 +54,33 @@ export class TakerdvComponent {
       if (this.tacheForm.valid) {
         console.log(this.tacheForm.value);
         let dateDebut = new Date(this.tacheForm.value.dateDebut ? this.tacheForm.value.dateDebut : "");
-        console.log(dateDebut);
+        // console.log(dateDebut);
 
         let service: Service | undefined = this.listeServiceBackup.find((element)=>{
           return this.tacheForm.value.service == element._id
         });
-        console.log(service);
+        // console.log(service);
 
         let employe: Employe | undefined = this.listeEmploye.find((element)=>{
           return this.tacheForm.value.employe == element._id
         });
-        console.log(employe);
+        // console.log(employe);
       
-        const dureeServiceEnMillisecondes = service ? service.duree * 60000 : 0; // 60000 millisecondes = 1 minute
-        // Ajouter la durée du service à la date de début
-        let dateFin = new Date(dateDebut.getTime() + dureeServiceEnMillisecondes);
-        // Arrondir la date de fin à la minute la plus proche
-        dateFin = new Date(Math.round(dateFin.getTime() / 60000) * 60000);
-        console.log(dateFin);
+        let dateFin = addDureeToDate(dateDebut, service ? service.duree : 0);
 
         let newTache = {
           dateDebut: dateDebut,
           dateFin: dateFin,
           employe: employe,
           service: service, 
-          isDeleted: false
+          isDeleted: false,
+          statut: this.statutEnCours
         }
+
+        console.log("new tache:", newTache);
+        this.listeTache.push(newTache);
+        this.tacheForm.reset();
+        (<any>window).closeModal();
       }
     };
 
@@ -101,6 +104,11 @@ export class TakerdvComponent {
       }
       
       // this.tacheForm.value.employe = null; //Il faut reset la valeur sinon faut cliquer 2 fois
+    }
+
+    formatDateTache = (date: Date) =>{
+      moment.locale("fr"); 
+      return moment(date).format("LLLL");
     }
 
     getListeService = () => {
@@ -168,6 +176,31 @@ export class TakerdvComponent {
             },
         });
     };
+
+    getStatutEnCours = () =>{
+      this.statutService.getStatutEnCours().subscribe({
+        next: (response: any) => {
+          if (response.status == 200) {
+            this.statutEnCours = response.data;
+          } else {
+            console.error(response.message);
+            this.toastr.error(
+              `Une erreur s'est produite!`,
+              'Erreur!',
+              TOAST_OPTIONS_BOTTOM_RIGHT
+            );
+          }
+        },
+        error: (error) => {
+          console.error(error);
+          this.toastr.error(
+            `Une erreur s'est produite`,
+            'Erreur!',
+            TOAST_OPTIONS_BOTTOM_RIGHT
+          );
+    }
+  });
+}
 
     
 }

@@ -61,25 +61,25 @@
                                                         <b class="text-pink"
                                                             >Service:</b
                                                         >
-                                                        Maquillage
+                                                        {{ tache.service.nomService }}
                                                     </p>
                                                     <p class="mb-2">
                                                         <b class="text-pink"
                                                             >Début:</b
                                                         >
-                                                        12h40
+                                                        {{ formatDateTache(tache.dateDebut) }}
                                                     </p>
                                                     <p class="mb-2">
                                                         <b class="text-pink"
                                                             >Fin:</b
                                                         >
-                                                        13h40
+                                                        {{ formatDateTache(tache.dateFin) }}
                                                     </p>
                                                     <p class="mb-2">
                                                         <b class="text-pink"
                                                             >Employé en charge:</b
                                                         >
-                                                        Jonathan Jacob
+                                                        {{ tache.employe.nomEmploye }} {{ tache.employe.prenomEmploye }}
                                                     </p>
                                                 </div>
                                             </div>
@@ -167,7 +167,7 @@
                                                             <select name="" id="" class="form-control selectEmploye" style="width: 100% !important;" formControlName="employe">
                                                             
                                                                 @for(employe of listeEmployeDispo; track $index){
-                                                                    <option [value]="employe._id">{{ employe.nomEmploye }}</option>
+                                                                    <option [value]="employe._id">{{ employe.nomEmploye }} {{ employe.prenomEmploye }}</option>
                                                                 }
         
                                                                 </select>

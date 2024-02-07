@@ -949,3 +949,7 @@ jQuery(window).on('resize',function () {
 
 window.BeautyZoneCopy = BeautyZone;
 // console.log(window.BeautyZoneCopy);
+
+window.closeModal = () =>{
+	$(".btn-close").click();
+}
