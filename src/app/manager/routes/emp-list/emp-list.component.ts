@@ -1,5 +1,5 @@
-import { EmployeeService } from '../../services/employee/employee.service';
 import { Component, OnInit } from '@angular/core';
+import { EmployeService } from '../../services/employee/employe.service';
 
 @Component({
     selector: 'app-emp-list',
@@ -9,31 +9,31 @@ import { Component, OnInit } from '@angular/core';
 export class EmpListComponent implements OnInit{
     searchText: string = '';
 
-    listeEmployee: any[] = [];
-    listeEmployeeBackup: any[] = [];
+    listeEmploye: any[] = [];
+    listeEmployeBackup: any[] = [];
 
     searchInsideEmpList() {
         if (this.searchText) {
-            this.listeEmployee = this.listeEmployee.filter(person =>
+            this.listeEmploye = this.listeEmploye.filter(person =>
                 person.firstName.toLowerCase().includes(this.searchText.toLowerCase()) &&
                 person.lastName.toLowerCase().includes(this.searchText.toLowerCase())
             );
         } else {
-            this.listeEmployee = this.listeEmployeeBackup;
+            this.listeEmploye = this.listeEmployeBackup;
         }
     }
 
     constructor(
-        private service: EmployeeService
+        private service: EmployeService
     ) {}
 
     ngOnInit(): void {
         this.isLoading = true;
-        this.service.getListeEmployee()
+        this.service.getListeEmploye()
             .subscribe({
                 next: (data: any) => {
-                    this.listeEmployee = data.data;
-                    this.listeEmployeeBackup = this.listeEmployee;
+                    this.listeEmploye = data.data;
+                    this.listeEmployeBackup = this.listeEmploye;
                     this.isLoading = false;
                 }
             })

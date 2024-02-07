@@ -1,12 +1,12 @@
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
-import { EmployeeService } from '../../services/employee/employee.service';
+import { EmployeService } from '../../services/employee/employe.service';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { ToastrService } from 'ngx-toastr';
 import { confirmPasswordValidator } from 'src/app/_utils/form/password-validator.validator';
 import { ActivatedRoute, Router } from '@angular/router';
-import { TOAST_OPTIONS_BOTTOM_RIGHT } from 'src/app/_utils/toast/toast-options';
+import { ToastrService } from 'ngx-toastr';
 import { first } from 'rxjs/operators';
 import { Service } from 'src/app/_models/service';
+import { TOAST_OPTIONS_BOTTOM_RIGHT } from 'src/app/_utils/toast/toast-options';
 
 @Component({
     selector: 'app-emp-add',
@@ -22,7 +22,7 @@ export class EmpAddComponent implements OnInit {
     @ViewChild('modal') myModal: ElementRef | undefined;
 
     constructor(
-        private service: EmployeeService,
+        private service: EmployeService,
         private route: ActivatedRoute,
         private toastr: ToastrService,
         private router: Router,
@@ -116,7 +116,7 @@ export class EmpAddComponent implements OnInit {
     private saveEmploye(formData: any) {
         return this.id
             ? this.service.updateEmploye(this.id!, formData)
-            : this.service.addEmployee(formData);
+            : this.service.addEmploye(formData);
     }
 
     openModal() {

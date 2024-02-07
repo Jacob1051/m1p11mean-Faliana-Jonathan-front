@@ -1,0 +1,223 @@
+@if(isLoading){
+<div id="loading-area"></div>
+}
+
+<div class="section-full content-inner-2 bg-white hair-services">
+    <div class="container">
+        <div class="section-head text-black text-center">
+            <h2 class="text-primary m-b10">Prendre un rendez-vous</h2>
+            <div class="dlab-separator-outer m-b0">
+                <div class="dlab-separator text-primary style-icon">
+                    <i class="flaticon-spa text-primary"></i>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-10 m-b30 m-auto">
+                <div class="p-a30">
+                    <div class="tab-content">
+                        <form id="login" class="tab-pane active">
+                            <div class="form-group">
+                                <label class="font-weight-700"
+                                    >Date du rendez-vous</label
+                                >
+                                <input
+                                    name="dzName"
+                                    class="form-control"
+                                    placeholder=""
+                                    type="datetime-local"
+                                />
+                            </div>
+
+                            <div class="card price-tbl" style="width: 100%">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div
+                                            class="d-flex align-items-center flex-wrap justify-content-center justify-content-md-start text-center text-md-left"
+                                        >
+                                            <div
+                                                class="d-flex justify-content-center justify-content-md-start align-items-center"
+                                                style="
+                                                    min-height: 150px;
+                                                    min-width: 150px;
+                                                "
+                                            >
+                                                <div
+                                                    class="circledImageContainer"
+                                                >
+                                                    <img
+                                                        src="https://i.pinimg.com/474x/4c/3e/3b/4c3e3b91f05a5765aa544ac7557d6642.jpg"
+                                                        alt=""
+                                                    />
+                                                </div>
+                                            </div>
+
+                                            <div class="">
+                                                <p class="mb-2">
+                                                    <b class="text-pink"
+                                                        >Service:</b
+                                                    >
+                                                    Maquillage
+                                                </p>
+                                                <p class="mb-2">
+                                                    <b class="text-pink"
+                                                        >Début:</b
+                                                    >
+                                                    12h40
+                                                </p>
+                                                <p class="mb-2">
+                                                    <b class="text-pink"
+                                                        >Fin:</b
+                                                    >
+                                                    13h40
+                                                </p>
+                                                <p class="mb-2">
+                                                    <b class="text-pink"
+                                                        >Employé en charge:</b
+                                                    >
+                                                    Jonathan Jacob
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="text-left pb-4">
+                                <button
+                                    type="button"
+                                    class="btn btn-pink text-white"
+                                    data-bs-toggle="modal"
+                                    data-bs-target="#exampleModal"
+                                >
+                                    <i class="fa fa-plus"></i>
+                                    <span class="ps-2"></span> Ajouter un
+                                    service
+                                </button>
+
+                                <!-- Modal -->
+                                <div
+                                    class="modal fade"
+                                    id="exampleModal"
+                                    tabindex="-1"
+                                    aria-labelledby="exampleModalLabel"
+                                    aria-hidden="true"
+                                >
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div
+                                                class="modal-header d-flex align-items-center"
+                                            >
+                                                <h1
+                                                    class="modal-title fs-5"
+                                                    id="exampleModalLabel"
+                                                >
+                                                    Ajouter un service
+                                                </h1>
+                                                <button
+                                                    type="button"
+                                                    class="btn-close"
+                                                    data-bs-dismiss="modal"
+                                                    aria-label="Close"
+                                                ></button>
+                                            </div>
+
+                                            <form action="">
+                                                <div class="modal-body">
+                                                    <div class="form-group">
+                                                        <label
+                                                            class="font-weight-700"
+                                                            >Services</label
+                                                        >
+
+                                                        <select
+                                                            name=""
+                                                            id=""
+                                                            class="form-control selectService"
+                                                            style="
+                                                                width: 100% !important;
+                                                            "
+                                                        >
+                                                            <option value="">
+                                                                Option 1
+                                                            </option>
+                                                            <option value="">
+                                                                Option 2
+                                                            </option>
+                                                            <option value="">
+                                                                Option 3
+                                                            </option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label
+                                                            class="font-weight-700"
+                                                            >Employe</label
+                                                        >
+                                                        <select
+                                                            class="form-control selectEmploye"
+                                                            name="state"
+                                                            style="
+                                                                width: 100% !important;
+                                                            "
+                                                        >
+                                                            <option value="AL">
+                                                                Alabama
+                                                            </option>
+                                                            <option value="WY">
+                                                                Wyoming
+                                                            </option>
+                                                        </select>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label
+                                                            class="font-weight-700"
+                                                            >Date</label
+                                                        >
+                                                        <input
+                                                            type="datetime-local"
+                                                            class="form-control"
+                                                        />
+                                                    </div>
+                                                </div>
+
+                                                <div class="modal-footer">
+                                                    <button
+                                                        type="button"
+                                                        class="btn btn-secondary"
+                                                        data-bs-dismiss="modal"
+                                                    >
+                                                        Close
+                                                    </button>
+                                                    <button
+                                                        type="submit"
+                                                        class="btn btn-danger btn-pink"
+                                                    >
+                                                        Save changes
+                                                    </button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="text-left">
+                                <!-- <button class="btn btn-danger btn-pink text-white" disabled>
+                  Valider le rendez-vous
+                </button> -->
+                                <button
+                                    class="site-button button-lg radius-no outline outline-2"
+                                >
+                                    Valider le rendez-vous
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
