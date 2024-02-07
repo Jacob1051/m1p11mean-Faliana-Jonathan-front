@@ -4,9 +4,12 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { confirmPasswordValidator } from 'src/app/_utils/form/password-validator.validator';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { first } from 'rxjs/operators';
+import { first } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { Service } from 'src/app/_models/service';
 import { TOAST_OPTIONS_BOTTOM_RIGHT } from 'src/app/_utils/toast/toast-options';
+import { ServiceService } from '../../services/service/service.service';
+import { Item } from 'src/app/_models/multi-dropdown';
 
 @Component({
     selector: 'app-emp-add',
@@ -19,10 +22,20 @@ export class EmpAddComponent implements OnInit {
     loading: boolean = false;
     id?: string;
     title: string = 'Ajout employee';
+    serviceList: Service[] | undefined;
     @ViewChild('modal') myModal: ElementRef | undefined;
+
+
+    listItems: Item[] = [];
+    currentSelectedItem!: Item;
+
+    onItemChange(item: Item): void {
+        this.currentSelectedItem = item;
+    }
 
     constructor(
         private service: EmployeService,
+        private serviceService: ServiceService,
         private route: ActivatedRoute,
         private toastr: ToastrService,
         private router: Router,
@@ -32,6 +45,13 @@ export class EmpAddComponent implements OnInit {
     ngOnInit(): void {
         this.id = this.route.snapshot.params['id'];
 
+        this.serviceService.getListeService()
+        .subscribe((x:any) => {
+            const data = x.data.map((service :any) => ({id:service._id, name:service.nomService} as Item));
+            this.listItems = data;
+        });
+
+
         this.addEmployeForm = new FormGroup(
             {
                 nomEmploye: new FormControl<string>('Emp', [Validators.required]),
@@ -40,7 +60,6 @@ export class EmpAddComponent implements OnInit {
                 password: new FormControl<string>('0123456789', { validators: [Validators.required, Validators.minLength(8)] }),
                 confirmPassword: new FormControl<string>('0123456789', [Validators.required]),
                 user: new FormControl(null),
-                mesServices: new FormArray([])
             },
             { validators: confirmPasswordValidator });
 
@@ -52,28 +71,18 @@ export class EmpAddComponent implements OnInit {
                 .subscribe((x: any) => {
                     this.addEmployeForm.patchValue(x.data);
                     this.addEmployeForm.patchValue({ 'user': x.data.user._id });
+
+                    this.listItems.forEach((item:any) => {
+                        const found = x.data.mesServices.find((serviceItem:any) => serviceItem._id === item.id);
+                        if (found) {
+                            item.checked = true;
+                        }
+                    });
+
                     this.isLoading = false;
                 });
         }
     }
-
-    get items(): FormArray {
-        return this.addEmployeForm.get('mesServices') as FormArray;
-    }
-
-    addItem() {
-        const newItem = new FormGroup({
-            name: new FormControl('test pr'),
-            value: new FormControl('test value pr')
-        });
-
-        this.items.push(newItem);
-    }
-
-    removeItem(index: number) {
-        this.items.removeAt(index);
-    }
-
 
     get formControl() { return this.addEmployeForm.controls; }
 
@@ -84,6 +93,7 @@ export class EmpAddComponent implements OnInit {
             this.loading = true;
 
             const auth = this.addEmployeForm.value;
+            const selectedService = this.listItems.filter((item:any) => item.checked);
 
             this.saveEmploye({
                 nomEmploye: auth.nomEmploye,
@@ -91,7 +101,8 @@ export class EmpAddComponent implements OnInit {
                 email: auth.email,
                 password: auth.password,
                 confirmPassword: auth.confirmPassword,
-                user: auth.user
+                user: auth.user,
+                mesServices: [...selectedService.map(item => item.id)]
             }).subscribe({
                 next: (response: any) => {
                     if (response.status == 200) {
@@ -131,4 +142,3 @@ export class EmpAddComponent implements OnInit {
 
     isLoading: boolean = false;
 }
-

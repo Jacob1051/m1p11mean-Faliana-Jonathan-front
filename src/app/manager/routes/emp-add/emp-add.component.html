@@ -2,8 +2,6 @@
 <div id="loading-area"></div>
 }
 
-<app-service-list-modal [serviceList]="[]"></app-service-list-modal>
-
 <!-- <div class="section-full content-inner-2 bg-white hair-services"> -->
 <div class="content-inner-2 bg-white hair-services">
     <div class="container">
@@ -135,41 +133,15 @@
                                         <label class="font-weight-700"
                                             >Affecter service</label
                                         >
-
-                                        <div formArrayName="mesServices">
-                                            <div
-                                                *ngFor="
-                                                    let mesServices of items.controls;
-                                                    let i = index
-                                                "
-                                            >
-                                                <div [formGroupName]="i">
-                                                    <input
-                                                        formControlName="name"
-                                                        placeholder="Name"
-                                                    />
-                                                    <input
-                                                        formControlName="age"
-                                                        placeholder="Age"
-                                                    />
-                                                    <button
-                                                        type="button"
-                                                        (click)="removeItem(i)"
-                                                    >
-                                                        Remove
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <button
-                                            type="button"
-                                            (click)="addItem()"
-                                        >
-                                            Add Item
-                                        </button>
-
-                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-lg">Large modal</button>
-
+                                        <app-multi-dropdown
+                                            [items]="listItems"
+                                            [showSearch]="true"
+                                            [showAll]="true"
+                                            [showStatus]="true"
+                                            [showError]="false"
+                                            placeholder="Service"
+                                            (itemChange)="onItemChange($event)">
+                                        </app-multi-dropdown>
                                     </div>
                                     <div class="text-left">
                                         <button

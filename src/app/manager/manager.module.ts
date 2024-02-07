@@ -11,6 +11,7 @@ import { ServiceListComponent } from './routes/service-list/service-list.compone
 import { ServiceAddComponent } from './routes/service-add/service-add.component';
 import { UploadImagesComponent } from '../core/components/upload-images/upload-images.component';
 import { ServiceListModalComponent } from './components/service-list-modal/service-list-modal/service-list-modal.component';
+import { MultiDropdownComponent } from '../_components/multi-dropdown/multi-dropdown/multi-dropdown.component';
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import { ServiceListModalComponent } from './components/service-list-modal/servi
         ServiceListComponent,
         ServiceAddComponent,
         UploadImagesComponent,
-        ServiceListModalComponent
+        ServiceListModalComponent,
+        MultiDropdownComponent
     ],
     imports: [
         CommonModule,

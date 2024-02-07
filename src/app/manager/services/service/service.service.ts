@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Service } from 'src/app/_models/service';
 import { environment } from 'src/environments/environment.development';
 
 @Injectable({
@@ -13,7 +14,7 @@ export class ServiceService {
     }
 
     getListeService() {
-        return this.http.get(`${this.apiUrl}/Service/getListeService`);
+        return this.http.get<Service[]>(`${this.apiUrl}/Service/getListeService`);
     }
 
     addService(empData: any) {
