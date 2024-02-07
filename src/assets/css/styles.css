@@ -72,7 +72,13 @@
     border-radius: 50%; /* Assurer que l'image reste un cercle même si elle est rectangulaire */
 }
 
-.sub-menu li a.active {
+.sub-menu li a.active{
     color: #ed3d8b !important;
     background: rgb(242, 242, 242) !important;
+}
+
+.page-wraper{
+    min-height: 85vh;
+    /* background: #F8F8F8; */
+    background: white;
 }

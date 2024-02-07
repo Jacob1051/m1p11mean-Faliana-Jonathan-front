@@ -41,7 +41,7 @@ var BeautyZone = function(){
 	var onePageLayout = function() {
 		'use strict';
 
-		// var headerHeight = parseInt(jQuery('.onepage').css('height'), 10);
+		var headerHeight = parseInt(jQuery('.onepage').css('height'), 10);
 
 		jQuery(".scroll").unbind().on('click',function(event) 
 		{
@@ -65,8 +65,7 @@ var BeautyZone = function(){
 			}   
 		});
 		
-		// jQuery('body').scrollspy({target: ".navbar", offset: headerHeight + 2});  
-		// soloina
+		jQuery('body').scrollspy({target: ".navbar", offset: headerHeight + 2});  // soloina
 		
 		/* One Page Setup */
 		if(jQuery('.navbar-nav-scroll').length > 0){
@@ -373,22 +372,40 @@ var BeautyZone = function(){
 	}
 	
 	/* Header Fixed ============ */
-	var headerFix = function(){
-		'use strict';
-		/* Main navigation fixed on top  when scroll down function custom */		
-		jQuery(window).bind('scroll', function () {
-			if(jQuery('.sticky-header').length)
-			{
-				var menu = jQuery('.sticky-header');
-				if ($(window).scrollTop() > menu.offset().top) {
-					menu.addClass('is-fixed');
-				} else {
-					menu.removeClass('is-fixed');
-				}
-			}
-		});
-		/* Main navigation fixed on top  when scroll down function custom end*/
-	}
+
+	// soloina
+	// var headerFix = function(){
+	// 	'use strict';
+	// 	/* Main navigation fixed on top  when scroll down function custom */		
+	// 	jQuery(window).bind('scroll', function () {
+	// 		if(jQuery('.sticky-header').length)
+	// 		{
+	// 			var menu = jQuery('.sticky-header');
+	// 			if ($(window).scrollTop() > menu.offset().top) {
+	// 				menu.addClass('is-fixed');
+	// 			} else {
+	// 				menu.removeClass('is-fixed');
+	// 			}
+	// 		}
+	// 	});
+	// 	/* Main navigation fixed on top  when scroll down function custom end*/
+	// }
+	var headerFix = function() {
+    'use strict';
+    var menu = document.querySelector('.sticky-header');
+    var menuOffsetTop = menu.offsetTop;
+    var menuHeight = menu.offsetHeight;
+
+    window.addEventListener('scroll', function() {
+        if (window.pageYOffset > menuOffsetTop) {
+            menu.classList.add('is-fixed');
+            document.body.style.marginTop = menuHeight + 'px';
+        } else {
+            menu.classList.remove('is-fixed');
+            document.body.style.marginTop = '0';
+        }
+    });
+};
 	
 	/* Masonry Box ============ */
 	var masonryBox = function(){
@@ -860,7 +877,7 @@ var BeautyZone = function(){
 			boxHover();
 			wow_animation();
 			priceslider();
-			// onePageLayout(); //soloina
+			onePageLayout(); //soloina
 			dzTheme();
 			handleResizeElement();
 			homeSearch();
@@ -871,7 +888,7 @@ var BeautyZone = function(){
 			handlePlaceholderAnimation();
 			footerAlign();
 			fileInput();
-			headerFix();
+			headerFix(); //soloina
 			setDivHeight();
 			handleVideo();
 			handleCountDown(WebsiteLaunchDate);
