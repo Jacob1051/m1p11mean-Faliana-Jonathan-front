@@ -1,12 +1,13 @@
-import { Employee } from "./employe";
+import { Employe } from "./employe";
 import { Service } from "./service";
 import { Statut } from "./statut";
 
 export interface Tache {
   dateDebut: Date;
   dateFin: Date;
-  employe: Employee;
+  employe: Employe;
   service: Service;
   statut: Statut;
   isDeleted: boolean;
 }
+
