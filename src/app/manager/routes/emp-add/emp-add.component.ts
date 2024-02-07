@@ -14,7 +14,7 @@ import { TOAST_OPTIONS_BOTTOM_RIGHT } from 'src/app/_utils/toast/toast-options';
     styleUrls: ['./emp-add.component.scss'],
 })
 export class EmpAddComponent implements OnInit {
-    addEmployeeForm!: FormGroup;
+    addEmployeForm!: FormGroup;
     submitted: boolean = false;
     loading: boolean = false;
     id?: string;
@@ -32,7 +32,7 @@ export class EmpAddComponent implements OnInit {
     ngOnInit(): void {
         this.id = this.route.snapshot.params['id'];
 
-        this.addEmployeeForm = new FormGroup(
+        this.addEmployeForm = new FormGroup(
             {
                 nomEmploye: new FormControl<string>('Emp', [Validators.required]),
                 prenomEmploye: new FormControl<string>('loye', [Validators.required]),
@@ -50,15 +50,15 @@ export class EmpAddComponent implements OnInit {
             this.service.getEmploye(this.id)
                 .pipe(first())
                 .subscribe((x: any) => {
-                    this.addEmployeeForm.patchValue(x.data);
-                    this.addEmployeeForm.patchValue({ 'user': x.data.user._id });
+                    this.addEmployeForm.patchValue(x.data);
+                    this.addEmployeForm.patchValue({ 'user': x.data.user._id });
                     this.isLoading = false;
                 });
         }
     }
 
     get items(): FormArray {
-        return this.addEmployeeForm.get('mesServices') as FormArray;
+        return this.addEmployeForm.get('mesServices') as FormArray;
     }
 
     addItem() {
@@ -75,15 +75,15 @@ export class EmpAddComponent implements OnInit {
     }
 
 
-    get formControl() { return this.addEmployeeForm.controls; }
+    get formControl() { return this.addEmployeForm.controls; }
 
     onSubmit() {
         this.submitted = true;
 
-        if (this.addEmployeeForm.valid) {
+        if (this.addEmployeForm.valid) {
             this.loading = true;
 
-            const auth = this.addEmployeeForm.value;
+            const auth = this.addEmployeForm.value;
 
             this.saveEmploye({
                 nomEmploye: auth.nomEmploye,
