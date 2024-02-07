@@ -10,6 +10,7 @@ import { EmpListComponent } from './routes/emp-list/emp-list.component';
 import { ServiceListComponent } from './routes/service-list/service-list.component';
 import { ServiceAddComponent } from './routes/service-add/service-add.component';
 import { UploadImagesComponent } from '../core/components/upload-images/upload-images.component';
+import { ServiceListModalComponent } from './components/service-list-modal/service-list-modal/service-list-modal.component';
 
 
 @NgModule({
@@ -21,7 +22,8 @@ import { UploadImagesComponent } from '../core/components/upload-images/upload-i
         EmpListComponent,
         ServiceListComponent,
         ServiceAddComponent,
-        UploadImagesComponent
+        UploadImagesComponent,
+        ServiceListModalComponent
     ],
     imports: [
         CommonModule,

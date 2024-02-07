@@ -1,6 +1,8 @@
 @if(isLoading){
-    <div id="loading-area"></div>
+<div id="loading-area"></div>
 }
+
+<app-service-list-modal [serviceList]="[]"></app-service-list-modal>
 
 <!-- <div class="section-full content-inner-2 bg-white hair-services"> -->
 <div class="content-inner-2 bg-white hair-services">
@@ -14,7 +16,6 @@
             </div>
         </div>
 
-
         <div class="shop-account w-100 p-0">
             <!-- Product -->
             <div class="container">
@@ -22,7 +23,6 @@
                     <div class="max-w500 m-auto m-b30">
                         <div class="p-a30 border-1 seth">
                             <div class="tab-content nav">
-
                                 <form
                                     [formGroup]="addEmployeeForm"
                                     (ngSubmit)="onSubmit()"
@@ -39,11 +39,13 @@
                                             type="text"
                                             formControlName="nomEmploye"
                                         />
-                                        @if(formControl['nomEmploye'].touched || submitted){
-                                            @if(formControl['nomEmploye'].errors?.['required']){
-                                                <span class="text-danger">Nom requis.</span>
-                                            }
-                                        }
+                                        @if(formControl['nomEmploye'].touched ||
+                                        submitted){
+                                        @if(formControl['nomEmploye'].errors?.['required']){
+                                        <span class="text-danger"
+                                            >Nom requis.</span
+                                        >
+                                        } }
                                     </div>
                                     <div class="form-group">
                                         <label class="font-weight-700"
@@ -56,11 +58,13 @@
                                             type="text"
                                             formControlName="prenomEmploye"
                                         />
-                                        @if(formControl['prenomEmploye'].touched || submitted){
-                                            @if(formControl['prenomEmploye'].errors?.['required']){
-                                                <span class="text-danger">Prénom requis.</span>
-                                            }
-                                        }
+                                        @if(formControl['prenomEmploye'].touched
+                                        || submitted){
+                                        @if(formControl['prenomEmploye'].errors?.['required']){
+                                        <span class="text-danger"
+                                            >Prénom requis.</span
+                                        >
+                                        } }
                                     </div>
                                     <div class="form-group">
                                         <label class="font-weight-700"
@@ -74,14 +78,19 @@
                                             type="email"
                                             formControlName="email"
                                         />
-                                        @if(formControl['email'].touched || submitted){
-                                            @if(formControl['email'].errors?.['required']){
-                                                <span class="text-danger">E-mail requis.</span>
-                                            }
-                                            @if(formControl['email'].errors?.['email']){
-                                                <span class="text-danger">Pas un format d'e-mail valide.</span>
-                                            }
+                                        @if(formControl['email'].touched ||
+                                        submitted){
+                                        @if(formControl['email'].errors?.['required']){
+                                        <span class="text-danger"
+                                            >E-mail requis.</span
+                                        >
                                         }
+                                        @if(formControl['email'].errors?.['email']){
+                                        <span class="text-danger"
+                                            >Pas un format d'e-mail
+                                            valide.</span
+                                        >
+                                        } }
                                     </div>
                                     <div class="form-group">
                                         <label class="font-weight-700"
@@ -95,11 +104,13 @@
                                             type="password"
                                             formControlName="password"
                                         />
-                                        @if(formControl['password'].touched || submitted){
-                                            @if(formControl['password'].errors?.['required']){
-                                                <span class="text-danger">Mot de passe requis.</span>
-                                            }
-                                        }
+                                        @if(formControl['password'].touched ||
+                                        submitted){
+                                        @if(formControl['password'].errors?.['required']){
+                                        <span class="text-danger"
+                                            >Mot de passe requis.</span
+                                        >
+                                        } }
                                     </div>
                                     <div class="form-group">
                                         <label class="font-weight-700"
@@ -111,20 +122,70 @@
                                             placeholder="Mot de Passe"
                                             type="password"
                                         />
-                                        @if(formControl['confirmPassword'].touched || submitted){
-                                            @if(addEmployeeForm.hasError('PasswordNoMatch')){
-                                                <span class="text-danger">Mot de passe ne correspond pas.</span>
-                                            }
-                                        }
+                                        @if(formControl['confirmPassword'].touched
+                                        || submitted){
+                                        @if(addEmployeeForm.hasError('PasswordNoMatch')){
+                                        <span class="text-danger"
+                                            >Mot de passe ne correspond
+                                            pas.</span
+                                        >
+                                        } }
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="font-weight-700"
+                                            >Affecter service</label
+                                        >
+
+                                        <div formArrayName="mesServices">
+                                            <div
+                                                *ngFor="
+                                                    let mesServices of items.controls;
+                                                    let i = index
+                                                "
+                                            >
+                                                <div [formGroupName]="i">
+                                                    <input
+                                                        formControlName="name"
+                                                        placeholder="Name"
+                                                    />
+                                                    <input
+                                                        formControlName="age"
+                                                        placeholder="Age"
+                                                    />
+                                                    <button
+                                                        type="button"
+                                                        (click)="removeItem(i)"
+                                                    >
+                                                        Remove
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <button
+                                            type="button"
+                                            (click)="addItem()"
+                                        >
+                                            Add Item
+                                        </button>
+
+                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-lg">Large modal</button>
+
                                     </div>
                                     <div class="text-left">
-                                        <button class="btn btn-danger btn-pink" [disabled]="loading">
-                                            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" *ngIf="loading && submitted"></span>
+                                        <button
+                                            class="btn btn-danger btn-pink"
+                                            [disabled]="loading"
+                                        >
+                                            <span
+                                                class="spinner-border spinner-border-sm"
+                                                role="status"
+                                                aria-hidden="true"
+                                                *ngIf="loading && submitted"
+                                            ></span>
                                             Ajouter
                                         </button>
                                     </div>
                                 </form>
-
                             </div>
                         </div>
                     </div>
