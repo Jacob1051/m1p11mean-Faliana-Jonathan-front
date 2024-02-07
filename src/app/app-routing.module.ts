@@ -15,6 +15,7 @@ const routes: Routes = [
     {
         path: '', component: LayoutComponent,
         children: [
+            { path: '', component: IndexComponent },
             { path: 'home', component: HomeComponent },
             { path: 'login', component: LoginComponent },
             { path: 'register', component: RegisterComponent },

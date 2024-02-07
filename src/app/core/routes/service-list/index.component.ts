@@ -1,16 +1,21 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { Service } from 'src/app/_models/service';
 import { TOAST_OPTIONS_BOTTOM_RIGHT } from 'src/app/_utils/toast/toast-options';
 import { environment } from "../../../../environments/environment";
 import { ServiceService } from '../../services/service/service.service';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-index',
     templateUrl: './index.component.html',
     styleUrls: ['./index.component.scss'],
 })
-export class IndexComponent {
+export class IndexComponent implements OnInit{
+    ngOnInit() {
+        this.router.navigate(['/home']);
+    }
+
     searchText: string = '';
     allServices;
     // services;
@@ -20,7 +25,8 @@ export class IndexComponent {
 
     constructor(
         private service: ServiceService,
-        private toastr: ToastrService
+        private toastr: ToastrService,
+        private router: Router
     ) {
         this.allServices = service.getAllServices();
         this.getListeService();
@@ -32,18 +38,10 @@ export class IndexComponent {
 
     searchInsideService() {
         if (this.searchText) {
-            // this.services = this.allServices.filter((service) =>
-            //     service.name
-            //         .toLowerCase()
-            //         .includes(this.searchText.toLowerCase())
-            // );
-
             this.listeService = this.listeService.filter((element)=>{
-                // console.log(element);
                 return element.nomService.toLowerCase().includes(this.searchText.toLowerCase()) || element.description.toLowerCase().includes(this.searchText.toLowerCase()) || element.duree.toString().includes(this.searchText.toLowerCase()) || element.prix.toString().includes(this.searchText.toLowerCase());
             });
         } else {
-            // this.services = this.allServices;
             this.listeService = this.listeServiceBackup;
         }
     }
