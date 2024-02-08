@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Employe } from 'src/app/_models/employe';
+import { Employe } from 'src/app/shared/models/employe';
 import { environment } from 'src/environments/environment.development';
 
 @Injectable({

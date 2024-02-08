@@ -18,6 +18,7 @@ import { ServiceDetailComponent } from './core/routes/service-detail/service-det
 import { IndexComponent } from './core/routes/service-list/index.component';
 import { TakerdvComponent } from './core/routes/takerdv/takerdv.component';
 import { LocalTimezoneService } from './core/services/localTimezone/local-timezone.service';
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
     declarations: [
@@ -34,6 +35,7 @@ import { LocalTimezoneService } from './core/services/localTimezone/local-timezo
         TakerdvComponent
     ],
     imports: [
+        SharedModule,
         BrowserModule,
         AppRoutingModule,
         FormsModule,

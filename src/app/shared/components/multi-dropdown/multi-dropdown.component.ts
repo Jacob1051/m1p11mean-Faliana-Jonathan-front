@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { Item } from 'src/app/_models/multi-dropdown';
+import { Item } from 'src/app/shared/models/multi-dropdown';
 // import { v4 } from 'uuid';
 
 @Component({

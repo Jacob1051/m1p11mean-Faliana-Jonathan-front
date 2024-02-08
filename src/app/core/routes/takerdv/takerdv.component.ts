@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {
   FormBuilder,
   FormControl,
@@ -8,9 +8,9 @@ import {
 import * as moment from 'moment';
 import 'moment-timezone';
 import { ToastrService } from 'ngx-toastr';
-import { Employe } from 'src/app/_models/employe';
-import { Service } from 'src/app/_models/service';
-import { Statut } from 'src/app/_models/statut';
+import { Employe } from 'src/app/shared/models/employe';
+import { Service } from 'src/app/shared/models/service';
+import { Statut } from 'src/app/shared/models/statut';
 import {
   addDureeToDate,
   addOneMinute,
@@ -21,13 +21,20 @@ import { EmployeService } from '../../services/employe/employe.service';
 import { LocalTimezoneService } from '../../services/localTimezone/local-timezone.service';
 import { ServiceService } from '../../services/service/service.service';
 import { StatutService } from '../../services/statut/statut.service';
+import { Item } from 'src/app/shared/models/multi-dropdown';
 
 @Component({
     selector: 'app-takerdv',
     templateUrl: './takerdv.component.html',
     styleUrl: './takerdv.component.scss',
 })
-export class TakerdvComponent {
+export class TakerdvComponent implements OnInit{
+
+    currentSelectedItem!: Item;
+    currentSelectedEmpItem!: Item;
+
+    rdvList!: any[];
+
     constructor(
         private serviceService: ServiceService,
         private employeService: EmployeService,
@@ -37,10 +44,24 @@ export class TakerdvComponent {
         private toastr: ToastrService
     ) {
         localTimezoneService.setDefaultTimezone();
+    }
+    ngOnInit(): void {
         this.getListeService();
         this.getListeEmploye();
         this.getStatutEnCours();
-        // console.log("AAAA", moment(new Date()).toDate());
+    }
+
+    addRdv(){
+        console.log('ok');
+    }
+
+    onItemChange(item: Item): void {
+        this.currentSelectedItem = item;
+        this.changerListeEmployeDispo();
+    }
+
+    onItemEmpChange(item: Item): void {
+        this.currentSelectedEmpItem = item;
     }
 
     isLoading = false;
@@ -48,6 +69,8 @@ export class TakerdvComponent {
     apiUrl: string = environment.apiUrl;
 
     listeService: Service[] = [];
+    listeServiceAsItem: Item[] = [];
+    listeEmployeAsItem: Item[] = [];
     listeServiceBackup: Service[] = [];
     listeEmploye: Employe[] = [];
     listeEmployeDispo: Employe[] = [];
@@ -75,7 +98,8 @@ export class TakerdvComponent {
     tacheFormSubmit = () => {
         this.isSubmitted = true;
 
-        console.log(this.tacheForm.value);
+        console.log(this.tacheForm.valid);
+
         if (this.tacheForm.valid) {
             console.log(this.tacheForm.value);
 
@@ -84,21 +108,23 @@ export class TakerdvComponent {
                     ? this.tacheForm.value.dateDebut
                     : ''
             );
-            // console.log(dateDebut);
 
-            let service: Service | undefined = this.listeServiceBackup.find(
-                (element) => {
-                    return this.tacheForm.value.service == element._id;
-                }
-            );
-            // console.log(service);
+            // let service: Service | undefined = this.listeServiceBackup.find(
+            //     (element) => {
+            //         return this.tacheForm.value.service == element._id;
+            //     }
+            // );
+            // // console.log(service);
 
-            let employe: Employe | undefined = this.listeEmploye.find(
-                (element) => {
-                    return this.tacheForm.value.employe == element._id;
-                }
-            );
-            // console.log(employe);
+            // let employe: Employe | undefined = this.listeEmploye.find(
+            //     (element) => {
+            //         return this.tacheForm.value.employe == element._id;
+            //     }
+            // );
+
+            let service: Service = this.currentSelectedItem.data;
+
+            let employe: Employe = this.currentSelectedEmpItem.data;
 
             let dateFin = addDureeToDate(
                 dateDebut,
@@ -147,21 +173,24 @@ export class TakerdvComponent {
     };
 
     changerListeEmployeDispo = () => {
-        if (this.tacheForm.value.service) {
+        // if (this.tacheForm.value.service) {
             // console.log("ok?")
 
             this.listeEmployeDispo = this.listeEmploye.filter((employe) => {
                 let condition1 = employe.mesServices.some((service) => {
-                    return service._id === this.tacheForm.value.service;
+                    return service._id === this.currentSelectedItem.id;
                 }); // il faut qu'il maitrise un des services
 
                 let condition2; // il faut qu'il n'est pas de tache durant le début et la fin cad début + délai service
 
                 return condition1 == true;
             });
-        } else {
-            this.listeEmployeDispo = this.listeEmploye;
-        }
+
+            this.listeEmployeAsItem = this.listeEmployeDispo.map((employe:Employe)=>({id:employe._id, name:employe.nomEmploye+' '+employe.prenomEmploye, data:employe} as Item));
+
+        // } else {
+        //     this.listeEmployeDispo = this.listeEmploye;
+        // }
 
         // this.tacheForm.value.employe = null; //Il faut reset la valeur sinon faut cliquer 2 fois
     };
@@ -211,6 +240,12 @@ export class TakerdvComponent {
         this.isLoading = true;
         this.serviceService.getListeService().subscribe({
             next: (response: any) => {
+
+                const data = response.data.map((service :any) => ({id:service._id, name:service.nomService, data:service} as Item));
+                this.listeServiceAsItem = data;
+
+                console.log(response.data);
+
                 if (response.status == 200) {
                     this.listeService = response.data;
 
@@ -247,7 +282,10 @@ export class TakerdvComponent {
             next: (response: any) => {
                 if (response.status == 200) {
                     this.listeEmploye = response.data;
-                    console.log(this.listeEmploye);
+
+                    const data = response.data.map((employe :any) => ({id:employe._id, name:employe.nomEmploye+' '+employe.prenomEmploye, data:employe} as Item));
+                    this.listeEmployeAsItem = data;
+
                     this.listeEmployeDispo.length == 0
                         ? (this.listeEmployeDispo = this.listeEmploye)
                         : null;

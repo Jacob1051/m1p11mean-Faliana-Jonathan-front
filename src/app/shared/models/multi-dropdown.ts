@@ -4,4 +4,5 @@ export interface Item {
     name: string;
     checked?: boolean;
     visible?: boolean;
+    data?: any;
 }

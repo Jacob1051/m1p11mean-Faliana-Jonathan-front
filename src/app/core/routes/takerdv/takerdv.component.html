@@ -54,7 +54,7 @@
                                                         />
                                                     </div>
                                                 </div>
-    
+
                                                 <div class="">
                                                     <p class="mb-2">
                                                         <b class="text-pink"
@@ -137,24 +137,32 @@
                                                             >Services</label
                                                         >
                                                         <!-- @for(service of listeService; track $index){
-                                                            {{ $index }}   
+                                                            {{ $index }}
                                                         } -->
 
                                                         @if(listeService.length>0){
-                                                            <select name="" id="" class="form-control selectService" style="width: 100% !important;" formControlName="service" (change)="changerListeEmployeDispo()">
-                                                            
+                                                            <app-dropdown
+                                                                [items]="listeServiceAsItem"
+                                                                [showSearch]="true"
+                                                                [showStatus]="true"
+                                                                [showError]="false"
+                                                                (itemChange)="onItemChange($event)">
+                                                            </app-dropdown>
+
+                                                            <!-- <select name="" id="" class="form-control selectService" style="width: 100% !important;" formControlName="service" (change)="changerListeEmployeDispo()">
+
                                                                 @for(service of listeService; track $index){
                                                                     <option [value]="service._id">{{ service.nomService }}</option>
                                                                 }
-        
+
                                                                 </select>
                                                                 @if(tacheForm.controls['service'].touched || isSubmitted){
                                                                     @if(tacheForm.controls['service'].errors?.['required']){
                                                                         <span class="text-danger">Ce champ est requis</span>
                                                                     }
-                                                                }
+                                                                } -->
                                                         }
-                                                        
+
                                                     </div>
 
                                                     <div class="form-group">
@@ -163,20 +171,28 @@
                                                             >Employe</label
                                                         >
 
-                                                        @if(listeEmployeDispo.length>0){
+                                                        <app-dropdown
+                                                            [items]="listeEmployeAsItem"
+                                                            [showSearch]="true"
+                                                            [showStatus]="true"
+                                                            [showError]="false"
+                                                            (itemChange)="onItemEmpChange($event)">
+                                                        </app-dropdown>
+
+                                                        <!-- @if(listeEmployeDispo.length>0){
                                                             <select name="" id="" class="form-control selectEmploye" style="width: 100% !important;" formControlName="employe">
-                                                            
+
                                                                 @for(employe of listeEmployeDispo; track $index){
                                                                     <option [value]="employe._id">{{ employe.nomEmploye }} {{ employe.prenomEmploye }}</option>
                                                                 }
-        
+
                                                                 </select>
                                                                 @if(tacheForm.controls['employe'].touched || isSubmitted){
                                                                     @if(tacheForm.controls['employe'].errors?.['required']){
                                                                         <span class="text-danger">Ce champ est requis</span>
                                                                     }
                                                                 }
-                                                        }
+                                                        } -->
 
                                                     </div>
 

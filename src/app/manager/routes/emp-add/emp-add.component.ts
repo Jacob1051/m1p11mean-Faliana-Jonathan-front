@@ -6,10 +6,10 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { first } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { Service } from 'src/app/_models/service';
+import { Service } from 'src/app/shared/models/service';
 import { TOAST_OPTIONS_BOTTOM_RIGHT } from 'src/app/_utils/toast/toast-options';
 import { ServiceService } from '../../services/service/service.service';
-import { Item } from 'src/app/_models/multi-dropdown';
+import { Item } from 'src/app/shared/models/multi-dropdown';
 
 @Component({
     selector: 'app-emp-add',
