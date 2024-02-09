@@ -10,6 +10,7 @@ import { IndexComponent } from './core/routes/service-list/index.component';
 import { TakerdvComponent } from './core/routes/takerdv/takerdv.component';
 
 const managerModule = () => import('./manager/manager.module').then(x => x.ManagerModule);
+const employeModule = () => import('./employe/employe.module').then(x => x.EmployeModule);
 
 const routes: Routes = [
     {
@@ -25,6 +26,7 @@ const routes: Routes = [
         ]
     },
     { path: 'manager', loadChildren: managerModule },
+    { path: 'employe', loadChildren: employeModule },
     { path: '**', component: NotFoundComponent },
 ];
 

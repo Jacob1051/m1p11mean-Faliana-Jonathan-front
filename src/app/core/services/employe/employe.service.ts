@@ -3,21 +3,25 @@ import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root'
 })
 export class EmployeService {
 
-  constructor(private http: HttpClient) {    
-    this.apiUrl = environment.apiUrl;
-  }
+    constructor(private http: HttpClient) {
+        this.apiUrl = environment.apiUrl;
+    }
 
-  apiUrl: string;
+    apiUrl: string;
 
-  getListeEmploye() {
-    return this.http.get(`${this.apiUrl}/Employe/getListeEmploye`);
-}
+    getListeEmploye() {
+        return this.http.get(`${this.apiUrl}/Employe/getListeEmploye`);
+    }
 
-getEmploye(id: string) {
-    return this.http.get(`${this.apiUrl}/Employe/getEmploye/${id}`);
-}
+    getEmploye(id: string) {
+        return this.http.get(`${this.apiUrl}/Employe/getEmploye/${id}`);
+    }
+
+    getListeEmployeLibre(criteria: any) {
+        return this.http.post(`${this.apiUrl}/Employe/getListeEmployeLibre/`, criteria);
+    }
 }

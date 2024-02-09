@@ -33,8 +33,6 @@ export class TakerdvComponent implements OnInit{
     currentSelectedItem!: Item;
     currentSelectedEmpItem!: Item;
 
-    rdvList!: any[];
-
     constructor(
         private serviceService: ServiceService,
         private employeService: EmployeService,
@@ -45,14 +43,11 @@ export class TakerdvComponent implements OnInit{
     ) {
         localTimezoneService.setDefaultTimezone();
     }
+
     ngOnInit(): void {
         this.getListeService();
         this.getListeEmploye();
         this.getStatutEnCours();
-    }
-
-    addRdv(){
-        console.log('ok');
     }
 
     onItemChange(item: Item): void {
@@ -174,17 +169,26 @@ export class TakerdvComponent implements OnInit{
         // if (this.tacheForm.value.service) {
             // console.log("ok?")
 
-            this.listeEmployeDispo = this.listeEmploye.filter((employe) => {
-                let condition1 = employe.mesServices.some((service) => {
-                    return service._id === this.currentSelectedItem.id;
-                }); // il faut qu'il maitrise un des services
+            // this.listeEmployeDispo = this.listeEmploye.filter((employe) => {
+            //     let condition1 = employe.mesServices.some((service) => {
+            //         return service._id === this.currentSelectedItem.id;
+            //     }); // il faut qu'il maitrise un des services
 
-                let condition2; // il faut qu'il n'est pas de tache durant le début et la fin cad début + délai service
+            //     let condition2; // il faut qu'il n'est pas de tache durant le début et la fin cad début + délai service
 
-                return condition1 == true;
+            //     return condition1 == true;
+            // });
+
+            this.isLoading = true;
+
+            this.employeService.getListeEmployeLibre({idService: this.currentSelectedItem.data._id, dateHeureDebut: this.tacheForm.value.dateDebut})
+            .subscribe({
+                next: (response: any) => {
+                    this.isLoading = false;
+                }
             });
 
-            this.listeEmployeAsItem = this.listeEmployeDispo.map((employe:Employe)=>({id:employe._id, name:employe.nomEmploye+' '+employe.prenomEmploye, data:employe} as Item));
+            // this.listeEmployeAsItem = this.listeEmployeDispo.map((employe:Employe)=>({id:employe._id, name:employe.nomEmploye+' '+employe.prenomEmploye, data:employe} as Item));
 
         // } else {
         //     this.listeEmployeDispo = this.listeEmploye;
@@ -242,12 +246,12 @@ export class TakerdvComponent implements OnInit{
                 const data = response.data.map((service :any) => ({id:service._id, name:service.nomService, data:service} as Item));
                 this.listeServiceAsItem = data;
 
-                console.log(response.data);
+                // console.log(response.data);
 
                 if (response.status == 200) {
                     this.listeService = response.data;
 
-                    console.log('liste service: ', this.listeService);
+                    // console.log('liste service: ', this.listeService);
 
                     this.listeServiceBackup.length == 0
                         ? (this.listeServiceBackup = this.listeService)

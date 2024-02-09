@@ -1,26 +1,27 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
+
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root'
 })
 export class StatutService {
 
-  constructor(private http: HttpClient) {    
-    this.apiUrl = environment.apiUrl;
-  }
+    constructor(private http: HttpClient) {
+        this.apiUrl = environment.apiUrl;
+    }
 
-  apiUrl: string;
+    apiUrl: string;
 
-  getListeStatut() {
-      return this.http.get(`${this.apiUrl}/Statut/getListeStatut`);
-  }
+    getListeStatut() {
+        return this.http.get(`${this.apiUrl}/Statut/getListeStatut`);
+    }
 
-  getStatut(id: string) {
-      return this.http.get(`${this.apiUrl}/Statut/getStatut/${id}`);
-  }
+    getStatut(id: string) {
+        return this.http.get(`${this.apiUrl}/Statut/getStatut/${id}`);
+    }
 
-  getStatutEnCours = () =>{
-    return this.http.get(`${this.apiUrl}/Statut/getStatutEnCours`);
-  }
+    getStatutEnCours = () => {
+        return this.http.get(`${this.apiUrl}/Statut/getStatutEnCours`);
+    }
 }
