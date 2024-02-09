@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { ServiceService } from 'src/app/core/services/service/service.service';
 import { TOAST_OPTIONS_BOTTOM_RIGHT } from 'src/app/_utils/toast/toast-options';
+import { ServiceService } from 'src/app/core/services/service/service.service';
 import { environment } from '../../../../environments/environment';
 
 @Component({
@@ -61,7 +61,7 @@ export class ServiceDetailComponent {
     initBeautyZone(){
         if(!this.isInitBeautyZone){
             const beautyZone = (<any>window).BeautyZoneCopy;
-            console.log(beautyZone);
+            // console.log(beautyZone);
             beautyZone.init();
             beautyZone.handleMasonryFilter();
             this.isInitBeautyZone = true;

@@ -98,6 +98,11 @@
     border-color: #ed3d8b;
     color: white;
 }
+.btn-light-pink[disabled] {
+    background: #ed3d8b;
+    border-color: #ed3d8b;
+    opacity: 0.7;
+}
 
 .soft-background{
     background-image:url(../images/background/bg1.png), url(../images/background/bg2.png); background-position: bottom, top; background-size: 100%; background-repeat: no-repeat
