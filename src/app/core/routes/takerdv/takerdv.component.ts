@@ -169,32 +169,46 @@ export class TakerdvComponent implements OnInit{
         // if (this.tacheForm.value.service) {
             // console.log("ok?")
 
-            this.listeEmployeDispo = this.listeEmploye.filter((employe) => {
-                let condition1 = employe.mesServices.some((service) => {
-                    return service._id === this.currentSelectedItem.id;
-                }); // il faut qu'il maitrise un des services
+            // this.listeEmployeDispo = this.listeEmploye.filter((employe) => {
+            //     let condition1 = employe.mesServices.some((service) => {
+            //         return service._id === this.currentSelectedItem.id;
+            //     }); // il faut qu'il maitrise un des services
 
-                let condition2; // il faut qu'il n'est pas de tache durant le début et la fin cad début + délai service
+            //     let condition2; // il faut qu'il n'est pas de tache durant le début et la fin cad début + délai service
 
-                return condition1 == true;
-            });
+            //     return condition1 == true;
+            // });
 
             // this.isLoading = true;
 
-            // this.employeService.getListeEmployeLibre({idService: this.currentSelectedItem.data._id, dateHeureDebut: this.tacheForm.value.dateDebut})
-            // .subscribe({
-            //     next: (response: any) => {
-            //         this.isLoading = false;
-            //     }
-            // });
+            this.employeService.getListeEmployeLibre({idService: this.currentSelectedItem.data._id, dateHeureDebut: this.tacheForm.value.dateDebut})
+            .subscribe({
+                next: (response: any) => {
+                    console.log(response);
 
-            this.listeEmployeAsItem = this.listeEmployeDispo.map((employe:Employe)=>({id:employe._id, name:employe.nomEmploye+' '+employe.prenomEmploye, data:employe} as Item));
+                    //   const dateToCheck = new Date('2024-02-07');
+
+                    //   // Filter tasks where the date does not overlap with any task
+                      const filteredEmp = response.data.listeTaches.filter((task:any) => !this.isDateOverlap(task, this.tacheForm.value.dateDebut, this.tacheForm.));
+
+
+                    this.listeEmployeAsItem = response.data.map(
+                        (employe:Employe)=>(
+                            {id:employe._id, name:employe.nomEmploye+' '+employe.prenomEmploye, data:employe} as Item
+                        )
+                    );
+                }
+            });
 
         // } else {
         //     this.listeEmployeDispo = this.listeEmploye;
         // }
 
         // this.tacheForm.value.employe = null; //Il faut reset la valeur sinon faut cliquer 2 fois
+    };
+
+    isDateOverlap = (task: any, date1: Date, date2: Date) => {
+        return (date1 < task.beg && date2 < task.beg) || (date1 > task.end && date2 > task.end);
     };
 
     changerDateDebutTache = () => {
