@@ -3,10 +3,10 @@
 }
 
 <!-- <div class="section-full content-inner-2 bg-white hair-services"> -->
-<div class="content-inner-2 bg-white hair-services">
+<div class="content-inner-2 bg-white hair-services soft-background">
     <div class="container">
         <div class="section-head text-black text-center">
-            <h2 class="text-primary m-b10">Nos services</h2>
+            <h2 class="text-primary m-b10">Liste des services</h2>
             <div class="dlab-separator-outer m-b0">
                 <div class="dlab-separator text-primary style-icon">
                     <i class="flaticon-spa text-primary"></i>
@@ -86,6 +86,10 @@
                         </div>
 
                         <p>{{ service.description }}</p>
+
+                        <a class="text-pink" [routerLink]="['/manager/service/edit', service._id]">
+                            <p class="text-right">> Consulter le service</p>
+                        </a>
                     </div>
                 </div>
             </div>

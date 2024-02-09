@@ -1,6 +1,6 @@
 <!-- LOADER -->
 @if(isLoading){
-  <div id="loading-area"></div>
+<div id="loading-area"></div>
 }
 <!-- header -->
 <header class="site-header header mo-left">
@@ -34,52 +34,57 @@
                     id="navbarNavDropdown"
                 >
                     <ul class="nav navbar-nav">
-                        <li>
+                        <li routerLinkActive="active">
                             <a
-                                >Employee <i class="fa fa-chevron-down"></i
+                                >Nos employés <i class="fa fa-chevron-down"></i
                             ></a>
                             <ul class="sub-menu">
                                 <li>
                                     <a
                                         [routerLink]="['/manager/emp/list']"
                                         class="dez-page"
-                                        >Liste</a
+                                        routerLinkActive="active"
+                                        >Liste des employés</a
                                     >
                                 </li>
                                 <li>
                                     <a
+                                        routerLinkActive="active"
                                         [routerLink]="['/manager/emp/add']"
                                         class="dez-page"
-                                        >Ajout</a
+                                        >Ajouter un employé</a
                                     >
                                 </li>
                             </ul>
                         </li>
 
-                        <li>
+                        <li routerLinkActive="active">
                             <a
-                                >Service <i class="fa fa-chevron-down"></i
+                                >Nos Services <i class="fa fa-chevron-down"></i
                             ></a>
                             <ul class="sub-menu">
                                 <li>
                                     <a
                                         [routerLink]="['/manager/service/list']"
                                         class="dez-page"
-                                        >Liste</a
+                                        routerLinkActive="active"
+                                        >Liste des services</a
                                     >
                                 </li>
-                                <li>
+                                <li routerLinkActive="active">
                                     <a
                                         [routerLink]="['/manager/service/add']"
                                         class="dez-page"
-                                        >Ajout</a
+                                        routerLinkActive="active"
+                                        >Ajouter un service</a
                                     >
                                 </li>
                             </ul>
                         </li>
 
                         <li [class.d-block]="user" [class.d-none]="!user">
-                            <a><i class="fa fa-user pe-1"></i> Mon compte
+                            <a
+                                ><i class="fa fa-user pe-1"></i> Mon compte
                                 <i class="fa fa-chevron-down"></i
                             ></a>
                             <ul class="sub-menu left">
@@ -87,16 +92,19 @@
                                     Bonjour,<br />
                                     <b class="text-pink"
                                         ><span class="text-uppercase">
-                                          {{
-                                            user && user.role == "Client" ? userInformation?.nomClient : ""
-                                          }}
-                                        </span
-                                        >
+                                            {{
+                                                user && user.role == "Client"
+                                                    ? userInformation?.nomClient
+                                                    : ""
+                                            }}
+                                        </span>
                                         {{
-                                          user && user.role == "Client" ? userInformation?.prenomClient : ""
+                                            user && user.role == "Client"
+                                                ? userInformation?.prenomClient
+                                                : ""
                                         }}
-                                        </b
-                                ></span>
+                                    </b></span
+                                >
                                 <li>
                                     <a href="shop-columns.html" class="dez-page"
                                         >Shop Columns</a
@@ -119,13 +127,20 @@
                                         (click)="logout()"
                                         class="dez-page"
                                         style="color: #ed3d8b"
-                                        ><i class="fa fa-sign-out pe-1"></i> Se déconnecter</a
+                                        ><i class="fa fa-sign-out pe-1"></i> Se
+                                        déconnecter</a
                                     >
                                 </li>
                             </ul>
                         </li>
 
-                        <li [ngClass]="{'d-flex align-items-center justify-content-center': !user, 'd-none': user}">
+                        <li
+                            [ngClass]="{
+                                'd-flex align-items-center justify-content-center':
+                                    !user,
+                                'd-none': user
+                            }"
+                        >
                             <button
                                 (click)="goToLogin()"
                                 class="btn btn-danger btn-light-pink w-100"
@@ -133,8 +148,7 @@
                             >
                                 Se Connecter
                             </button>
-                        </li>           
-
+                        </li>
                     </ul>
                 </div>
             </div>

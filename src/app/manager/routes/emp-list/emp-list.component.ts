@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { environment } from 'src/environments/environment';
 import { EmployeService } from '../../services/employee/employe.service';
 
 @Component({
@@ -12,11 +13,13 @@ export class EmpListComponent implements OnInit{
     listeEmploye: any[] = [];
     listeEmployeBackup: any[] = [];
 
+    apiUrl: string = environment.apiUrl;
+
     searchInsideEmpList() {
         if (this.searchText) {
             this.listeEmploye = this.listeEmploye.filter(person =>
-                person.firstName.toLowerCase().includes(this.searchText.toLowerCase()) &&
-                person.lastName.toLowerCase().includes(this.searchText.toLowerCase())
+                person.nomEmploye.toLowerCase().includes(this.searchText.toLowerCase()) ||
+                person.prenomEmploye.toLowerCase().includes(this.searchText.toLowerCase())
             );
         } else {
             this.listeEmploye = this.listeEmployeBackup;
@@ -37,6 +40,18 @@ export class EmpListComponent implements OnInit{
                     this.isLoading = false;
                 }
             })
+    };
+
+    getEmployeListeService = (employe: any): string => {
+        // Vérifier si l'employé et ses services existent
+        if (employe && employe.mesServices && employe.mesServices.length > 0) {
+            // Utiliser map() pour extraire les noms des services
+            const services = employe.mesServices.map((service: any) => service.nomService);
+            // Concaténer les noms des services avec ", " comme séparateur
+            return services.join(", ");
+        } else {
+            return ""; // Retourner une chaîne vide si aucun service n'est trouvé
+        }
     }
 
     isLoading: boolean = false;

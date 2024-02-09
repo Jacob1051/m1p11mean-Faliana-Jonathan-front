@@ -1,11 +1,11 @@
-import { ServiceListComponent } from './routes/service-list/service-list.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LayoutComponent } from './components/layout/layout.component';
-import { LoginComponent } from './routes/login/login.component';
-import { EmpListComponent } from './routes/emp-list/emp-list.component';
 import { EmpAddComponent } from './routes/emp-add/emp-add.component';
+import { EmpListComponent } from './routes/emp-list/emp-list.component';
+import { LoginComponent } from './routes/login/login.component';
 import { ServiceAddComponent } from './routes/service-add/service-add.component';
+import { ServiceListComponent } from './routes/service-list/service-list.component';
 
 
 const routes: Routes = [

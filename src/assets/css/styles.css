@@ -102,3 +102,15 @@
 .soft-background{
     background-image:url(../images/background/bg1.png), url(../images/background/bg2.png); background-position: bottom, top; background-size: 100%; background-repeat: no-repeat
 }
+
+.soft-background2{
+    background-image:url(../images/background/newbg2.webp), url(../images/background/newbg1.webp); background-position: bottom, top; background-size: 100%; background-repeat: no-repeat
+}
+
+.icon-bx-wraper{
+    background-color: white;
+}
+
+.seth{
+    background: white;
+}
