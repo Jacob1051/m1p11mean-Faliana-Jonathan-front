@@ -98,9 +98,7 @@ export class TakerdvComponent implements OnInit{
     tacheFormSubmit = () => {
         this.isSubmitted = true;
 
-        console.log(this.tacheForm.valid);
-
-        if (this.tacheForm.valid) {
+        // if (this.tacheForm.valid) {
             console.log(this.tacheForm.value);
 
             let dateDebut = new Date(
@@ -169,7 +167,7 @@ export class TakerdvComponent implements OnInit{
             });
 
             (<any>window).closeModal();
-        }
+        // }
     };
 
     changerListeEmployeDispo = () => {
