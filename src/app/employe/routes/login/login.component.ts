@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { first } from 'rxjs/operators';
-import { AuthService } from 'src/app/core/services/client/auth/auth.service';
+import { AuthService } from '../../services/auth/auth.service';
 import { TOAST_OPTIONS_BOTTOM_RIGHT } from 'src/app/_utils/toast/toast-options';
 
 @Component({
@@ -42,14 +42,12 @@ export class LoginComponent implements OnInit {
             this.loading = true;
 
             const auth = this.loginForm.value;
-            // console.log(auth);
+
             this.service
                 .login(auth)
                 .pipe(first())
                 .subscribe({
                     next: (response: any) => {
-
-                        // console.log(response);
 
                         if(response.status==200){
                             this.toastr.success('Vous vous êtes connecté avec succès!', 'Succès!',  TOAST_OPTIONS_BOTTOM_RIGHT);
@@ -67,10 +65,8 @@ export class LoginComponent implements OnInit {
                         this.loading = false;
                     },
                     error: (error) => {
-                        // this.error = error;
                         this.error = "Email ou mot de passe incorrect";
                         this.loading = false;
-                        console.error(error);
                         this.toastr.error(`Une erreur s'est produite`, 'Erreur!', TOAST_OPTIONS_BOTTOM_RIGHT);
                     },
                 });

@@ -17,7 +17,7 @@ import {
 } from 'src/app/_utils/addDureeToDate.util';
 import { TOAST_OPTIONS_BOTTOM_RIGHT } from 'src/app/_utils/toast/toast-options';
 import { environment } from 'src/environments/environment';
-import { EmployeService } from '../../services/employe/employe.service';
+import { EmployeService } from '../../../shared/services/employe/employe.service';
 import { LocalTimezoneService } from '../../services/localTimezone/local-timezone.service';
 import { ServiceService } from '../../services/service/service.service';
 import { StatutService } from '../../services/statut/statut.service';

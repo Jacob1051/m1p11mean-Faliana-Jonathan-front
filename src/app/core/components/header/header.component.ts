@@ -17,7 +17,7 @@ export class HeaderComponent {
         private authService: AuthService,
         private toastr: ToastrService
     ) {
-        
+
     }
 
     isLoading: boolean = false;
@@ -42,7 +42,6 @@ export class HeaderComponent {
             .getUserInformation(this.user.user_id, this.user.role)
             ?.subscribe({
                 next: (response: any) => {
-                    // console.log("eto2");
                     if(response.status == 200){
                         this.userInformation = response.data;
                     }

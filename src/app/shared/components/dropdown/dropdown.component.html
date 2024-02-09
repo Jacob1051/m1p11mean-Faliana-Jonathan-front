@@ -1,6 +1,6 @@
 <div class="dropdown">
     <button class="btn btn-block text-left dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true"
-        aria-expanded="false" data-display="static" [title]="item.name || ''"
+        aria-expanded="false" data-display="static" [title]="item?.name || ''"
         [ngClass]="{ 'border border-danger': showError }">
         <span>
             {{item ? item.name : (placeholder ? placeholder : 'Select')}}
