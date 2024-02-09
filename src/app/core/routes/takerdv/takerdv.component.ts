@@ -1,27 +1,27 @@
 import { Component, OnInit } from '@angular/core';
 import {
-  FormBuilder,
-  FormControl,
-  FormGroup,
-  Validators,
+    FormBuilder,
+    FormControl,
+    FormGroup,
+    Validators,
 } from '@angular/forms';
 import * as moment from 'moment';
 import 'moment-timezone';
 import { ToastrService } from 'ngx-toastr';
-import { Employe } from 'src/app/shared/models/employe';
-import { Service } from 'src/app/shared/models/service';
-import { Statut } from 'src/app/shared/models/statut';
 import {
-  addDureeToDate,
-  addOneMinute,
+    addDureeToDate,
+    addOneMinute,
 } from 'src/app/_utils/addDureeToDate.util';
 import { TOAST_OPTIONS_BOTTOM_RIGHT } from 'src/app/_utils/toast/toast-options';
+import { Employe } from 'src/app/shared/models/employe';
+import { Item } from 'src/app/shared/models/multi-dropdown';
+import { Service } from 'src/app/shared/models/service';
+import { Statut } from 'src/app/shared/models/statut';
 import { environment } from 'src/environments/environment';
 import { EmployeService } from '../../services/employe/employe.service';
 import { LocalTimezoneService } from '../../services/localTimezone/local-timezone.service';
 import { ServiceService } from '../../services/service/service.service';
 import { StatutService } from '../../services/statut/statut.service';
-import { Item } from 'src/app/shared/models/multi-dropdown';
 
 @Component({
     selector: 'app-takerdv',
@@ -169,26 +169,26 @@ export class TakerdvComponent implements OnInit{
         // if (this.tacheForm.value.service) {
             // console.log("ok?")
 
-            // this.listeEmployeDispo = this.listeEmploye.filter((employe) => {
-            //     let condition1 = employe.mesServices.some((service) => {
-            //         return service._id === this.currentSelectedItem.id;
-            //     }); // il faut qu'il maitrise un des services
+            this.listeEmployeDispo = this.listeEmploye.filter((employe) => {
+                let condition1 = employe.mesServices.some((service) => {
+                    return service._id === this.currentSelectedItem.id;
+                }); // il faut qu'il maitrise un des services
 
-            //     let condition2; // il faut qu'il n'est pas de tache durant le début et la fin cad début + délai service
+                let condition2; // il faut qu'il n'est pas de tache durant le début et la fin cad début + délai service
 
-            //     return condition1 == true;
-            // });
-
-            this.isLoading = true;
-
-            this.employeService.getListeEmployeLibre({idService: this.currentSelectedItem.data._id, dateHeureDebut: this.tacheForm.value.dateDebut})
-            .subscribe({
-                next: (response: any) => {
-                    this.isLoading = false;
-                }
+                return condition1 == true;
             });
 
-            // this.listeEmployeAsItem = this.listeEmployeDispo.map((employe:Employe)=>({id:employe._id, name:employe.nomEmploye+' '+employe.prenomEmploye, data:employe} as Item));
+            // this.isLoading = true;
+
+            // this.employeService.getListeEmployeLibre({idService: this.currentSelectedItem.data._id, dateHeureDebut: this.tacheForm.value.dateDebut})
+            // .subscribe({
+            //     next: (response: any) => {
+            //         this.isLoading = false;
+            //     }
+            // });
+
+            this.listeEmployeAsItem = this.listeEmployeDispo.map((employe:Employe)=>({id:employe._id, name:employe.nomEmploye+' '+employe.prenomEmploye, data:employe} as Item));
 
         // } else {
         //     this.listeEmployeDispo = this.listeEmploye;
