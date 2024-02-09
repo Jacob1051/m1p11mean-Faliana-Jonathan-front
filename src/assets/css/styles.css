@@ -98,3 +98,7 @@
     border-color: #ed3d8b;
     color: white;
 }
+
+.soft-background{
+    background-image:url(../images/background/bg1.png), url(../images/background/bg2.png); background-position: bottom, top; background-size: 100%; background-repeat: no-repeat
+}

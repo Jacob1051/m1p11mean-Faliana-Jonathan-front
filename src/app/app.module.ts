@@ -9,6 +9,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FooterComponent } from './core/components/footer/footer.component';
 import { HeaderComponent } from './core/components/header/header.component';
+import { LandingComponent } from './core/components/landing/landing.component';
 import { LayoutComponent } from './core/components/layout/layout.component';
 import { HomeComponent } from './core/routes/home/home.component';
 import { LoginComponent } from './core/routes/login/login.component';
@@ -32,7 +33,8 @@ import { SharedModule } from './shared/shared.module';
         RegisterComponent,
         LayoutComponent,
         HomeComponent,
-        TakerdvComponent
+        TakerdvComponent,
+        LandingComponent
     ],
     imports: [
         SharedModule,

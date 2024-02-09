@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { Service } from 'src/app/shared/models/service';
 import { TOAST_OPTIONS_BOTTOM_RIGHT } from 'src/app/_utils/toast/toast-options';
+import { Service } from 'src/app/shared/models/service';
 import { environment } from "../../../../environments/environment";
 import { ServiceService } from '../../services/service/service.service';
-import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-index',
@@ -72,6 +72,6 @@ export class IndexComponent implements OnInit{
     }
 
     ngOnInit() {
-        this.router.navigate(['/home']);
+        // this.router.navigate(['/home']);
     }
 }

@@ -34,19 +34,19 @@
                     id="navbarNavDropdown"
                 >
                     <ul class="nav navbar-nav">
-                        <li routerLinkActive="active">
+                        <li routerLinkActive="active" [class.active]="isAcceuil()">
                             <a routerLink="/home">Acceuil </a>
                         </li>
                         <li routerLinkActive="active">
+                            <a routerLink="/listeService"
+                                >Nos Services
+                            </a>
+                        </li>
+                        <li routerLinkActive="active">
                             <a 
-                                >Nos Services <i class="fa fa-chevron-down"></i
+                                >Rendez-vous <i class="fa fa-chevron-down"></i
                             ></a>
                             <ul class="sub-menu">
-                                <li>
-                                    <a routerLink="/listeService" class="dez-page" routerLinkActive="active"
-                                        >Consulter nos Services</a
-                                    >
-                                </li>
                                 <li>
                                     <a
                                         routerLink="/takerdv"
@@ -55,49 +55,9 @@
                                         >Prendre un rendez-vous</a
                                     >
                                 </li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a 
-                                >Blog <i class="fa fa-chevron-down"></i
-                            ></a>
-                            <ul class="sub-menu">
                                 <li>
-                                    <a href="blog-classic.html" class="dez-page"
-                                        >Classic</a
-                                    >
-                                </li>
-                                <li>
-                                    <a
-                                        href="blog-classic-sidebar.html"
-                                        class="dez-page"
-                                        >Classic Sidebar</a
-                                    >
-                                </li>
-                                <li>
-                                    <a
-                                        href="blog-detailed-grid.html"
-                                        class="dez-page"
-                                        >Detailed Grid</a
-                                    >
-                                </li>
-                                <li>
-                                    <a
-                                        href="blog-detailed-grid-sidebar.html"
-                                        class="dez-page"
-                                        >Detailed Grid Sidebar</a
-                                    >
-                                </li>
-                                <li>
-                                    <a
-                                        href="blog-left-img.html"
-                                        class="dez-page"
-                                        >Left Image Sidebar</a
-                                    >
-                                </li>
-                                <li>
-                                    <a href="blog-details.html" class="dez-page"
-                                        >Blog Details</a
+                                    <a class="dez-page" routerLinkActive="active"
+                                        >Historique de vos rendez-vous</a
                                     >
                                 </li>
                             </ul>
