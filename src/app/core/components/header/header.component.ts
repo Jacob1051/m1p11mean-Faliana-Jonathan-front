@@ -64,4 +64,13 @@ export class HeaderComponent {
     logout(){
       this.authService.logout();
     }
+
+    isAcceuil = () =>{
+        const urlActuelle = this.router.url;
+        // console.log('URL actuelle :', urlActuelle);
+        if(urlActuelle=="/"){
+            return true;
+        }
+        return false;
+    }
 }
