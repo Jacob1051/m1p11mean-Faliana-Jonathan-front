@@ -29,7 +29,7 @@
 
         <!-- not found -->
         <div class="dropdown-item" *ngIf="isEmpty">
-            No item found 🍽
+            {{ noItemLabel }}
         </div>
 
         <div *ngIf="showStatus" class="dropdown-count text-dark">

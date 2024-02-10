@@ -18,7 +18,7 @@ import { Item } from 'src/app/shared/models/multi-dropdown';
 import { Service } from 'src/app/shared/models/service';
 import { Statut } from 'src/app/shared/models/statut';
 import { environment } from 'src/environments/environment';
-import { EmployeService } from '../../services/employe/employe.service';
+import { EmployeService } from '../../../shared/services/employe/employe.service';
 import { LocalTimezoneService } from '../../services/localTimezone/local-timezone.service';
 import { ServiceService } from '../../services/service/service.service';
 import { StatutService } from '../../services/statut/statut.service';
@@ -28,7 +28,7 @@ import { StatutService } from '../../services/statut/statut.service';
     templateUrl: './takerdv.component.html',
     styleUrl: './takerdv.component.scss',
 })
-export class TakerdvComponent implements OnInit{
+export class TakerdvComponent implements OnInit {
 
     currentSelectedItem!: Item;
     currentSelectedEmpItem!: Item;
@@ -94,101 +94,114 @@ export class TakerdvComponent implements OnInit{
         this.isSubmitted = true;
 
         // if (this.tacheForm.valid) {
-            console.log(this.tacheForm.value);
+        console.log(this.tacheForm.value);
 
-            let dateDebut = new Date(
-                this.tacheForm.value.dateDebut
-                    ? this.tacheForm.value.dateDebut
-                    : ''
-            );
+        let dateDebut = new Date(
+            this.tacheForm.value.dateDebut
+                ? this.tacheForm.value.dateDebut
+                : ''
+        );
 
-            // let service: Service | undefined = this.listeServiceBackup.find(
-            //     (element) => {
-            //         return this.tacheForm.value.service == element._id;
-            //     }
-            // );
-            // // console.log(service);
+        // let service: Service | undefined = this.listeServiceBackup.find(
+        //     (element) => {
+        //         return this.tacheForm.value.service == element._id;
+        //     }
+        // );
+        // // console.log(service);
 
-            // let employe: Employe | undefined = this.listeEmploye.find(
-            //     (element) => {
-            //         return this.tacheForm.value.employe == element._id;
-            //     }
-            // );
+        // let employe: Employe | undefined = this.listeEmploye.find(
+        //     (element) => {
+        //         return this.tacheForm.value.employe == element._id;
+        //     }
+        // );
 
-            let service: Service = this.currentSelectedItem.data;
+        let service: Service = this.currentSelectedItem.data;
 
-            let employe: Employe = this.currentSelectedEmpItem.data;
+        let employe: Employe = this.currentSelectedEmpItem.data;
 
-            let dateFin = addDureeToDate(
-                dateDebut,
-                service ? service.duree : 0
-            );
+        let dateFin = addDureeToDate(
+            dateDebut,
+            service ? service.duree : 0
+        );
 
-            let newTache = {
-                dateDebut: dateDebut,
-                dateFin: dateFin,
-                employe: employe,
-                service: service,
-                isDeleted: false,
-                statut: this.statutEnCours,
-            };
+        let newTache = {
+            dateDebut: dateDebut,
+            dateFin: dateFin,
+            employe: employe,
+            service: service,
+            isDeleted: false,
+            statut: this.statutEnCours,
+        };
 
-            console.log('new tache:', newTache);
+        console.log('new tache:', newTache);
 
-            this.listeTache.push(newTache);
-            this.tacheForm.reset();
+        this.listeTache.push(newTache);
+        this.tacheForm.reset();
 
-            // Trier le tableau d'objets par dateDebut
-            this.listeTache.sort((a: any, b: any) => {
-                const dateA = new Date(a.dateDebut);
-                const dateB = new Date(b.dateDebut);
-                return dateA.getTime() - dateB.getTime();
-            });
-            this.rdvForm = new FormGroup({
-                dateRdv: new FormControl(
-                    moment(this.listeTache[0].dateDebut).format(
-                        'YYYY-MM-DD HH:mm'
-                    ),
-                    Validators.required
+        // Trier le tableau d'objets par dateDebut
+        this.listeTache.sort((a: any, b: any) => {
+            const dateA = new Date(a.dateDebut);
+            const dateB = new Date(b.dateDebut);
+            return dateA.getTime() - dateB.getTime();
+        });
+        this.rdvForm = new FormGroup({
+            dateRdv: new FormControl(
+                moment(this.listeTache[0].dateDebut).format(
+                    'YYYY-MM-DD HH:mm'
                 ),
-            });
+                Validators.required
+            ),
+        });
 
-            // Filtrer les services à retirer de listeService
-            let servicesToRemove = this.listeTache.map((tache: any) => {
-                return tache.service._id;
-            });
-            this.listeService = this.listeService.filter((service) => {
-                return !servicesToRemove.includes(service._id);
-            });
+        // Filtrer les services à retirer de listeService
+        let servicesToRemove = this.listeTache.map((tache: any) => {
+            return tache.service._id;
+        });
+        this.listeService = this.listeService.filter((service) => {
+            return !servicesToRemove.includes(service._id);
+        });
 
-            (<any>window).closeModal();
+        (<any>window).closeModal();
         // }
     };
 
     changerListeEmployeDispo = () => {
         // if (this.tacheForm.value.service) {
-            // console.log("ok?")
+        // console.log("ok?")
 
-            this.listeEmployeDispo = this.listeEmploye.filter((employe) => {
-                let condition1 = employe.mesServices.some((service) => {
-                    return service._id === this.currentSelectedItem.id;
-                }); // il faut qu'il maitrise un des services
+        // this.listeEmployeDispo = this.listeEmploye.filter((employe) => {
+        //     let condition1 = employe.mesServices.some((service) => {
+        //         return service._id === this.currentSelectedItem.id;
+        //     }); // il faut qu'il maitrise un des services
 
-                let condition2; // il faut qu'il n'est pas de tache durant le début et la fin cad début + délai service
+        //     let condition2; // il faut qu'il n'est pas de tache durant le début et la fin cad début + délai service
 
-                return condition1 == true;
+        //     return condition1 == true;
+        // });
+
+        // this.isLoading = true;
+
+        this.employeService.getListeEmployeLibre({ idService: this.currentSelectedItem.data._id, dateHeureDebut: this.tacheForm.value.dateDebut })
+            .subscribe({
+                next: (response: any) => {
+                    const dateDeb = moment(this.tacheForm.value.dateDebut, 'YYYY-MM-DD HH:mm');
+                    const dateFin = dateDeb.clone().add(this.currentSelectedItem.data.duree, 'minutes');
+
+                    var listeEmploye = response.data.filter((user: any) => {
+                        return user.listeTaches.every((task: any) => !this.isDateOverlap(task, dateDeb.toDate(), dateFin.toDate()));
+                    });
+
+                    listeEmploye = listeEmploye.filter((emp: any) => (!this.isOverlap(emp.horaireTravail.debut, emp.horaireTravail.fin, dateDeb.toDate())));
+
+                    listeEmploye = listeEmploye.filter((emp: any) => (!this.checkIfOverlap(emp, this.currentSelectedItem.data, dateDeb.toDate(), dateFin.toDate())));
+
+                    this.listeEmployeAsItem = listeEmploye.map(
+                        (employe: Employe) => (
+                            { id: employe._id, name: employe.nomEmploye + ' ' + employe.prenomEmploye, data: employe } as Item
+                        )
+                    );
+                }
             });
-
-            // this.isLoading = true;
-
-            // this.employeService.getListeEmployeLibre({idService: this.currentSelectedItem.data._id, dateHeureDebut: this.tacheForm.value.dateDebut})
-            // .subscribe({
-            //     next: (response: any) => {
-            //         this.isLoading = false;
-            //     }
-            // });
-
-            this.listeEmployeAsItem = this.listeEmployeDispo.map((employe:Employe)=>({id:employe._id, name:employe.nomEmploye+' '+employe.prenomEmploye, data:employe} as Item));
 
         // } else {
         //     this.listeEmployeDispo = this.listeEmploye;
@@ -196,6 +209,27 @@ export class TakerdvComponent implements OnInit{
 
         // this.tacheForm.value.employe = null; //Il faut reset la valeur sinon faut cliquer 2 fois
     };
+
+    isDateOverlap = (task: any, date1: Date, date2: Date) => {
+        return (date1 < task.beg && date2 < task.beg) || (date1 > task.end && date2 > task.end);
+    };
+
+    is2DateOverlap(start1: Date, end1: Date, start2: Date, end2: Date) {
+        return (start1 <= end2 && end1 >= start2);
+    }
+
+    isOverlap(date1: Date, date2: Date, dateToCheck: Date) {
+        return (date1 <= dateToCheck && dateToCheck <= date2);
+    }
+
+    checkIfOverlap(emp: any, service: any, dateDebut: Date, dateFin: Date) {
+        return this.listeTache.find(
+            (element: any) => (
+                element.employe._id === emp._id &&
+                element.service._id === service._id &&
+                this.is2DateOverlap(element.dateDebut, element.dateFin, dateDebut, dateFin)
+            ));
+    }
 
     changerDateDebutTache = () => {
         if (this.listeTache.length > 0) {
@@ -243,7 +277,7 @@ export class TakerdvComponent implements OnInit{
         this.serviceService.getListeService().subscribe({
             next: (response: any) => {
 
-                const data = response.data.map((service :any) => ({id:service._id, name:service.nomService, data:service} as Item));
+                const data = response.data.map((service: any) => ({ id: service._id, name: service.nomService, data: service } as Item));
                 this.listeServiceAsItem = data;
 
                 // console.log(response.data);
@@ -285,7 +319,7 @@ export class TakerdvComponent implements OnInit{
                 if (response.status == 200) {
                     this.listeEmploye = response.data;
 
-                    const data = response.data.map((employe :any) => ({id:employe._id, name:employe.nomEmploye+' '+employe.prenomEmploye, data:employe} as Item));
+                    const data = response.data.map((employe: any) => ({ id: employe._id, name: employe.nomEmploye + ' ' + employe.prenomEmploye, data: employe } as Item));
                     this.listeEmployeAsItem = data;
 
                     this.listeEmployeDispo.length == 0

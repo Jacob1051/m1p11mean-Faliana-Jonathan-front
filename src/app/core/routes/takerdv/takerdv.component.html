@@ -206,6 +206,7 @@
                                                             class="form-control"
                                                             id = "dateDebutTacheInput"
                                                             formControlName="dateDebut"
+                                                            (input)="changerListeEmployeDispo()"
                                                         />
                                                         @if(tacheForm.controls['dateDebut'].touched || isSubmitted){
                                                             @if(tacheForm.controls['dateDebut'].errors?.['required']){

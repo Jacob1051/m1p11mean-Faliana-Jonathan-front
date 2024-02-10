@@ -34,49 +34,6 @@
                     id="navbarNavDropdown"
                 >
                     <ul class="nav navbar-nav">
-                        <li>
-                            <a
-                                >Employee <i class="fa fa-chevron-down"></i
-                            ></a>
-                            <ul class="sub-menu">
-                                <li>
-                                    <a
-                                        [routerLink]="['/manager/emp/list']"
-                                        class="dez-page"
-                                        >Liste</a
-                                    >
-                                </li>
-                                <li>
-                                    <a
-                                        [routerLink]="['/manager/emp/add']"
-                                        class="dez-page"
-                                        >Ajout</a
-                                    >
-                                </li>
-                            </ul>
-                        </li>
-
-                        <li>
-                            <a
-                                >Service <i class="fa fa-chevron-down"></i
-                            ></a>
-                            <ul class="sub-menu">
-                                <li>
-                                    <a
-                                        [routerLink]="['/manager/service/list']"
-                                        class="dez-page"
-                                        >Liste</a
-                                    >
-                                </li>
-                                <li>
-                                    <a
-                                        [routerLink]="['/manager/service/add']"
-                                        class="dez-page"
-                                        >Ajout</a
-                                    >
-                                </li>
-                            </ul>
-                        </li>
 
                         <li [class.d-block]="user" [class.d-none]="!user">
                             <a><i class="fa fa-user pe-1"></i> Mon compte
@@ -88,30 +45,28 @@
                                     <b class="text-pink"
                                         ><span class="text-uppercase">
                                           {{
-                                            user && user.role == "Client" ? userInformation?.nomClient : ""
+                                            user ? userInformation?.nomEmploye : ""
                                           }}
                                         </span
                                         >
                                         {{
-                                          user && user.role == "Client" ? userInformation?.prenomClient : ""
+                                          user ? userInformation?.prenomEmploye : ""
                                         }}
                                         </b
                                 ></span>
                                 <li>
-                                    <a href="shop-columns.html" class="dez-page"
-                                        >Shop Columns</a
+                                    <a [routerLink]="[route.MON_COMPTE]" routerLinkActive="active" class="dez-page"
+                                        >Mon compte</a
                                     >
                                 </li>
                                 <li>
-                                    <a href="shop-login.html" class="dez-page"
-                                        >Shop Login</a
+                                    <a [routerLink]="[route.HEURE_TRAVAIL]" routerLinkActive="active" class="dez-page"
+                                        >Horaire de travail</a
                                     >
                                 </li>
                                 <li>
-                                    <a
-                                        href="shop-register.html"
-                                        class="dez-page"
-                                        >Shop Register</a
+                                    <a [routerLink]="[route.LISTE_TACHE]" routerLinkActive="active" class="dez-page"
+                                        >Les taches</a
                                     >
                                 </li>
                                 <li role="button">

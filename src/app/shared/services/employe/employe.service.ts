@@ -24,4 +24,8 @@ export class EmployeService {
     getListeEmployeLibre(criteria: any) {
         return this.http.post(`${this.apiUrl}/Employe/getListeEmployeLibre/`, criteria);
     }
+
+    updateHoraireTravail(horaire: any, user_Id: string) {
+        return this.http.put(`${this.apiUrl}/Employe/updateHoraireTravail/${user_Id}`, horaire);
+    }
 }

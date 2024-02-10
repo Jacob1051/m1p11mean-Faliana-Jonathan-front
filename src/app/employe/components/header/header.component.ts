@@ -1,7 +1,8 @@
+import { EMP_ROUTE, EMP_ROUTING } from './../../constants/route-list';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { AuthService } from 'src/app/core/services/client/auth/auth.service';
+import { AuthService } from '../../services/auth/auth.service';
 import { UserInformationService } from 'src/app/core/services/user/userInformation/user-information.service';
 import { TOAST_OPTIONS_BOTTOM_RIGHT } from 'src/app/_utils/toast/toast-options';
 
@@ -22,6 +23,7 @@ export class HeaderComponent {
     isLoading: boolean = false;
     user: any;
     userInformation:any;
+    route = EMP_ROUTING;
 
     ngOnInit(): void {
       this.authService.user.subscribe((nouvelUtilisateur) => {
@@ -31,11 +33,10 @@ export class HeaderComponent {
     }
 
     goToLogin() {
-        this.router.navigateByUrl('/manager/login');
+        this.router.navigateByUrl('/employe/login');
     }
 
     getUserInformation() {
-        // console.log("eto");
         this.isLoading = true;
         this.service
             .getUserInformation(this.user.user_id, this.user.role)

@@ -15,6 +15,7 @@ export class DropdownComponent {
     @Input() showSearch = true;
     @Input() showStatus = true;
     @Input() showError = false;
+    @Input() noItemLabel = 'Pas de donneé.';
     @Output() itemChange = new EventEmitter<Item>(undefined);
 
     @Input('items')
