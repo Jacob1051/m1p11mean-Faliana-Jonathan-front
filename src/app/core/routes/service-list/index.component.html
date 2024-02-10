@@ -83,9 +83,15 @@
                         <p>{{ service.description }}</p>
                         
                         
-                            <a class="text-pink" routerLink="/service/{{ service._id }}">
+                            <!-- <a class="text-pink" routerLink="/service/{{ service._id }}">
                                 <p class="text-right">> Consulter le service</p>
-                            </a>
+                            </a> -->
+
+                            <div class="text-right">
+                                <button class="btn btn-danger btn-light-pink" routerLink="/service/{{ service._id }}">
+                                    Consulter le service <i class="fa-solid fa-chevron-right"></i>
+                                </button>
+                            </div>
                            
                     </div>
                 </div>
