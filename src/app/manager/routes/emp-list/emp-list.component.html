@@ -42,7 +42,10 @@
                         class="icon-lg radius m-b20 d-flex align-items-center justify-content-center w-100"
                         style="min-height: 90.5px"
                     >
-                        <a routerLink="/manager/emp/edit/{{ employee._id }}" class="icon-cell">
+                        <a
+                            routerLink="/manager/emp/edit/{{ employee._id }}"
+                            class="icon-cell"
+                        >
                             <div class="circledImageContainer">
                                 <img
                                     src="{{ apiUrl }}/Employe/{{
@@ -71,10 +74,83 @@
                         </h5>
                     </div>
                     <div class="">
-                        <p><b class="text-pink">Services offerts: </b>{{ getEmployeListeService(employee) }}</p>
+                        <p>
+                            <b class="text-pink">Services offerts: </b
+                            >{{ getEmployeListeService(employee) }}
+                        </p>
                     </div>
-                    <div class="text-right pt-4">
+
+                    <!-- <div class="text-right pt-4">
                         <a routerLink="/manager/emp/edit/{{ employee._id }}">> Modifier l'employé</a>
+                    </div> -->
+
+                    <p class="text-right d-flex gap-2 justify-content-end pt-5">
+                        <button
+                            class="btn btn-danger btn-light-pink"
+                            routerLink="/manager/emp/edit/{{ employee._id }}"
+                        >
+                            <i class="fa fa-edit"></i>
+                        </button>
+                        <button
+                            class="btn btn-danger btn-pink"
+                            style="border-radius: 0"
+                            data-bs-toggle="modal"
+                            [attr.data-bs-target]="
+                                '#exampleModal' + employee._id
+                            "
+                        >
+                            <i class="fa fa-trash"></i>
+                        </button>
+                    </p>
+                </div>
+            </div>
+
+            } @for(employee of listeEmploye; track $index){
+
+            <div
+                class="modal fade"
+                id="exampleModal{{ employee._id }}"
+                tabindex="-1"
+                aria-labelledby="exampleModalLabel"
+                aria-hidden="true"
+            >
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header d-flex align-items-center">
+                            <h1 class="modal-title fs-5" id="exampleModalLabel">
+                                Suppression d'employé
+                            </h1>
+                            <button
+                                type="button"
+                                class="btn-close"
+                                data-bs-dismiss="modal"
+                                aria-label="Close"
+                            ></button>
+                        </div>
+                        <div class="modal-body">
+                            Êtes-vous sûr de vouloir supprimer l'employé:
+                            <b class="text-pink"
+                                >{{ employee.nomEmploye }}
+                                {{ employee.prenomEmploye }}</b
+                            >
+                            ?
+                        </div>
+                        <div class="modal-footer">
+                            <button
+                                type="button"
+                                class="btn btn-secondary"
+                                data-bs-dismiss="modal"
+                            >
+                                Fermer
+                            </button>
+                            <button
+                                type="button"
+                                class="btn btn-danger btn-pink"
+                                (click)="deleteEmploye(employee._id)"
+                            >
+                                Supprimer
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>

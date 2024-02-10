@@ -41,7 +41,10 @@
                     @if(service.icone){
                     <div class="icon-lg radius m-b20">
                         <a
-                            [routerLink]="['/manager/service/edit', service._id]"
+                            [routerLink]="[
+                                '/manager/service/edit',
+                                service._id
+                            ]"
                             class="icon-cell"
                             ><i class="{{ service.icone }}"></i>
                         </a>
@@ -53,7 +56,10 @@
                         style="min-height: 90.5px"
                     >
                         <a
-                            [routerLink]="['/manager/service/edit', service._id]"
+                            [routerLink]="[
+                                '/manager/service/edit',
+                                service._id
+                            ]"
                             class="icon-cell"
                         >
                             <img
@@ -66,9 +72,13 @@
 
                     <div class="icon-content">
                         <h5 class="dez-tilte">
-                            <a [routerLink]="['/manager/service/edit', service._id]">{{
-                                service.nomService
-                            }}</a>
+                            <a
+                                [routerLink]="[
+                                    '/manager/service/edit',
+                                    service._id
+                                ]"
+                                >{{ service.nomService }}</a
+                            >
                         </h5>
 
                         <div
@@ -87,12 +97,78 @@
 
                         <p>{{ service.description }}</p>
 
-                        <a class="text-pink" [routerLink]="['/manager/service/edit', service._id]">
-                            <p class="text-right">> Consulter le service</p>
-                        </a>
+                        
+                        <p class="text-right d-flex gap-2 justify-content-end">
+                            <button
+                                class="btn btn-danger btn-light-pink"
+                                [routerLink]="[
+                                    '/manager/service/edit',
+                                    service._id
+                                ]"
+                            >
+                                <i class="fa fa-edit"></i>
+                            </button>
+                            <button
+                                class="btn btn-danger btn-pink"
+                                style="border-radius: 0"
+                                data-bs-toggle="modal"
+                                [attr.data-bs-target]="
+                                    '#exampleModal' + service._id
+                                "
+                            >
+                                <i class="fa fa-trash"></i>
+                            </button>
+                        </p>
+                        
                     </div>
                 </div>
             </div>
+            } @for(service of listeService; track $index){
+            <!-- Modal -->
+            <div
+                class="modal fade"
+                id="exampleModal{{ service._id }}"
+                tabindex="-1"
+                aria-labelledby="exampleModalLabel"
+                aria-hidden="true"
+            >
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header d-flex align-items-center">
+                            <h1 class="modal-title fs-5" id="exampleModalLabel">
+                                Suppression de service
+                            </h1>
+                            <button
+                                type="button"
+                                class="btn-close"
+                                data-bs-dismiss="modal"
+                                aria-label="Close"
+                            ></button>
+                        </div>
+                        <div class="modal-body">
+                            Êtes-vous sûr de vouloir supprimer le service:
+                            <b class="text-pink">{{ service.nomService }}</b> ?
+                        </div>
+                        <div class="modal-footer">
+                            <button
+                                type="button"
+                                class="btn btn-secondary"
+                                data-bs-dismiss="modal"
+                            >
+                                Fermer
+                            </button>
+                            <button
+                                type="button"
+                                class="btn btn-danger btn-pink"
+                                (click)="deleteService(service._id)"
+                            >
+                                Supprimer
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             }
 
             <!-- <div class="col-lg-4 col-md-6 col-sm-6 p-lr0" *ngFor="let service of services">

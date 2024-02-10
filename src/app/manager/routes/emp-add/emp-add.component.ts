@@ -28,6 +28,8 @@ export class EmpAddComponent implements OnInit {
     listItems: Item[] = [];
     currentSelectedItem!: Item;
 
+    hasServices: boolean = false;
+
     onItemChange(item: Item): void {
         this.currentSelectedItem = item;
     }
@@ -89,37 +91,46 @@ export class EmpAddComponent implements OnInit {
         this.submitted = true;
 
         if (this.addEmployeForm.valid) {
-            this.loading = true;
+            // this.loading = true;
 
             const auth = this.addEmployeForm.value;
             const selectedService = this.listItems.filter((item:any) => item.checked);
 
-            this.saveEmploye({
-                nomEmploye: auth.nomEmploye,
-                prenomEmploye: auth.prenomEmploye,
-                email: auth.email,
-                password: auth.password,
-                confirmPassword: auth.confirmPassword,
-                user: auth.user,
-                mesServices: [...selectedService.map(item => item.id)]
-            }).subscribe({
-                next: (response: any) => {
-                    if (response.status == 200) {
-                        this.toastr.success('Vous vous êtes inscrit avec succès!', 'Succès!', TOAST_OPTIONS_BOTTOM_RIGHT);
-                        this.router.navigate(['/'], { relativeTo: this.route });
-                    }
-                    else {
-                        console.error(response.message);
-                        this.toastr.error(`Une erreur s'est produite!`, 'Erreur!', TOAST_OPTIONS_BOTTOM_RIGHT);
-                    }
-                    this.loading = false;
-                },
-                error: error => {
-                    console.error(error);
-                    this.toastr.error(`Une erreur s'est produite`, 'Erreur!', TOAST_OPTIONS_BOTTOM_RIGHT);
-                    this.loading = false;
-                },
-            });
+            if(selectedService.length>0){
+                this.loading = true;
+                this.hasServices = true;
+                
+                this.saveEmploye({
+                    nomEmploye: auth.nomEmploye,
+                    prenomEmploye: auth.prenomEmploye,
+                    email: auth.email,
+                    password: auth.password,
+                    confirmPassword: auth.confirmPassword,
+                    user: auth.user,
+                    mesServices: [...selectedService.map(item => item.id)]
+                }).subscribe({
+                    next: (response: any) => {
+                        if (response.status == 200) {
+                            this.toastr.success('Vous vous êtes inscrit avec succès!', 'Succès!', TOAST_OPTIONS_BOTTOM_RIGHT);
+                            this.router.navigate(['/'], { relativeTo: this.route });
+                        }
+                        else {
+                            console.error(response.message);
+                            this.toastr.error(`Une erreur s'est produite!`, 'Erreur!', TOAST_OPTIONS_BOTTOM_RIGHT);
+                        }
+                        this.loading = false;
+                    },
+                    error: error => {
+                        console.error(error);
+                        this.toastr.error(`Une erreur s'est produite`, 'Erreur!', TOAST_OPTIONS_BOTTOM_RIGHT);
+                        this.loading = false;
+                    },
+                });
+            }
+            else{
+                this.hasServices = false;
+            }
+
         }
     }
 

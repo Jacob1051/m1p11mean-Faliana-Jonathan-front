@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
+import { TOAST_OPTIONS_BOTTOM_RIGHT } from 'src/app/_utils/toast/toast-options';
 import { environment } from 'src/environments/environment';
 import { EmployeService } from '../../services/employee/employe.service';
 
@@ -15,6 +17,8 @@ export class EmpListComponent implements OnInit{
 
     apiUrl: string = environment.apiUrl;
 
+    isLoading: boolean = false;
+
     searchInsideEmpList() {
         if (this.searchText) {
             this.listeEmploye = this.listeEmploye.filter(person =>
@@ -27,7 +31,8 @@ export class EmpListComponent implements OnInit{
     }
 
     constructor(
-        private service: EmployeService
+        private service: EmployeService,
+        private toastr: ToastrService
     ) {}
 
     ngOnInit(): void {
@@ -54,5 +59,45 @@ export class EmpListComponent implements OnInit{
         }
     }
 
-    isLoading: boolean = false;
+    deleteEmploye = (id: string) =>{
+        this.service.deleteEmploye(id).subscribe({
+            next: (response: any) => {
+                if (response.status == 200) {
+                    this.toastr.success(
+                        `Une donnée a été supprimée!`,
+                        'Success!',
+                        TOAST_OPTIONS_BOTTOM_RIGHT
+                    );
+                    (<any>window).closeModal();
+
+                    this.isLoading = true;
+                    this.service.getListeEmploye()
+                        .subscribe({
+                            next: (data: any) => {
+                                this.listeEmploye = data.data;
+                                this.listeEmployeBackup = this.listeEmploye;
+                                this.isLoading = false;
+                            }
+                        })
+                } else {
+                    console.error(response.message);
+                    this.toastr.error(
+                        `Une erreur s'est produite!`,
+                        'Erreur!',
+                        TOAST_OPTIONS_BOTTOM_RIGHT
+                    );
+                }
+                this.isLoading = false;
+            },
+            error: (error) => {
+                console.error(error);
+                this.toastr.error(
+                    `Une erreur s'est produite`,
+                    'Erreur!',
+                    TOAST_OPTIONS_BOTTOM_RIGHT
+                );
+                this.isLoading = false;
+            },
+        });
+    }
 }

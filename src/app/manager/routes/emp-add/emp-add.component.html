@@ -5,6 +5,9 @@
 <!-- <div class="section-full content-inner-2 bg-white hair-services"> -->
 <div class="content-inner-2 bg-white hair-services soft-background">
     <div class="container">
+        <div class="text-left pb-4">
+            <button class="btn btn-danger btn-light-pink" routerLink="/manager/emp/list"><i class="fa fa-arrow-left"></i></button>
+        </div>
         <div class="section-head text-black text-center">
             <h2 class="text-primary m-b10">{{ title }}</h2>
             <div class="dlab-separator-outer m-b0">
@@ -143,6 +146,15 @@
                                             (itemChange)="onItemChange($event)">
                                         </app-multi-dropdown>
                                     </div>
+
+                                    @if(submitted && !hasServices){
+                                        <div class="pb-4">
+                                            <span class="text-danger pb-4"
+                                                >Veillez sélectionner au moins un service</span
+                                            >
+                                        </div>
+                                    }
+
                                     <div class="text-left">
                                         <button
                                             class="btn btn-danger btn-light-pink p-3"

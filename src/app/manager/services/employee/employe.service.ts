@@ -28,4 +28,8 @@ export class EmployeService {
     updateEmploye(id: string, empData: any) {
         return this.http.put(`${this.apiUrl}/Employe/updateEmploye/${id}`, empData);
     }
+
+    deleteEmploye(id: string) {
+        return this.http.delete(`${this.apiUrl}/Employe/deleteEmploye/${id}`);
+    }
 }
