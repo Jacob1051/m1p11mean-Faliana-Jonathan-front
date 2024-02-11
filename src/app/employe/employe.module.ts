@@ -6,7 +6,7 @@ import { SharedModule } from '../shared/shared.module';
 import { LoginComponent } from './routes/login/login.component';
 import { LayoutComponent } from './components/layout/layout.component';
 import { HeaderComponent } from './components/header/header.component';
-import { HeureTravailComponent } from './components/heure-travail/heure-travail.component';
+import { HeureTravailComponent } from './routes/heure-travail/heure-travail.component';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
 

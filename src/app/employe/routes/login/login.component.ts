@@ -54,7 +54,9 @@ export class LoginComponent implements OnInit {
 
                             console.log(response.data);
 
-                            const returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+                            // const returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+
+                            const returnUrl = this.service.redirectUrl || '/';
 
                             this.router.navigateByUrl(returnUrl);
                         }

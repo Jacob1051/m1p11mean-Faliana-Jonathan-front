@@ -14,6 +14,7 @@ export class AuthService {
     private apiUrl: string;
     private userSubject: BehaviorSubject<any | null>;
     public user: Observable<any | null>;
+    public redirectUrl!: string;
 
     constructor(private http: HttpClient, private router: Router) {
         this.apiUrl = environment.apiUrl;

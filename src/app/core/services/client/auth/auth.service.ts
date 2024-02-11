@@ -12,6 +12,7 @@ export class AuthService {
     private apiUrl: string;
     private userSubject: BehaviorSubject<any | null>;
     public user: Observable<any | null>;
+    public redirectUrl!: string;
 
     constructor(private http: HttpClient, private router: Router) {
         this.apiUrl = environment.apiUrl;
@@ -33,14 +34,6 @@ export class AuthService {
                 return res;
             }));
     }
-
-    // login(user: any) {
-    //   console.log(`${this.apiUrl}/User/login`, user);
-    //   return this.http.post(`${this.apiUrl}/User/login`, user)
-    //     .subscribe({
-    //       next: (data) => console.log(data)
-    //     });
-    // }
 
     logout() {
         localStorage.removeItem('user');

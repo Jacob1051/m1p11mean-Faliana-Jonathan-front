@@ -49,14 +49,10 @@ export class LoginComponent implements OnInit {
                 .subscribe({
                     next: (response: any) => {
 
-                        // console.log(response);
-
                         if(response.status==200){
                             this.toastr.success('Vous vous êtes connecté avec succès!', 'Succès!',  TOAST_OPTIONS_BOTTOM_RIGHT);
 
-                            console.log(response.data);
-
-                            const returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/home';
+                            const returnUrl = this.service.redirectUrl || '/home';
 
                             this.router.navigateByUrl(returnUrl);
                         }

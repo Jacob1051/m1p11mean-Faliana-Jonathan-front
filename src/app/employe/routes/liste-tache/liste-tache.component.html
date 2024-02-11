@@ -1,0 +1,46 @@
+@if(isLoading){
+<div id="loading-area"></div>
+}
+
+<div class="section-full content-inner-2 bg-white hair-services">
+    <div class="container">
+        <div class="section-head text-black text-center">
+            <h2 class="text-primary m-b10">Les tâches à effectuer</h2>
+            <div class="dlab-separator-outer m-b0">
+                <div class="dlab-separator text-primary style-icon">
+                    <i class="flaticon-spa text-primary"></i>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-10 m-b30 m-auto">
+                <div class="p-a30">
+                    <div class="tab-content">
+                        <h4>Les tâches à réaliser</h4>
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">First</th>
+                                    <th scope="col">Last</th>
+                                    <th scope="col">Handle</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @for(tache of pendingTask; track $index){
+                                    <tr>
+                                        <th scope="row">1</th>
+                                        <td>Mark</td>
+                                        <td>Otto</td>
+                                        <td>mdo</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

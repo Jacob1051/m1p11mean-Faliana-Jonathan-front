@@ -21,7 +21,10 @@ import { environment } from 'src/environments/environment';
 import { EmployeService } from '../../../shared/services/employe/employe.service';
 import { LocalTimezoneService } from '../../services/localTimezone/local-timezone.service';
 import { ServiceService } from '../../services/service/service.service';
-import { StatutService } from '../../services/statut/statut.service';
+import { StatutService } from '../../../shared/services/statut/statut.service';
+import { AuthService } from '../../services/client/auth/auth.service';
+import { RdvService } from '../../services/rdv/rdv.service';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-takerdv',
@@ -39,7 +42,10 @@ export class TakerdvComponent implements OnInit {
         private statutService: StatutService,
         private formBuilder: FormBuilder,
         private localTimezoneService: LocalTimezoneService,
-        private toastr: ToastrService
+        private toastr: ToastrService,
+        private authService: AuthService,
+        private rdvService: RdvService,
+        private router: Router
     ) {
         localTimezoneService.setDefaultTimezone();
     }
@@ -70,6 +76,7 @@ export class TakerdvComponent implements OnInit {
     listeEmploye: Employe[] = [];
     listeEmployeDispo: Employe[] = [];
     listeTache: any = [];
+    loading: boolean = false;
 
     currentDate: Date = moment(new Date()).toDate();
     statutEnCours: Statut | any;
@@ -94,7 +101,6 @@ export class TakerdvComponent implements OnInit {
         this.isSubmitted = true;
 
         // if (this.tacheForm.valid) {
-        console.log(this.tacheForm.value);
 
         let dateDebut = new Date(
             this.tacheForm.value.dateDebut
@@ -133,7 +139,7 @@ export class TakerdvComponent implements OnInit {
             statut: this.statutEnCours,
         };
 
-        console.log('new tache:', newTache);
+        // console.log('new tache:', newTache);
 
         this.listeTache.push(newTache);
         this.tacheForm.reset();
@@ -184,16 +190,19 @@ export class TakerdvComponent implements OnInit {
         this.employeService.getListeEmployeLibre({ idService: this.currentSelectedItem.data._id, dateHeureDebut: this.tacheForm.value.dateDebut })
             .subscribe({
                 next: (response: any) => {
-                    const dateDeb = moment(this.tacheForm.value.dateDebut, 'YYYY-MM-DD HH:mm');
-                    const dateFin = dateDeb.clone().add(this.currentSelectedItem.data.duree, 'minutes');
+                    // const dateDeb = moment(this.tacheForm.value.dateDebut, 'YYYY-MM-DD HH:mm');
+                    // const dateFin = dateDeb.clone().add(this.currentSelectedItem.data.duree, 'minutes');
 
-                    var listeEmploye = response.data.filter((user: any) => {
-                        return user.listeTaches.every((task: any) => !this.isDateOverlap(task, dateDeb.toDate(), dateFin.toDate()));
-                    });
+                    // var listeEmploye = response.data.filter((user: any) => {
+                    //     return user.listeTaches.every((task: any) => !this.isDateOverlap(task, dateDeb.toDate(), dateFin.toDate()));
+                    // });
 
-                    listeEmploye = listeEmploye.filter((emp: any) => (!this.isOverlap(emp.horaireTravail.debut, emp.horaireTravail.fin, dateDeb.toDate())));
+                    // listeEmploye = listeEmploye.filter((emp: any) => (!this.isOverlap(emp.horaireTravail.debut, emp.horaireTravail.fin, dateDeb.toDate())));
 
-                    listeEmploye = listeEmploye.filter((emp: any) => (!this.checkIfOverlap(emp, this.currentSelectedItem.data, dateDeb.toDate(), dateFin.toDate())));
+                    // listeEmploye = listeEmploye.filter((emp: any) => (!this.checkIfOverlap(emp, this.currentSelectedItem.data, dateDeb.toDate(), dateFin.toDate())));
+
+                    var listeEmploye = response.data;
+                    console.log(listeEmploye);
 
                     this.listeEmployeAsItem = listeEmploye.map(
                         (employe: Employe) => (
@@ -371,4 +380,42 @@ export class TakerdvComponent implements OnInit {
             },
         });
     };
+
+    validerRDV() {
+        const clientId = this.authService.userValue;
+
+        const rdv = {
+            client: clientId.user_id,
+            dateDebutRdv: this.listeTache[0].dateDebut,
+            dateFinRdv: this.listeTache[this.listeTache.length -1].dateFin,
+            listeTaches: this.listeTache.map((data:any)=> ({
+                dateDebut: data.dateDebut,
+                dateFin: data.dateFin,
+                employe: data.employe._id,
+                service: data.service._id,
+                statut: data.statut._id,
+                isDeleted: false
+            })),
+            isDeleted: false,
+        };
+
+        this.rdvService.addRendezvous(rdv)
+        .subscribe({
+            next: (response: any) => {
+                if(response.status==200){
+                    this.toastr.success('Vous vous êtes connecté avec succès!', 'Succès!',  TOAST_OPTIONS_BOTTOM_RIGHT);
+                    this.router.navigateByUrl('/takerdv');
+                }
+                else{
+                    this.toastr.error(`Une erreur s'est produite!`, 'Erreur!', TOAST_OPTIONS_BOTTOM_RIGHT);
+                }
+                this.loading = false;
+            },
+            error: (error) => {
+                this.loading = false;
+                console.error(error);
+                this.toastr.error(`Une erreur s'est produite`, 'Erreur!', TOAST_OPTIONS_BOTTOM_RIGHT);
+            },
+        });
+    }
 }
