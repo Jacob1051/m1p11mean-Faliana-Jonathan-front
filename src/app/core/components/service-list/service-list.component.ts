@@ -44,6 +44,9 @@ export class ServiceListComponent {
     onClick(service: Service): void {
         this.selectedService = service;
         this.itemChange.emit(service);
+
+        (<any>window).closeModal();
     }
+
 }
 
