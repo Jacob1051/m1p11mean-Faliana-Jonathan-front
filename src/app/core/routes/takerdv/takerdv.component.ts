@@ -393,6 +393,7 @@ export class TakerdvComponent implements OnInit {
                 dateFin: data.dateFin,
                 employe: data.employe._id,
                 service: data.service._id,
+                client: clientId.user_id,
                 statut: data.statut._id,
                 isDeleted: false
             })),

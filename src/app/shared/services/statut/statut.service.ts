@@ -24,4 +24,8 @@ export class StatutService {
     getStatutEnCours = () => {
         return this.http.get(`${this.apiUrl}/Statut/getStatutEnCours`);
     }
+
+    getStatutTermine = () => {
+        return this.http.get(`${this.apiUrl}/Statut/getStatutTermine`);
+    }
 }

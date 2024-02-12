@@ -14,6 +14,63 @@
         </div>
 
         <div class="row">
+            <div class="col-md-6">
+                <h2>À réaliser</h2>
+
+                <div
+                    cdkDropList
+                    #todoList="cdkDropList"
+                    [cdkDropListData]="pendingTask"
+                    cdkDropListSortingDisabled
+                    [cdkDropListConnectedTo]="[doneList]"
+                    class="example-list"
+                    (cdkDropListDropped)="drop($event)"
+                >
+                    @for (item of pendingTask; track item) {
+                        <div class="example-box" cdkDrag>
+                            {{ item.client.nomClient + " " + item.client.prenomClient }} |
+                            {{ item.service.nomService }} |
+                            {{ item.dateDebut | date : "fullTime" }}
+                        </div>
+                    }
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <h2>Réalisées</h2>
+
+                <div
+                    cdkDropList
+                    #doneList="cdkDropList"
+                    [cdkDropListData]="finishedTask"
+                    cdkDropListSortingDisabled
+                    [cdkDropListConnectedTo]="[todoList]"
+                    class="example-list"
+                    (cdkDropListDropped)="drop($event)"
+                >
+                    @for (item of finishedTask; track item) {
+                        <div class="example-box" cdkDragDisabled>
+                            {{ item.client.nomClient + " " + item.client.prenomClient }} |
+                            {{ item.service.nomService }} |
+                            {{ item.dateDebut | date : "fullTime" }}
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="text-center pt-5">
+                <button
+                    class="site-button button-lg radius-no outline outline-2"
+                    (click)="saveTodayWork()"
+                >
+                    Enregistrer
+                </button>
+            </div>
+        </div>
+
+        <!-- <div class="row">
             <div class="col-md-10 m-b30 m-auto">
                 <div class="p-a30">
                     <div class="tab-content">
@@ -22,19 +79,29 @@
                             <thead>
                                 <tr>
                                     <th scope="col">#</th>
-                                    <th scope="col">First</th>
-                                    <th scope="col">Last</th>
-                                    <th scope="col">Handle</th>
+                                    <th scope="col">Client</th>
+                                    <th scope="col">Service</th>
+                                    <th scope="col">Date Heure</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @for(tache of pendingTask; track $index){
-                                    <tr>
-                                        <th scope="row">1</th>
-                                        <td>Mark</td>
-                                        <td>Otto</td>
-                                        <td>mdo</td>
-                                    </tr>
+                                <tr>
+                                    <th scope="row">1</th>
+                                    <td>
+                                        {{
+                                            tache.client.nomClient +
+                                                " " +
+                                                tache.client.prenomClient
+                                        }}
+                                    </td>
+                                    <td>{{ tache.service.nomService }}</td>
+                                    <td>
+                                        {{
+                                            tache.dateDebut | date : "fullTime"
+                                        }}
+                                    </td>
+                                </tr>
                                 }
                             </tbody>
                         </table>
@@ -42,5 +109,64 @@
                 </div>
             </div>
         </div>
+
+        <div class="row">
+            <div class="col-md-10 m-b30 m-auto">
+                <div class="p-a30">
+                    <div class="tab-content">
+                        <h4>Les tâches réalisées</h4>
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Client</th>
+                                    <th scope="col">Service</th>
+                                    <th scope="col">Date Heure</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @for(tache of finishedTask; track $index){
+                                <tr>
+                                    <th scope="row">
+                                        <div
+                                            class="example-handle"
+                                            cdkDragHandle
+                                        >
+                                            <svg
+                                                width="24px"
+                                                fill="currentColor"
+                                                viewBox="0 0 24 24"
+                                            >
+                                                <path
+                                                    d="M10 9h4V6h3l-5-5-5 5h3v3zm-1 1H6V7l-5 5 5 5v-3h3v-4zm14 2l-5-5v3h-3v4h3v3l5-5zm-9 3h-4v3H7l5 5 5-5h-3v-3z"
+                                                ></path>
+                                                <path
+                                                    d="M0 0h24v24H0z"
+                                                    fill="none"
+                                                ></path>
+                                            </svg>
+                                        </div>
+                                    </th>
+                                    <td>
+                                        {{
+                                            tache.client.nomClient +
+                                                " " +
+                                                tache.client.prenomClient
+                                        }}
+                                    </td>
+                                    <td>{{ tache.service.nomService }}</td>
+                                    <td>
+                                        {{
+                                            tache.dateDebut | date : "fullTime"
+                                        }}
+                                    </td>
+                                </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div> -->
     </div>
 </div>

@@ -20,6 +20,7 @@ import { IndexComponent } from './core/routes/service-list/index.component';
 import { TakerdvComponent } from './core/routes/takerdv/takerdv.component';
 import { LocalTimezoneService } from './core/services/localTimezone/local-timezone.service';
 import { SharedModule } from './shared/shared.module';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 
 @NgModule({
     declarations: [
@@ -48,6 +49,7 @@ import { SharedModule } from './shared/shared.module';
     providers: [
         LocalTimezoneService,
         importProvidersFrom(HttpClientModule),
+        provideAnimationsAsync(),
     ],
     bootstrap: [AppComponent]
 })

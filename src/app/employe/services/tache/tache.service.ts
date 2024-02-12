@@ -13,8 +13,11 @@ export class TacheService {
 
     apiUrl: string;
 
-    getTacheByEmp(id: string) {
-        return this.http.get(`${this.apiUrl}/Tache/getTacheByEmp/${id}`);
+    getTacheByEmpToday(id: string) {
+        return this.http.get(`${this.apiUrl}/Tache/getTacheByEmpToday/${id}`);
     }
 
+    updateTache(tacheTab: any, tokenEmp: string){
+        return this.http.post(`${this.apiUrl}/Tache/updateTaches/${tokenEmp}`, tacheTab);
+    }
 }
