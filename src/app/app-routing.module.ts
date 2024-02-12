@@ -9,6 +9,7 @@ import { ServiceDetailComponent } from './core/routes/service-detail/service-det
 import { IndexComponent } from './core/routes/service-list/index.component';
 import { TakerdvComponent } from './core/routes/takerdv/takerdv.component';
 import { authGuard } from './core/guard/auth.guard';
+import { PreferenceComponent } from './core/routes/preference/preference.component';
 
 const managerModule = () => import('./manager/manager.module').then(x => x.ManagerModule);
 const employeModule = () => import('./employe/employe.module').then(x => x.EmployeModule);
@@ -22,6 +23,7 @@ const routes: Routes = [
             { path: 'login', component: LoginComponent },
             { path: 'register', component: RegisterComponent },
             { path: 'takerdv', component: TakerdvComponent, canActivate: [authGuard] },
+            { path: 'preferences', component: PreferenceComponent, canActivate: [authGuard] },
             { path: 'listeService', component: IndexComponent },
             { path: 'service/:id', component: ServiceDetailComponent },
         ]

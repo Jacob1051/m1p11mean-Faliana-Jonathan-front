@@ -43,7 +43,7 @@
                             </a>
                         </li>
                         <li routerLinkActive="active">
-                            <a 
+                            <a
                                 >Rendez-vous <i class="fa fa-chevron-down"></i
                             ></a>
                             <ul class="sub-menu">
@@ -63,7 +63,7 @@
                             </ul>
                         </li>
                         <li>
-                            <a 
+                            <a
                                 >Our Portfolio <i class="fa fa-chevron-down"></i
                             ></a>
                             <ul class="sub-menu">
@@ -91,7 +91,7 @@
                             </ul>
                         </li>
 
-                        
+
                         <li [class.d-block]="user" [class.d-none]="!user">
                             <a><i class="fa fa-user pe-1"></i> Mon compte
                                 <i class="fa fa-chevron-down"></i
@@ -112,8 +112,8 @@
                                         </b
                                 ></span>
                                 <li>
-                                    <a href="shop-columns.html" class="dez-page"
-                                        >Shop Columns</a
+                                    <a [routerLink]="['/preferences']" routerLinkActive="active"  class="dez-page"
+                                        >Mes préférences</a
                                     >
                                 </li>
                                 <li>
@@ -138,7 +138,7 @@
                                 </li>
                             </ul>
                         </li>
-                        
+
                         <li [ngClass]="{'d-flex align-items-center justify-content-center': !user, 'd-none': user}">
                             <button
                                 (click)="goToLogin()"
@@ -147,7 +147,7 @@
                             >
                                 Se Connecter
                             </button>
-                        </li>            
+                        </li>
                     </ul>
                 </div>
             </div>

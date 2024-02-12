@@ -21,6 +21,8 @@ import { TakerdvComponent } from './core/routes/takerdv/takerdv.component';
 import { LocalTimezoneService } from './core/services/localTimezone/local-timezone.service';
 import { SharedModule } from './shared/shared.module';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { ServiceListComponent } from './core/components/service-list/service-list.component';
+import { PreferenceComponent } from './core/routes/preference/preference.component';
 
 @NgModule({
     declarations: [
@@ -35,7 +37,9 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
         LayoutComponent,
         HomeComponent,
         TakerdvComponent,
-        LandingComponent
+        LandingComponent,
+        ServiceListComponent,
+        PreferenceComponent
     ],
     imports: [
         SharedModule,
