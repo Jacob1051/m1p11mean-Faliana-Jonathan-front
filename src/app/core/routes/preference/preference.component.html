@@ -82,83 +82,98 @@
                 <div class="tab-content">Service préféré</div>
 
                 @if(!preferedService){
-                    <div class="card" style="width: 15rem">
-                        <div class="card-body">
-                            <button
-                                type="button"
-                                class="btn btn-light"
-                                data-bs-toggle="modal"
-                                data-bs-target="#modalService"
+                <div class="card" style="width: 15rem">
+                    <div class="card-body">
+                        <button
+                            type="button"
+                            class="btn btn-light"
+                            data-bs-toggle="modal"
+                            data-bs-target="#modalService"
+                        >
+                            <svg
+                                width="160"
+                                height="160"
+                                class="bi bi-plus"
+                                viewBox="0 0 16 16"
                             >
-                                <svg
-                                    width="160"
-                                    height="160"
-                                    class="bi bi-plus"
-                                    viewBox="0 0 16 16"
-                                >
-                                    <path
-                                        d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0
+                                <path
+                                    d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0
                                            0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"
-                                    />
-                                </svg>
-                            </button>
-                        </div>
+                                />
+                            </svg>
+                        </button>
                     </div>
+                </div>
                 }@else{
-                    <!-- <div class="col-lg-4 col-md-6 col-sm-6 p-lr0"> -->
-                        <div class="icon-bx-wraper center p-a30 h-100">
-                            @if(preferedService['icone']){
-                                <div class="icon-lg radius m-b20">
-                                    <a
-                                        routerLink="/service/{{ preferedService['_id'] }}"
-                                        class="icon-cell"
-                                        ><i class="{{ preferedService['icone'] }}"></i>
-                                    </a>
-                                </div>
-                            } @else{
-                                <div
-                                    class="icon-lg radius m-b20 d-flex align-items-center justify-content-center w-100"
-                                    style="min-height: 90.5px"
-                                >
-                                    <a
-                                        routerLink="/service/{{ preferedService['_id'] }}"
-                                        class="icon-cell"
-                                    >
-                                        <img
-                                            src="{{ apiUrl + '/Service/' + preferedService['image'] }}"
-                                            alt=""
-                                            width="84px"
-                                    /></a>
-                                </div>
-                            }
+                <!-- <div class="col-lg-4 col-md-6 col-sm-6 p-lr0"> -->
+                <div class="icon-bx-wraper center p-a30 h-100">
+                    @if(preferedService['icone']){
+                    <div class="icon-lg radius m-b20">
+                        <a
+                            routerLink="/service/{{ preferedService['_id'] }}"
+                            class="icon-cell"
+                            ><i class="{{ preferedService['icone'] }}"></i>
+                        </a>
+                    </div>
+                    } @else{
+                    <div
+                        class="icon-lg radius m-b20 d-flex align-items-center justify-content-center w-100"
+                        style="min-height: 90.5px"
+                    >
+                        <a
+                            routerLink="/service/{{ preferedService['_id'] }}"
+                            class="icon-cell"
+                        >
+                            <img
+                                src="{{
+                                    apiUrl +
+                                        '/Service/' +
+                                        preferedService['image']
+                                }}"
+                                alt=""
+                                width="84px"
+                        /></a>
+                    </div>
+                    }
 
-                            <div class="icon-content">
-                                <h5 class="dez-tilte">
-                                    <a routerLink="/service/{{ preferedService['_id'] }}">{{
-                                        preferedService['nomService']
-                                    }}</a>
-                                </h5>
+                    <div class="icon-content">
+                        <h5 class="dez-tilte">
+                            <a
+                                routerLink="/service/{{
+                                    preferedService['_id']
+                                }}"
+                                >{{ preferedService["nomService"] }}</a
+                            >
+                        </h5>
 
-                                <div
-                                    class="text-left"
-                                    style="display: inline-block; margin: auto"
-                                >
-                                    <p class="m-0">
-                                        <span class="text-pink"><b>Durée:</b></span>
-                                        {{ preferedService['duree'] }} min
-                                    </p>
-                                    <p class="mb-2">
-                                        <span class="text-pink"><b>Prix:</b></span>
-                                        {{ preferedService['prix'] }} $
-                                    </p>
-                                </div>
-
-                                <p>{{ preferedService['description'] }}</p>
-                            </div>
+                        <div
+                            class="text-left"
+                            style="display: inline-block; margin: auto"
+                        >
+                            <p class="m-0">
+                                <span class="text-pink"><b>Durée:</b></span>
+                                {{ preferedService["duree"] }} min
+                            </p>
+                            <p class="mb-2">
+                                <span class="text-pink"><b>Prix:</b></span>
+                                {{ preferedService["prix"] }} $
+                            </p>
                         </div>
-                    <!-- </div> -->
-                }
 
+                        <p>{{ preferedService["description"] }}</p>
+
+                        <button
+                            type="button"
+                            class="btn btn-info"
+                            data-bs-toggle="modal"
+                            data-bs-target="#modalService"
+                        >
+                        Modifier
+                        </button>
+                    </div>
+                </div>
+                <!-- </div> -->
+                }
             </div>
 
             <div class="col-md-6 m-b30 m-auto">
@@ -192,30 +207,50 @@
                 }@else{
 
                 <div class="icon-bx-wraper center p-a30 h-100">
-
                     <div
                         class="icon-lg radius m-b20 d-flex align-items-center justify-content-center w-100"
                         style="min-height: 90.5px"
                     >
                         <a routerLink="" class="icon-cell">
-                            <img
-                                src=""
-                                alt=""
-                                width="84px"
+                            <img src="" alt="" width="84px"
                         /></a>
                     </div>
 
                     <div class="icon-content">
                         <h5 class="dez-tilte">
                             {{
-                                preferedEmploye.nomEmploye+" "+preferedEmploye.prenomEmploye
+                                preferedEmploye.nomEmploye +
+                                    " " +
+                                    preferedEmploye.prenomEmploye
                             }}
                         </h5>
                     </div>
+                    <button
+                            type="button"
+                            class="btn btn-info"
+                            data-bs-toggle="modal"
+                            data-bs-target="#modalEmploye"
+                        >
+                        Modifier
+                        </button>
+
                 </div>
 
                 }
             </div>
         </div>
+
+        @if(preferedEmploye || preferedService){
+        <div class="row">
+            <div class="text-center pt-5">
+                <button
+                    class="site-button button-lg radius-no outline outline-2"
+                    (click)="savePreference()"
+                >
+                    Enregistrer
+                </button>
+            </div>
+        </div>
+        }
     </div>
 </div>
