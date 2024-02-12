@@ -59,35 +59,19 @@
                         </div>
                         }
 
-                        <div class="icon-content">
-                            <h5 class="dez-tilte">
-                                <a routerLink="/service/{{ service._id }}">{{
-                                    service.nomService
-                                }}</a>
-                            </h5>
+                        <p>{{ service.description }}</p>
 
-                            <div
-                                class="text-left"
-                                style="display: inline-block; margin: auto"
-                            >
-                                <p class="m-0">
-                                    <span class="text-pink"><b>Durée:</b></span>
-                                    {{ service.duree }} min
-                                </p>
-                                <p class="mb-2">
-                                    <span class="text-pink"><b>Prix:</b></span>
-                                    {{ service.prix }} $
-                                </p>
+
+                            <!-- <a class="text-pink" routerLink="/service/{{ service._id }}">
+                                <p class="text-right">> Consulter le service</p>
+                            </a> -->
+
+                            <div class="text-right">
+                                <button class="btn btn-danger btn-light-pink" routerLink="/service/{{ service._id }}">
+                                    Consulter le service <i class="fa-solid fa-chevron-right"></i>
+                                </button>
                             </div>
 
-                            <p>{{ service.description }}</p>
-
-
-                                <a class="text-pink" routerLink="/service/{{ service._id }}">
-                                    <p class="text-right">> Consulter le service</p>
-                                </a>
-
-                        </div>
                     </div>
                 </div>
             }

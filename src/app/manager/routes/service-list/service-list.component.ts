@@ -65,4 +65,37 @@ export class ServiceListComponent {
             },
         });
     }
+
+    deleteService = (id: string) =>{
+        this.service.deleteService(id).subscribe({
+            next: (response: any) => {
+                if (response.status == 200) {
+                    this.toastr.success(
+                        `Une donnée a été supprimée!`,
+                        'Success!',
+                        TOAST_OPTIONS_BOTTOM_RIGHT
+                    );
+                    (<any>window).closeModal();
+                    this.getListeService();
+                } else {
+                    console.error(response.message);
+                    this.toastr.error(
+                        `Une erreur s'est produite!`,
+                        'Erreur!',
+                        TOAST_OPTIONS_BOTTOM_RIGHT
+                    );
+                }
+                this.isLoading = false;
+            },
+            error: (error) => {
+                console.error(error);
+                this.toastr.error(
+                    `Une erreur s'est produite`,
+                    'Erreur!',
+                    TOAST_OPTIONS_BOTTOM_RIGHT
+                );
+                this.isLoading = false;
+            },
+        });
+    }
 }

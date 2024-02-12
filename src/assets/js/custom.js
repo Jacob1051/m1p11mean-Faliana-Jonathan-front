@@ -445,6 +445,7 @@ var BeautyZone = (function () {
     // 	});
     // 	/* Main navigation fixed on top  when scroll down function custom end*/
     // }
+
     var headerFix = function () {
         "use strict";
         var menu = document.querySelector(".sticky-header");

@@ -3,10 +3,13 @@
 } -->
 
 <!-- <div class="section-full content-inner-2 bg-white hair-services"> -->
-<div class="content-inner-2 bg-white hair-services">
+<div class="content-inner-2 bg-white hair-services soft-background">
     <div class="container">
+        <div class="text-left pb-4">
+            <button class="btn btn-danger btn-light-pink" routerLink="/manager/service/list"><i class="fa fa-arrow-left"></i></button>
+        </div>
         <div class="section-head text-black text-center">
-            <h2 class="text-primary m-b10">Ajout service</h2>
+            <h2 class="text-primary m-b10">{{ title }}</h2>
             <div class="dlab-separator-outer m-b0">
                 <div class="dlab-separator text-primary style-icon">
                     <i class="flaticon-spa text-primary"></i>
@@ -55,6 +58,7 @@
                                             placeholder="Prix du service"
                                             type="number"
                                             formControlName="prix"
+                                            step="0.1"
                                         />
                                         @if(formControl['prix'].touched ||
                                         submitted){
@@ -95,6 +99,7 @@
                                             placeholder="Commission en pourcentage"
                                             type="number"
                                             formControlName="commission"
+                                            step="0.1"
                                         />
                                         @if(formControl['commission'].touched ||
                                         submitted){
@@ -108,12 +113,14 @@
                                         <label class="font-weight-700"
                                             >Description</label
                                         >
-                                        <input
+                                        <textarea
                                             formControlName="description"
                                             class="form-control"
                                             placeholder="Description du service"
                                             type="text"
-                                        />
+                                            rows="4"
+                                            style = "height: auto; padding: 15px 20px;"
+                                        ></textarea>
                                     </div>
                                     <div class="form-group">
                                         <label class="font-weight-700"
@@ -121,12 +128,10 @@
                                         >
                                         <input
                                             id="mdp"
-                                            required=""
                                             class="form-control"
                                             placeholder="Icone"
                                             type="text"
                                             formControlName="icone"
-                                            (input)="checkIcon()"
                                         />
                                     </div>
                                     <div class="form-group">
@@ -151,8 +156,9 @@
 
                                     <div class="text-left">
                                         <button
-                                            class="btn btn-danger btn-pink"
+                                            class="btn btn-danger btn-light-pink p-3"
                                             [disabled]="loading"
+                                            type="submit"
                                         >
                                             <span
                                                 class="spinner-border spinner-border-sm"
@@ -160,7 +166,7 @@
                                                 aria-hidden="true"
                                                 *ngIf="loading && submitted"
                                             ></span>
-                                            Ajouter
+                                            Ajouter un service
                                         </button>
                                     </div>
                                 </form>

@@ -1,15 +1,14 @@
-import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
-import { EmployeService } from '../../services/employee/employe.service';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { confirmPasswordValidator } from 'src/app/_utils/form/password-validator.validator';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { first } from 'rxjs';
-import { map } from 'rxjs/operators';
-import { Service } from 'src/app/shared/models/service';
+import { confirmPasswordValidator } from 'src/app/_utils/form/password-validator.validator';
 import { TOAST_OPTIONS_BOTTOM_RIGHT } from 'src/app/_utils/toast/toast-options';
-import { ServiceService } from '../../services/service/service.service';
 import { Item } from 'src/app/shared/models/multi-dropdown';
+import { Service } from 'src/app/shared/models/service';
+import { EmployeService } from '../../services/employee/employe.service';
+import { ServiceService } from '../../services/service/service.service';
 
 @Component({
     selector: 'app-emp-add',
@@ -21,13 +20,15 @@ export class EmpAddComponent implements OnInit {
     submitted: boolean = false;
     loading: boolean = false;
     id?: string;
-    title: string = 'Ajout employee';
+    title: string = 'Ajouter un employé';
     serviceList: Service[] | undefined;
     @ViewChild('modal') myModal: ElementRef | undefined;
 
 
     listItems: Item[] = [];
     currentSelectedItem!: Item;
+
+    hasServices: boolean = false;
 
     onItemChange(item: Item): void {
         this.currentSelectedItem = item;
@@ -64,7 +65,7 @@ export class EmpAddComponent implements OnInit {
             { validators: confirmPasswordValidator });
 
         if (this.id) {
-            this.title = 'Modification employee';
+            this.title = "Modifier l'employé";
             this.isLoading = true;
             this.service.getEmploye(this.id)
                 .pipe(first())
@@ -90,37 +91,46 @@ export class EmpAddComponent implements OnInit {
         this.submitted = true;
 
         if (this.addEmployeForm.valid) {
-            this.loading = true;
+            // this.loading = true;
 
             const auth = this.addEmployeForm.value;
             const selectedService = this.listItems.filter((item:any) => item.checked);
 
-            this.saveEmploye({
-                nomEmploye: auth.nomEmploye,
-                prenomEmploye: auth.prenomEmploye,
-                email: auth.email,
-                password: auth.password,
-                confirmPassword: auth.confirmPassword,
-                user: auth.user,
-                mesServices: [...selectedService.map(item => item.id)]
-            }).subscribe({
-                next: (response: any) => {
-                    if (response.status == 200) {
-                        this.toastr.success('Vous vous êtes inscrit avec succès!', 'Succès!', TOAST_OPTIONS_BOTTOM_RIGHT);
-                        this.router.navigate(['/'], { relativeTo: this.route });
-                    }
-                    else {
-                        console.error(response.message);
-                        this.toastr.error(`Une erreur s'est produite!`, 'Erreur!', TOAST_OPTIONS_BOTTOM_RIGHT);
-                    }
-                    this.loading = false;
-                },
-                error: error => {
-                    console.error(error);
-                    this.toastr.error(`Une erreur s'est produite`, 'Erreur!', TOAST_OPTIONS_BOTTOM_RIGHT);
-                    this.loading = false;
-                },
-            });
+            if(selectedService.length>0){
+                this.loading = true;
+                this.hasServices = true;
+                
+                this.saveEmploye({
+                    nomEmploye: auth.nomEmploye,
+                    prenomEmploye: auth.prenomEmploye,
+                    email: auth.email,
+                    password: auth.password,
+                    confirmPassword: auth.confirmPassword,
+                    user: auth.user,
+                    mesServices: [...selectedService.map(item => item.id)]
+                }).subscribe({
+                    next: (response: any) => {
+                        if (response.status == 200) {
+                            this.toastr.success('Vous vous êtes inscrit avec succès!', 'Succès!', TOAST_OPTIONS_BOTTOM_RIGHT);
+                            this.router.navigate(['/'], { relativeTo: this.route });
+                        }
+                        else {
+                            console.error(response.message);
+                            this.toastr.error(`Une erreur s'est produite!`, 'Erreur!', TOAST_OPTIONS_BOTTOM_RIGHT);
+                        }
+                        this.loading = false;
+                    },
+                    error: error => {
+                        console.error(error);
+                        this.toastr.error(`Une erreur s'est produite`, 'Erreur!', TOAST_OPTIONS_BOTTOM_RIGHT);
+                        this.loading = false;
+                    },
+                });
+            }
+            else{
+                this.hasServices = false;
+            }
+
         }
     }
 
