@@ -34,6 +34,38 @@
     </div>
 </div>
 
+<!-- Modal Employe -->
+<div
+    class="modal fade"
+    id="modalEmploye"
+    tabindex="-1"
+    aria-labelledby="exampleModalLabel"
+    aria-hidden="true"
+>
+    <div class="modal-dialog modal-dialog-centered modal-xl">
+        <div class="modal-content">
+            <div class="modal-header d-flex align-items-center">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">
+                    Choix employe
+                </h1>
+                <button
+                    type="button"
+                    class="btn-close"
+                    data-bs-dismiss="modal"
+                    aria-label="Close"
+                ></button>
+            </div>
+
+            <div class="modal-body">
+                <app-emp-list-template
+                    [listeEmployes]="employeList"
+                    (itemChange)="selectEmploye($event)"
+                ></app-emp-list-template>
+            </div>
+        </div>
+    </div>
+</div>
+
 <div class="section-full content-inner-2 bg-white hair-services">
     <div class="container">
         <div class="section-head text-black text-center">
@@ -132,9 +164,16 @@
             <div class="col-md-6 m-b30 m-auto">
                 <div class="tab-content">Employé préféré</div>
 
+                @if(!preferedEmploye){
+
                 <div class="card" style="width: 15rem">
                     <div class="card-body">
-                        <a href="#" class="btn btn-light">
+                        <button
+                            type="button"
+                            class="btn btn-light"
+                            data-bs-toggle="modal"
+                            data-bs-target="#modalEmploye"
+                        >
                             <svg
                                 width="160"
                                 height="160"
@@ -146,9 +185,36 @@
                                        0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"
                                 />
                             </svg>
-                        </a>
+                        </button>
                     </div>
                 </div>
+
+                }@else{
+
+                <div class="icon-bx-wraper center p-a30 h-100">
+
+                    <div
+                        class="icon-lg radius m-b20 d-flex align-items-center justify-content-center w-100"
+                        style="min-height: 90.5px"
+                    >
+                        <a routerLink="" class="icon-cell">
+                            <img
+                                src=""
+                                alt=""
+                                width="84px"
+                        /></a>
+                    </div>
+
+                    <div class="icon-content">
+                        <h5 class="dez-tilte">
+                            {{
+                                preferedEmploye.nomEmploye+" "+preferedEmploye.prenomEmploye
+                            }}
+                        </h5>
+                    </div>
+                </div>
+
+                }
             </div>
         </div>
     </div>

@@ -23,6 +23,7 @@ import { SharedModule } from './shared/shared.module';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { ServiceListComponent } from './core/components/service-list/service-list.component';
 import { PreferenceComponent } from './core/routes/preference/preference.component';
+import { EmpListComponent } from './core/components/emp-list/emp-list.component';
 
 @NgModule({
     declarations: [
@@ -39,7 +40,8 @@ import { PreferenceComponent } from './core/routes/preference/preference.compone
         TakerdvComponent,
         LandingComponent,
         ServiceListComponent,
-        PreferenceComponent
+        PreferenceComponent,
+        EmpListComponent
     ],
     imports: [
         SharedModule,
