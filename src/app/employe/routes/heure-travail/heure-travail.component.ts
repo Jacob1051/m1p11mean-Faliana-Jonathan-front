@@ -73,13 +73,22 @@ export class HeureTravailComponent implements OnInit {
     }
 
     submitHoraireDeTravail() {
-        const heureTravail = this.formHoraireTravail.value.heureTravail;
+        const {debut, fin} = this.formHoraireTravail.value.heureTravail;
+        const debutSplitted = debut.split(':');
+        const finSplitted = fin.split(':');
+
+        let momentHeureTravailDebut = moment();
+        let momentHeureTravailFin = moment();
+
+        momentHeureTravailDebut.set({'h': debutSplitted[0], 'm': debutSplitted[1], 's': 0});
+        momentHeureTravailFin.set({'h': finSplitted[0], 'm': finSplitted[1], 's': 0});
+
         var jourTravail = this.formHoraireTravail.value.jourSemaine;
 
         jourTravail = Object.keys(jourTravail)
         .filter(key => jourTravail[key]);
 
-        const data = {...heureTravail , jourTravail};
+        const data = {debut: momentHeureTravailDebut.toDate().toISOString(), fin:momentHeureTravailFin.toDate().toISOString()  , jourTravail: jourTravail};
 
         this.empService.updateHoraireTravail(data, this.user.user_id)
             .subscribe({

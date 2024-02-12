@@ -44,8 +44,6 @@ export class ListeTacheComponent implements OnInit {
                         task.statut._id != this.statutEnCours._id
                     ));
 
-                    console.log(this.pendingTask);
-
                 } else {
                     console.error(response.message);
                     this.toastr.error(
@@ -90,6 +88,7 @@ export class ListeTacheComponent implements OnInit {
     }
 
     saveTodayWork() {
+        this.isLoading = true;
 
         this.tacheService.updateTache({listeTache: this.finishedTask}, this.authService.userValue.token)
             .subscribe({

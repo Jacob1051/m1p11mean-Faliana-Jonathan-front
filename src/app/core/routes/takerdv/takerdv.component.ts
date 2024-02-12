@@ -187,22 +187,15 @@ export class TakerdvComponent implements OnInit {
 
         // this.isLoading = true;
 
-        this.employeService.getListeEmployeLibre({ idService: this.currentSelectedItem.data._id, dateHeureDebut: this.tacheForm.value.dateDebut })
+        this.employeService.getListeEmployeLibre({ idService: this.currentSelectedItem.data._id, dateHeureDebut: new Date(this.tacheForm.value.dateDebut) })
             .subscribe({
                 next: (response: any) => {
-                    // const dateDeb = moment(this.tacheForm.value.dateDebut, 'YYYY-MM-DD HH:mm');
-                    // const dateFin = dateDeb.clone().add(this.currentSelectedItem.data.duree, 'minutes');
-
-                    // var listeEmploye = response.data.filter((user: any) => {
-                    //     return user.listeTaches.every((task: any) => !this.isDateOverlap(task, dateDeb.toDate(), dateFin.toDate()));
-                    // });
-
-                    // listeEmploye = listeEmploye.filter((emp: any) => (!this.isOverlap(emp.horaireTravail.debut, emp.horaireTravail.fin, dateDeb.toDate())));
-
-                    // listeEmploye = listeEmploye.filter((emp: any) => (!this.checkIfOverlap(emp, this.currentSelectedItem.data, dateDeb.toDate(), dateFin.toDate())));
+                    const dateDeb = moment(this.tacheForm.value.dateDebut, 'YYYY-MM-DD HH:mm');
+                    const dateFin = dateDeb.clone().add(this.currentSelectedItem.data.duree, 'minutes');
 
                     var listeEmploye = response.data;
-                    console.log(listeEmploye);
+
+                    listeEmploye = listeEmploye.filter((emp: any) => (!this.checkIfOverlap(emp, this.currentSelectedItem.data, dateDeb.toDate(), dateFin.toDate())));
 
                     this.listeEmployeAsItem = listeEmploye.map(
                         (employe: Employe) => (
@@ -219,16 +212,8 @@ export class TakerdvComponent implements OnInit {
         // this.tacheForm.value.employe = null; //Il faut reset la valeur sinon faut cliquer 2 fois
     };
 
-    isDateOverlap = (task: any, date1: Date, date2: Date) => {
-        return (date1 < task.beg && date2 < task.beg) || (date1 > task.end && date2 > task.end);
-    };
-
     is2DateOverlap(start1: Date, end1: Date, start2: Date, end2: Date) {
         return (start1 <= end2 && end1 >= start2);
-    }
-
-    isOverlap(date1: Date, date2: Date, dateToCheck: Date) {
-        return (date1 <= dateToCheck && dateToCheck <= date2);
     }
 
     checkIfOverlap(emp: any, service: any, dateDebut: Date, dateFin: Date) {
@@ -242,8 +227,6 @@ export class TakerdvComponent implements OnInit {
 
     changerDateDebutTache = () => {
         if (this.listeTache.length > 0) {
-            // console.log("hello2");
-
             // Trier le tableau d'objets par dateDebut
             this.listeTache.sort((a: any, b: any) => {
                 const dateA = new Date(a.dateDebut);
@@ -406,8 +389,7 @@ export class TakerdvComponent implements OnInit {
                 if(response.status==200){
                     this.toastr.success('Vous vous êtes connecté avec succès!', 'Succès!',  TOAST_OPTIONS_BOTTOM_RIGHT);
                     this.router.navigateByUrl('/takerdv');
-                }
-                else{
+                }else{
                     this.toastr.error(`Une erreur s'est produite!`, 'Erreur!', TOAST_OPTIONS_BOTTOM_RIGHT);
                 }
                 this.loading = false;
