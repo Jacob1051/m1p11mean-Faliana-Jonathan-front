@@ -123,12 +123,30 @@ export class PreferenceComponent implements OnInit {
     }
 
     savePreference(){
+        this.isLoading = true;
+
         this.clientService.savePreference(this.user.user_id, {
             preference: {
                 service: this.preferedService,
                 employe: this.preferedEmploye
             }
         })
-        .subscribe();
+        .subscribe({
+            next: (response: any) => {
+                if (response.status == 200) {
+                    this.toastr.success(`Enregistré avec succès !`, 'Succès', TOAST_OPTIONS_BOTTOM_RIGHT);
+                }
+                else {
+                    console.error(response.message);
+                    this.toastr.error(`Une erreur s'est produite`, 'Erreur!', TOAST_OPTIONS_BOTTOM_RIGHT);
+                }
+                this.isLoading = false;
+            },
+            error: (error) => {
+                console.error(error);
+                this.toastr.error(`Une erreur s'est produite`, 'Erreur!', TOAST_OPTIONS_BOTTOM_RIGHT);
+                this.isLoading = false;
+            },
+        });
     }
 }
