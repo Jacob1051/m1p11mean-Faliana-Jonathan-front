@@ -24,7 +24,6 @@ export class ServiceListComponent {
         this.listeServiceBackup = service;
     }
 
-
     constructor() {
         this.apiUrl = environment.apiUrl;
     }

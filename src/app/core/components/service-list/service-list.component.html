@@ -98,9 +98,11 @@
             </div>
             }
 
-            <div *ngIf="listeService.length === 0">
-                <div style="text-align: center">Pas de résultat.</div>
-            </div>
+            @if(listeService){
+                <div *ngIf="listeService.length === 0">
+                    <div style="text-align: center">Pas de résultat.</div>
+                </div>
+            }
         </div>
     </div>
 </div>
