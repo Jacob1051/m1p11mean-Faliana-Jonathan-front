@@ -23,6 +23,7 @@
                             <th scope="col">Services demandés</th>
                             <th scope="col">Employé</th>
                             <th scope="col">Date</th>
+                            <th scope="col">Prix</th>
                             <th scope="col">Statut</th>
                         </tr>
                     </thead>
@@ -34,6 +35,7 @@
                                     <td>{{rdv.listeTaches[0].service.nomService}}</td>
                                     <td>{{rdv.listeTaches[0].employe.nomEmploye+' '+rdv.listeTaches[0].employe.prenomEmploye}}</td>
                                     <td>{{rdv.listeTaches[0].dateDebut | date : "dd-MM-YYYY hh:mm" +' - '+(rdv.listeTaches[0].dateFin | date : "dd-MM-YYYY hh:mm")}}</td>
+                                    <td>{{rdv.listeTaches[0].service.prix}}</td>
                                     <td>{{rdv.listeTaches[0].statut.nomStatut}}</td>
                                 </tr>
                                 @for(tache of rdv.listeTaches; track $index){
@@ -42,6 +44,7 @@
                                             <td>{{tache.service.nomService}}</td>
                                             <td>{{tache.employe.nomEmploye+' '+tache.employe.prenomEmploye}}</td>
                                             <td>{{tache.dateDebut | date : "dd-MM-YYYY hh:mm" +' - '+(tache.dateFin | date : "dd-MM-YYYY hh:mm")}}</td>
+                                            <td>{{tache.service.prix}}</td>
                                             <td>{{tache.statut.nomStatut}}</td>
                                         </tr>
                                     }
