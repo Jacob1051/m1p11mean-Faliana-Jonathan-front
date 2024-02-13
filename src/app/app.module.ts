@@ -24,6 +24,8 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import { ServiceListComponent } from './core/components/service-list/service-list.component';
 import { PreferenceComponent } from './core/routes/preference/preference.component';
 import { EmpListComponent } from './core/components/emp-list/emp-list.component';
+import { CommonModule } from '@angular/common';
+import { HistoRdvComponent } from './core/routes/histo-rdv/histo-rdv.component';
 
 @NgModule({
     declarations: [
@@ -41,9 +43,11 @@ import { EmpListComponent } from './core/components/emp-list/emp-list.component'
         LandingComponent,
         ServiceListComponent,
         PreferenceComponent,
-        EmpListComponent
+        EmpListComponent,
+        HistoRdvComponent
     ],
     imports: [
+        CommonModule,
         SharedModule,
         BrowserModule,
         AppRoutingModule,
