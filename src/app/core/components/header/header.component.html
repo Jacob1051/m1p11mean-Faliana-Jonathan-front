@@ -42,7 +42,7 @@
                                 >Nos Services
                             </a>
                         </li>
-                        <li routerLinkActive="active">
+                        <li routerLinkActive="active" [class.d-block]="user" [class.d-none]="!user">
                             <a
                                 >Rendez-vous <i class="fa fa-chevron-down"></i
                             ></a>
@@ -56,37 +56,9 @@
                                     >
                                 </li>
                                 <li>
-                                    <a class="dez-page" routerLinkActive="active"
+                                    <a class="dez-page" [routerLink]="['/histoRdv']" routerLinkActive="active"
                                         >Historique de vos rendez-vous</a
                                     >
-                                </li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a
-                                >Our Portfolio <i class="fa fa-chevron-down"></i
-                            ></a>
-                            <ul class="sub-menu">
-                                <li>
-                                    <a
-                                        href="portfolio-grid-2.html"
-                                        class="dez-page"
-                                        >Portfolio Grid 2
-                                    </a>
-                                </li>
-                                <li>
-                                    <a
-                                        href="portfolio-grid-3.html"
-                                        class="dez-page"
-                                        >Portfolio Grid 3
-                                    </a>
-                                </li>
-                                <li>
-                                    <a
-                                        href="portfolio-grid-4.html"
-                                        class="dez-page"
-                                        >Portfolio Grid 4
-                                    </a>
                                 </li>
                             </ul>
                         </li>
@@ -116,18 +88,18 @@
                                         >Mes préférences</a
                                     >
                                 </li>
-                                <li>
+                                <!-- <li>
                                     <a [routerLink]="['/histoRdv']" routerLinkActive="active"  class="dez-page"
                                         >Mes historiques</a
                                     >
-                                </li>
-                                <li>
+                                </li> -->
+                                <!-- <li>
                                     <a
                                         href="shop-register.html"
                                         class="dez-page"
                                         >Shop Register</a
                                     >
-                                </li>
+                                </li> -->
                                 <li role="button">
                                     <a
                                         (click)="logout()"
