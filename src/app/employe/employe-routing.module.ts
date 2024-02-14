@@ -6,6 +6,7 @@ import { LoginComponent } from './routes/login/login.component';
 import { authGuard } from './guards/auth.guard';
 import { HeureTravailComponent } from './routes/heure-travail/heure-travail.component';
 import { ListeTacheComponent } from './routes/liste-tache/liste-tache.component';
+import { MonCompteComponent } from './routes/mon-compte/mon-compte.component';
 
 const routes: Routes = [
     {
@@ -15,7 +16,7 @@ const routes: Routes = [
             { path: EMP_ROUTING.INDEX, component: ListeTacheComponent, canActivate: [authGuard] },
             { path: EMP_ROUTING.HEURE_TRAVAIL, component: HeureTravailComponent, canActivate: [authGuard] },
             { path: EMP_ROUTING.LISTE_TACHE, component: ListeTacheComponent, canActivate: [authGuard] },
-            { path: EMP_ROUTING.MON_COMPTE, component: LoginComponent, canActivate: [authGuard] },
+            { path: EMP_ROUTING.MON_COMPTE, component: MonCompteComponent, canActivate: [authGuard] },
         ]
     }
 ];
