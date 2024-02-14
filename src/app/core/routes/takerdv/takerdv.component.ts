@@ -5,6 +5,7 @@ import {
     FormGroup,
     Validators,
 } from '@angular/forms';
+import { Router } from '@angular/router';
 import * as moment from 'moment';
 import 'moment-timezone';
 import { ToastrService } from 'ngx-toastr';
@@ -19,12 +20,11 @@ import { Service } from 'src/app/shared/models/service';
 import { Statut } from 'src/app/shared/models/statut';
 import { environment } from 'src/environments/environment';
 import { EmployeService } from '../../../shared/services/employe/employe.service';
-import { LocalTimezoneService } from '../../services/localTimezone/local-timezone.service';
-import { ServiceService } from '../../services/service/service.service';
 import { StatutService } from '../../../shared/services/statut/statut.service';
 import { AuthService } from '../../services/client/auth/auth.service';
+import { LocalTimezoneService } from '../../services/localTimezone/local-timezone.service';
 import { RdvService } from '../../services/rdv/rdv.service';
-import { Router } from '@angular/router';
+import { ServiceService } from '../../services/service/service.service';
 
 @Component({
     selector: 'app-takerdv',
@@ -365,6 +365,9 @@ export class TakerdvComponent implements OnInit {
     };
 
     validerRDV() {
+        this.isSubmitted = true;
+        this.loading = true;
+
         const clientId = this.authService.userValue;
 
         const rdv = {
@@ -387,18 +390,27 @@ export class TakerdvComponent implements OnInit {
         .subscribe({
             next: (response: any) => {
                 if(response.status==200){
-                    this.toastr.success('Vous vous êtes connecté avec succès!', 'Succès!',  TOAST_OPTIONS_BOTTOM_RIGHT);
-                    this.router.navigateByUrl('/takerdv');
+                    this.toastr.success('Votre rendez-vous a été enregistré!', 'Succès!',  TOAST_OPTIONS_BOTTOM_RIGHT);
+                    this.router.navigateByUrl('/histoRdv');
                 }else{
                     this.toastr.error(`Une erreur s'est produite!`, 'Erreur!', TOAST_OPTIONS_BOTTOM_RIGHT);
                 }
+                this.isSubmitted = false;
                 this.loading = false;
             },
             error: (error) => {
+                this.isSubmitted = false;
                 this.loading = false;
                 console.error(error);
                 this.toastr.error(`Une erreur s'est produite`, 'Erreur!', TOAST_OPTIONS_BOTTOM_RIGHT);
             },
+        });
+    }
+
+    enleverTache(indexTache:any){
+        // console.log("hello", indexTache);
+        this.listeTache = this.listeTache.filter((element:any, index:any)=>{
+            return index != indexTache
         });
     }
 }

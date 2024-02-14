@@ -1,8 +1,11 @@
 @if(isLoading){
-    <div id="loading-area"></div>
+<div id="loading-area"></div>
 }
 
-<div class="section-full content-inner-2 bg-white hair-services soft-background" style="min-height: calc(100vh - 82.5px)">
+<div
+    class="section-full content-inner-2 bg-white hair-services soft-background"
+    style="min-height: calc(100vh - 82.5px)"
+>
     <div class="container">
         <div class="section-head text-black text-center">
             <h2 class="text-primary m-b10">Prendre un rendez-vous</h2>
@@ -17,7 +20,11 @@
             <div class="col-md-10 m-b30 m-auto">
                 <div class="p-a30">
                     <div class="tab-content">
-                        <form id="login" class="tab-pane active" [formGroup] = "rdvForm">
+                        <form
+                            id="login"
+                            class="tab-pane active"
+                            [formGroup]="rdvForm"
+                        >
                             <div class="form-group">
                                 <label class="font-weight-700"
                                     >Date du rendez-vous</label
@@ -32,59 +39,90 @@
                             </div>
 
                             @for(tache of listeTache; track $index){
-                                <div class="card price-tbl" style="width: 100%">
-                                    <div class="card-body">
-                                        <div class="row">
+                            <div class="card price-tbl" style="width: 100%">
+                                <div class="card-body">
+                                    <div class="text-right text-pink">
+                                        <a
+                                            role="button"
+                                            (click)="enleverTache($index)"
+                                        >
+                                            <i
+                                                class="fa fa-close"
+                                                style="height: 30px"
+                                            ></i>
+                                        </a>
+                                    </div>
+                                    <div class="row">
+                                        <div
+                                            class="d-flex align-items-center flex-wrap justify-content-center justify-content-md-start text-center text-md-left"
+                                        >
                                             <div
-                                                class="d-flex align-items-center flex-wrap justify-content-center justify-content-md-start text-center text-md-left"
+                                                class="d-flex justify-content-center justify-content-md-start align-items-center"
+                                                style="
+                                                    min-height: 150px;
+                                                    min-width: 150px;
+                                                "
                                             >
                                                 <div
-                                                    class="d-flex justify-content-center justify-content-md-start align-items-center"
-                                                    style="
-                                                        min-height: 150px;
-                                                        min-width: 150px;
-                                                    "
+                                                    class="circledImageContainer"
                                                 >
-                                                    <div
-                                                        class="circledImageContainer"
-                                                    >
-                                                        <img
-                                                            src="{{ apiUrl }}/Employe/{{ tache.employe.image }}"
-                                                            alt=""
-                                                        />
-                                                    </div>
+                                                    <img
+                                                        src="{{
+                                                            apiUrl
+                                                        }}/Employe/{{
+                                                            tache.employe.image
+                                                        }}"
+                                                        alt=""
+                                                    />
                                                 </div>
+                                            </div>
 
-                                                <div class="">
-                                                    <p class="mb-2">
-                                                        <b class="text-pink"
-                                                            >Service:</b
-                                                        >
-                                                        {{ tache.service.nomService }}
-                                                    </p>
-                                                    <p class="mb-2">
-                                                        <b class="text-pink"
-                                                            >Début:</b
-                                                        >
-                                                        {{ formatDateTache(tache.dateDebut) }}
-                                                    </p>
-                                                    <p class="mb-2">
-                                                        <b class="text-pink"
-                                                            >Fin:</b
-                                                        >
-                                                        {{ formatDateTache(tache.dateFin) }}
-                                                    </p>
-                                                    <p class="mb-2">
-                                                        <b class="text-pink"
-                                                            >Employé en charge:</b
-                                                        >
-                                                        {{ tache.employe.nomEmploye }} {{ tache.employe.prenomEmploye }}
-                                                    </p>
-                                                </div>
+                                            <div class="">
+                                                <p class="mb-2">
+                                                    <b class="text-pink"
+                                                        >Service:</b
+                                                    >
+                                                    {{
+                                                        tache.service.nomService
+                                                    }}
+                                                </p>
+                                                <p class="mb-2">
+                                                    <b class="text-pink"
+                                                        >Début:</b
+                                                    >
+                                                    {{
+                                                        formatDateTache(
+                                                            tache.dateDebut
+                                                        )
+                                                    }}
+                                                </p>
+                                                <p class="mb-2">
+                                                    <b class="text-pink"
+                                                        >Fin:</b
+                                                    >
+                                                    {{
+                                                        formatDateTache(
+                                                            tache.dateFin
+                                                        )
+                                                    }}
+                                                </p>
+                                                <p class="mb-2">
+                                                    <b class="text-pink"
+                                                        >Employé en charge:</b
+                                                    >
+                                                    {{
+                                                        tache.employe.nomEmploye
+                                                    }}
+                                                    {{
+                                                        tache.employe
+                                                            .prenomEmploye
+                                                    }}
+                                                </p>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
+                            </div>
                             }
 
                             <div class="text-left pb-4">
@@ -93,7 +131,7 @@
                                     class="btn btn-pink text-white"
                                     data-bs-toggle="modal"
                                     data-bs-target="#exampleModal"
-                                    (click) = "changerDateDebutTache()"
+                                    (click)="changerDateDebutTache()"
                                 >
                                     <i class="fa fa-plus"></i>
                                     <span class="ps-2"></span> Ajouter un
@@ -129,7 +167,10 @@
                                                 ></button>
                                             </div>
 
-                                            <form [formGroup]="tacheForm" (ngSubmit)="tacheFormSubmit()">
+                                            <form
+                                                [formGroup]="tacheForm"
+                                                (ngSubmit)="tacheFormSubmit()"
+                                            >
                                                 <div class="modal-body">
                                                     <div class="form-group">
                                                         <label
@@ -141,15 +182,22 @@
                                                         } -->
 
                                                         @if(listeService.length>0){
-                                                            <app-dropdown
-                                                                [items]="listeServiceAsItem"
-                                                                [showSearch]="true"
-                                                                [showStatus]="true"
-                                                                [showError]="false"
-                                                                (itemChange)="onItemChange($event)">
-                                                            </app-dropdown>
+                                                        <app-dropdown
+                                                            [items]="
+                                                                listeServiceAsItem
+                                                            "
+                                                            [showSearch]="true"
+                                                            [showStatus]="true"
+                                                            [showError]="false"
+                                                            (itemChange)="
+                                                                onItemChange(
+                                                                    $event
+                                                                )
+                                                            "
+                                                        >
+                                                        </app-dropdown>
 
-                                                            <!-- <select name="" id="" class="form-control selectService" style="width: 100% !important;" formControlName="service" (change)="changerListeEmployeDispo()">
+                                                        <!-- <select name="" id="" class="form-control selectService" style="width: 100% !important;" formControlName="service" (change)="changerListeEmployeDispo()">
 
                                                                 @for(service of listeService; track $index){
                                                                     <option [value]="service._id">{{ service.nomService }}</option>
@@ -162,7 +210,6 @@
                                                                     }
                                                                 } -->
                                                         }
-
                                                     </div>
 
                                                     <div class="form-group">
@@ -172,11 +219,18 @@
                                                         >
 
                                                         <app-dropdown
-                                                            [items]="listeEmployeAsItem"
+                                                            [items]="
+                                                                listeEmployeAsItem
+                                                            "
                                                             [showSearch]="true"
                                                             [showStatus]="true"
                                                             [showError]="false"
-                                                            (itemChange)="onItemEmpChange($event)">
+                                                            (itemChange)="
+                                                                onItemEmpChange(
+                                                                    $event
+                                                                )
+                                                            "
+                                                        >
                                                         </app-dropdown>
 
                                                         <!-- @if(listeEmployeDispo.length>0){
@@ -193,7 +247,6 @@
                                                                     }
                                                                 }
                                                         } -->
-
                                                     </div>
 
                                                     <div class="form-group">
@@ -204,17 +257,22 @@
                                                         <input
                                                             type="datetime-local"
                                                             class="form-control"
-                                                            id = "dateDebutTacheInput"
+                                                            id="dateDebutTacheInput"
                                                             formControlName="dateDebut"
-                                                            (input)="changerListeEmployeDispo()"
+                                                            (input)="
+                                                                changerListeEmployeDispo()
+                                                            "
                                                         />
-                                                        @if(tacheForm.controls['dateDebut'].touched || isSubmitted){
-                                                            @if(tacheForm.controls['dateDebut'].errors?.['required']){
-                                                                <span class="text-danger">Ce champ est requis</span>
-                                                            }
-                                                        }
+                                                        @if(tacheForm.controls['dateDebut'].touched
+                                                        || isSubmitted){
+                                                        @if(tacheForm.controls['dateDebut'].errors?.['required']){
+                                                        <span
+                                                            class="text-danger"
+                                                            >Ce champ est
+                                                            requis</span
+                                                        >
+                                                        } }
                                                     </div>
-
                                                 </div>
 
                                                 <div class="modal-footer">
@@ -223,13 +281,13 @@
                                                         class="btn btn-secondary"
                                                         data-bs-dismiss="modal"
                                                     >
-                                                        Close
+                                                        Fermer
                                                     </button>
                                                     <button
                                                         type="submit"
                                                         class="btn btn-danger btn-pink"
                                                     >
-                                                        Save changes
+                                                        Valider
                                                     </button>
                                                 </div>
                                             </form>
@@ -242,7 +300,16 @@
                                 <button
                                     class="site-button button-lg radius-no outline outline-2"
                                     (click)="validerRDV()"
+                                    [disabled]="
+                                        listeTache.length == 0 || loading
+                                    "
                                 >
+                                    <span
+                                        class="spinner-border spinner-border-sm"
+                                        role="status"
+                                        aria-hidden="true"
+                                        *ngIf="loading && isSubmitted"
+                                    ></span>
                                     Valider le rendez-vous
                                 </button>
                             </div>

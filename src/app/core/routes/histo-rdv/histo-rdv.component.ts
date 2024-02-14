@@ -1,10 +1,13 @@
 import { Component } from '@angular/core';
-import { UserInformationService } from '../../services/user/userInformation/user-information.service';
-import { AuthService } from '../../services/client/auth/auth.service';
-import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
+import * as moment from 'moment';
+import 'moment-timezone';
+import { ToastrService } from 'ngx-toastr';
 import { TOAST_OPTIONS_BOTTOM_RIGHT } from 'src/app/_utils/toast/toast-options';
+import { AuthService } from '../../services/client/auth/auth.service';
+import { LocalTimezoneService } from '../../services/localTimezone/local-timezone.service';
 import { RdvService } from '../../services/rdv/rdv.service';
+import { UserInformationService } from '../../services/user/userInformation/user-information.service';
 
 @Component({
     templateUrl: './histo-rdv.component.html',
@@ -18,9 +21,10 @@ export class HistoRdvComponent {
         private service: UserInformationService,
         private authService: AuthService,
         private rdvService: RdvService,
-        private toastr: ToastrService
+        private toastr: ToastrService,
+        private localTimezoneService: LocalTimezoneService
     ) {
-
+        localTimezoneService.setDefaultTimezone();
     }
 
     user: any;
@@ -41,6 +45,7 @@ export class HistoRdvComponent {
                 next: (response: any) => {
                     if(response.status == 200){
                         this.userRDV = response.data;
+
                         console.log(this.userRDV);
                     }
                     else{
@@ -56,4 +61,9 @@ export class HistoRdvComponent {
                 },
             });
     }
+
+    formatDate = (date: Date) => {
+        moment.locale('fr');
+        return moment(date).format('Do-MM-YYYY hh:mm');
+    };
 }
