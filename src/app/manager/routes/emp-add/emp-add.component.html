@@ -25,6 +25,7 @@
                         <div class="p-a30 border-1 seth">
                             <div class="tab-content nav">
                                 <form
+                                    enctype="multipart/form-data"
                                     [formGroup]="addEmployeForm"
                                     (ngSubmit)="onSubmit()"
                                     class="w-100"
@@ -36,7 +37,7 @@
                                         <input
                                             id="nom"
                                             class="form-control"
-                                            placeholder="Nom de l'employee"
+                                            placeholder="Nom de l'employé"
                                             type="text"
                                             formControlName="nomEmploye"
                                         />
@@ -55,7 +56,7 @@
                                         <input
                                             id="prenom"
                                             class="form-control"
-                                            placeholder="Nom de l'employee"
+                                            placeholder="Prenom de l'employé"
                                             type="text"
                                             formControlName="prenomEmploye"
                                         />
@@ -154,6 +155,84 @@
                                             >
                                         </div>
                                     }
+
+
+                                    <div class="row">
+                                        <div class="form-group col-md-6">
+                                            <label class="font-weight-700"
+                                                >Date de début de service</label
+                                            >
+                                            <input
+                                                name="dzName"
+                                                class="form-control"
+                                                type="time"
+                                                formControlName="debutHeure"
+                                            />
+                                        </div>
+
+                                        <div class="form-group col-md-6">
+                                            <label class="font-weight-700"
+                                                >Date fin de service</label
+                                            >
+                                            <input
+                                                name="dzName"
+                                                class="form-control"
+                                                type="time"
+                                                formControlName="finHeure"
+                                            />
+                                        </div>
+                                    </div>
+
+                                    <label class="font-weight-700">Jour à travailler</label>
+
+                                    <div formGroupName="jourSemaine">
+                                        <div class="table-responsive">
+                                            <table class="table table-bordered">
+                                                <tr>
+                                                    <th>Lun</th>
+                                                    <th>Mar</th>
+                                                    <th>Mer</th>
+                                                    <th>Jeu</th>
+                                                    <th>Ven</th>
+                                                    <th>Sam</th>
+                                                    <th>Dim</th>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <input type="checkbox" formControlName="1">
+                                                    </td>
+                                                    <td>
+                                                        <input type="checkbox" formControlName="2">
+                                                    </td>
+                                                    <td>
+                                                        <input type="checkbox" formControlName="3">
+                                                    </td>
+                                                    <td>
+                                                        <input type="checkbox" formControlName="4">
+                                                    </td>
+                                                    <td>
+                                                        <input type="checkbox" formControlName="5">
+                                                    </td>
+                                                    <td>
+                                                        <input type="checkbox" formControlName="6">
+                                                    </td>
+                                                    <td>
+                                                        <input type="checkbox" formControlName="0">
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="font-weight-700"
+                                            >Image</label
+                                        >
+                                        <app-upload-images
+                                            [formData]="addEmployeForm"
+                                            [formField]="'image'"
+                                        ></app-upload-images>
+                                    </div>
 
                                     <div class="text-left">
                                         <button

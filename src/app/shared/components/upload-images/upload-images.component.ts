@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { FileUploadService } from '../../services/file-upload/file-upload.service';
+import { FileUploadService } from '../../../core/services/file-upload/file-upload.service';
 import { HttpEventType, HttpResponse } from '@angular/common/http';
 
 @Component({
@@ -31,6 +31,7 @@ export class UploadImagesComponent implements OnInit {
         if (this.selectedFiles && this.selectedFiles[0]) {
             const numberOfFiles = this.selectedFiles.length;
             this.formData.patchValue({[this.formField]: (event.target as HTMLInputElement).files});
+            this.formData.get(this.formField).updateValueAndValidity();
 
             for (let i = 0; i < numberOfFiles; i++) {
                 const reader = new FileReader();
