@@ -9,7 +9,6 @@ import { EmpAddComponent } from './routes/emp-add/emp-add.component';
 import { EmpListComponent } from './routes/emp-list/emp-list.component';
 import { ServiceListComponent } from './routes/service-list/service-list.component';
 import { ServiceAddComponent } from './routes/service-add/service-add.component';
-import { UploadImagesComponent } from '../core/components/upload-images/upload-images.component';
 import { ServiceListModalComponent } from './components/service-list-modal/service-list-modal/service-list-modal.component';
 import { SharedModule } from '../shared/shared.module';
 
@@ -23,7 +22,6 @@ import { SharedModule } from '../shared/shared.module';
         EmpListComponent,
         ServiceListComponent,
         ServiceAddComponent,
-        UploadImagesComponent,
         ServiceListModalComponent,
     ],
     imports: [
