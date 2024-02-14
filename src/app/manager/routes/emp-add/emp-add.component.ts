@@ -100,7 +100,7 @@ export class EmpAddComponent implements OnInit {
                     this.resetJourSemaine();
 
                     this.addEmployeForm.patchValue(x.data);
-                    this.addEmployeForm.patchValue({'image': null});
+                    this.addEmployeForm.patchValue({ 'image': null});
                     this.addEmployeForm.patchValue({ 'user': x.data.user._id });
                     this.addEmployeForm.patchValue({ 'email': x.data.user.email });
                     this.addEmployeForm.patchValue({ 'debutHeure': moment(x.data.horaireTravail.debut).format('HH:mm') });
