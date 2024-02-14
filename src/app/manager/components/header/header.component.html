@@ -33,8 +33,9 @@
                     class="header-nav navbar-collapse collapse justify-content-end"
                     id="navbarNavDropdown"
                 >
+
                     <ul class="nav navbar-nav">
-                        <li routerLinkActive="active">
+                        <li routerLinkActive="active" [class.d-block]="user" [class.d-none]="!user">
                             <a
                                 >Nos employés <i class="fa fa-chevron-down"></i
                             ></a>
@@ -58,7 +59,7 @@
                             </ul>
                         </li>
 
-                        <li routerLinkActive="active">
+                        <li routerLinkActive="active" [class.d-block]="user" [class.d-none]="!user">
                             <a
                                 >Nos Services <i class="fa fa-chevron-down"></i
                             ></a>
