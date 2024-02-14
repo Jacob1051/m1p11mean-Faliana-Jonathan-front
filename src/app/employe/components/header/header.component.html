@@ -81,9 +81,16 @@
                         </li>
 
                         <li [ngClass]="{'d-flex align-items-center justify-content-center': !user, 'd-none': user}">
-                            <button
+                            <!-- <button
                                 (click)="goToLogin()"
                                 class="btn btn-danger btn-pink w-100"
+                                style="height: 50px"
+                            >
+                                Se Connecter
+                            </button> -->
+                            <button
+                                (click)="goToLogin()"
+                                class="btn btn-danger btn-light-pink w-100"
                                 style="height: 50px"
                             >
                                 Se Connecter

@@ -3,8 +3,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { first } from 'rxjs/operators';
-import { AuthService } from '../../services/auth/auth.service';
 import { TOAST_OPTIONS_BOTTOM_RIGHT } from 'src/app/_utils/toast/toast-options';
+import { AuthService } from '../../services/auth/auth.service';
 
 @Component({
     selector: 'app-login-employe',
@@ -27,7 +27,7 @@ export class LoginComponent implements OnInit {
 
     ngOnInit(): void {
         this.loginForm = this.formBuilder.group({
-            email:['client@gmail.com', { validators: [Validators.required , Validators.email ]}],
+            email:['employe@gmail.com', { validators: [Validators.required , Validators.email ]}],
             password: ['0123456789', Validators.required],
         });
     }
@@ -56,7 +56,7 @@ export class LoginComponent implements OnInit {
 
                             // const returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
 
-                            const returnUrl = this.service.redirectUrl || '/';
+                            const returnUrl = this.service.redirectUrl || '/employe';
 
                             this.router.navigateByUrl(returnUrl);
                         }

@@ -94,35 +94,27 @@
                                     <b class="text-pink"
                                         ><span class="text-uppercase">
                                             {{
-                                                user && user.role == "Client"
-                                                    ? userInformation?.nomClient
+                                                user && user.role == "Manager"
+                                                    ? userInformation?.nomManager
                                                     : ""
                                             }}
                                         </span>
                                         {{
-                                            user && user.role == "Client"
-                                                ? userInformation?.prenomClient
+                                            user && user.role == "Manager"
+                                                ? userInformation?.prenomManager
                                                 : ""
                                         }}
                                     </b></span
                                 >
-                                <li>
-                                    <a href="shop-columns.html" class="dez-page"
-                                        >Shop Columns</a
-                                    >
-                                </li>
-                                <li>
-                                    <a href="shop-login.html" class="dez-page"
-                                        >Shop Login</a
-                                    >
-                                </li>
-                                <li>
+                                
+                                <!-- <li>
                                     <a
                                         href="shop-register.html"
                                         class="dez-page"
                                         >Shop Register</a
                                     >
-                                </li>
+                                </li> -->
+
                                 <li role="button">
                                     <a
                                         (click)="logout()"
