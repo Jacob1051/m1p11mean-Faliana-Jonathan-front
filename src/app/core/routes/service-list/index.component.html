@@ -59,6 +59,16 @@
                         </div>
                         }
 
+                        <h5 class="dez-tilte">
+                            <a
+                                [routerLink]="[
+                                    '/service',
+                                    service._id
+                                ]"
+                                >{{ service.nomService }}</a
+                            >
+                        </h5>
+
                         <p>{{ service.description }}</p>
 
 
