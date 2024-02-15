@@ -62,9 +62,9 @@ export class TakerdvComponent implements OnInit {
 
         this.paiementForm = new FormGroup({
             nomSurCarte: new FormControl('', Validators.required),
-            numeroCarte: new FormControl('0000-0000-0000-0000', Validators.required),
-            cvv: new FormControl('123',Validators.required),
-            dateExpiration: new FormControl('', Validators.required),
+            numeroCarte: new FormControl('0000-0000-0000-0000', [Validators.required, Validators.pattern(/^(?:\d{4}-){3}\d{4}$/)]),
+            cvv: new FormControl('123', [Validators.required, Validators.pattern(/^\d{3}$/)] ),
+            dateExpiration: new FormControl('', [Validators.required, Validators.pattern(/^(0[1-9]|1[0-2])\/([0-9]{2})$/)]),
         });
     }
 
@@ -394,6 +394,8 @@ export class TakerdvComponent implements OnInit {
             next: (response: any) => {
                 if(response.status==200){
                     this.toastr.success('Votre rendez-vous a été enregistré!', 'Succès!',  TOAST_OPTIONS_BOTTOM_RIGHT);
+
+                    (<any>window).closeModal();
                     this.router.navigateByUrl('/histoRdv');
                 }else{
                     this.toastr.error(`Une erreur s'est produite!`, 'Erreur!', TOAST_OPTIONS_BOTTOM_RIGHT);

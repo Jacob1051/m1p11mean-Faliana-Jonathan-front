@@ -44,14 +44,35 @@
                                     </div>
                                     <label class="pay">Nom sur la carte</label>
                                     <input type="text" name="holdername" placeholder="John Smith" formControlName="nomSurCarte">
+                                    @if(formControl['nomSurCarte'].touched || submitted){
+                                        @if(formControl['nomSurCarte'].errors?.['required']){
+                                            <span class="text-danger">Nom requis.</span>
+                                        }
+                                    }
                                     <div class="row">
                                         <div class="col-8 col-md-6">
                                             <label class="pay">Numéro de la carte</label>
                                             <input type="text" name="cardno" id="cr_no" placeholder="0000-0000-0000-0000" minlength="19" maxlength="19" formControlName="numeroCarte">
+                                            @if(formControl['numeroCarte'].touched || submitted){
+                                                @if(formControl['numeroCarte'].errors?.['required']){
+                                                    <span class="text-danger">Numéro requis.</span>
+                                                }
+                                                @if(formControl['numeroCarte'].errors?.['pattern']){
+                                                    <span class="text-danger">Numéro invalide.</span>
+                                                }
+                                            }
                                         </div>
                                         <div class="col-4 col-md-6">
                                             <label class="pay">CVV</label>
                                             <input type="password" name="cvcpwd" placeholder="&#9679;&#9679;&#9679;" class="placeicon" minlength="3" maxlength="3" formControlName="cvv">
+                                            @if(formControl['cvv'].touched || submitted){
+                                                @if(formControl['cvv'].errors?.['required']){
+                                                    <span class="text-danger">CVV requis.</span>
+                                                }
+                                                @if(formControl['cvv'].errors?.['pattern']){
+                                                    <span class="text-danger">CVV invalide.</span>
+                                                }
+                                            }
                                         </div>
                                     </div>
                                     <div class="row">
@@ -60,13 +81,23 @@
                                         </div>
                                         <div class="col-md-12">
                                             <input type="text" name="exp" id="exp" placeholder="MM/YY" minlength="5" maxlength="5" formControlName="dateExpiration">
+                                            @if(formControl['dateExpiration'].touched || submitted){
+                                                @if(formControl['dateExpiration'].errors?.['required']){
+                                                    <span class="text-danger">Date d'expiration requis.</span>
+                                                }
+                                                @if(formControl['dateExpiration'].errors?.['pattern']){
+                                                    <span class="text-danger">Date d'expiration invalide.</span>
+                                                }
+                                            }
                                         </div>
                                     </div>
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <input type="submit" value="PAYER &nbsp; &#xf178;" class="btn btn-info placeicon">
+                                    @if(listeTache.length>0){
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <input type="submit" value="PAYER &nbsp; &#xf178;" class="btn btn-info placeicon">
+                                            </div>
                                         </div>
-                                    </div>
+                                    }
                                 </form>
 			                </div>
 						</div>

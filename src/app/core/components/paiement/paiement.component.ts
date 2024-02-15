@@ -9,6 +9,8 @@ import { FormGroup } from '@angular/forms';
 export class PaiementComponent {
     listeTache: any = [];
 
+    submitted:boolean = false;
+
     @Input('listeTache')
     set listeTaches(tache: any[]) {
         this.listeTache = tache;
@@ -18,7 +20,13 @@ export class PaiementComponent {
     @Input() paiementForm!: FormGroup;
     @Output() formSubmitted = new EventEmitter<void>();
 
+    get formControl() { return this.paiementForm.controls; }
+
     onSubmit() {
-        this.formSubmitted.emit();
+        this.submitted = true;
+
+        if(this.paiementForm.valid){
+            this.formSubmitted.emit();
+        }
     }
 }
