@@ -123,3 +123,7 @@
 #navbarNavDropdown ul.nav.navbar-nav li:has(button.btn.btn-danger.btn-light-pink){
     min-height: 82.5px;
 }
+
+.modalChoixService{
+    margin-top: 100px !important;
+}
