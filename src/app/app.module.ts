@@ -1,4 +1,4 @@
-import { NgModule, importProvidersFrom } from '@angular/core';
+import { LOCALE_ID, NgModule, importProvidersFrom } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { HttpClientModule } from '@angular/common/http';
@@ -24,8 +24,12 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import { ServiceListComponent } from './core/components/service-list/service-list.component';
 import { PreferenceComponent } from './core/routes/preference/preference.component';
 import { EmpListComponent } from './core/components/emp-list/emp-list.component';
-import { CommonModule } from '@angular/common';
+import { CommonModule, registerLocaleData } from '@angular/common';
 import { HistoRdvComponent } from './core/routes/histo-rdv/histo-rdv.component';
+import { PaiementComponent } from './core/components/paiement/paiement.component';
+import localeFr from '@angular/common/locales/fr';
+
+registerLocaleData(localeFr);
 
 @NgModule({
     declarations: [
@@ -44,7 +48,8 @@ import { HistoRdvComponent } from './core/routes/histo-rdv/histo-rdv.component';
         ServiceListComponent,
         PreferenceComponent,
         EmpListComponent,
-        HistoRdvComponent
+        HistoRdvComponent,
+        PaiementComponent
     ],
     imports: [
         CommonModule,
@@ -60,6 +65,7 @@ import { HistoRdvComponent } from './core/routes/histo-rdv/histo-rdv.component';
         LocalTimezoneService,
         importProvidersFrom(HttpClientModule),
         provideAnimationsAsync(),
+        { provide: LOCALE_ID, useValue: 'fr' }
     ],
     bootstrap: [AppComponent]
 })

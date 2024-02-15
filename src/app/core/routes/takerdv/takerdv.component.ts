@@ -36,6 +36,10 @@ export class TakerdvComponent implements OnInit {
     currentSelectedItem!: Item;
     currentSelectedEmpItem!: Item;
 
+    total: number = 0;
+
+    paiementForm!: FormGroup;
+
     constructor(
         private serviceService: ServiceService,
         private employeService: EmployeService,
@@ -54,6 +58,14 @@ export class TakerdvComponent implements OnInit {
         this.getListeService();
         this.getListeEmploye();
         this.getStatutEnCours();
+
+
+        this.paiementForm = new FormGroup({
+            nomSurCarte: new FormControl('', Validators.required),
+            numeroCarte: new FormControl('0000-0000-0000-0000', Validators.required),
+            cvv: new FormControl('123',Validators.required),
+            dateExpiration: new FormControl('', Validators.required),
+        });
     }
 
     onItemChange(item: Item): void {
@@ -100,75 +112,62 @@ export class TakerdvComponent implements OnInit {
     tacheFormSubmit = () => {
         this.isSubmitted = true;
 
-        // if (this.tacheForm.valid) {
+        if(this.currentSelectedItem && this.currentSelectedEmpItem){
 
-        let dateDebut = new Date(
-            this.tacheForm.value.dateDebut
-                ? this.tacheForm.value.dateDebut
-                : ''
-        );
+            let dateDebut = new Date(
+                this.tacheForm.value.dateDebut
+                    ? this.tacheForm.value.dateDebut
+                    : ''
+            );
 
-        // let service: Service | undefined = this.listeServiceBackup.find(
-        //     (element) => {
-        //         return this.tacheForm.value.service == element._id;
-        //     }
-        // );
-        // // console.log(service);
+            let service: Service = this.currentSelectedItem.data;
+            let employe: Employe = this.currentSelectedEmpItem.data;
 
-        // let employe: Employe | undefined = this.listeEmploye.find(
-        //     (element) => {
-        //         return this.tacheForm.value.employe == element._id;
-        //     }
-        // );
+            let dateFin = addDureeToDate(
+                dateDebut,
+                service ? service.duree : 0
+            );
 
-        let service: Service = this.currentSelectedItem.data;
+            let newTache = {
+                dateDebut: dateDebut,
+                dateFin: dateFin,
+                employe: employe,
+                service: service,
+                isDeleted: false,
+                statut: this.statutEnCours,
+            };
 
-        let employe: Employe = this.currentSelectedEmpItem.data;
+            this.listeTache.push(newTache);
+            this.tacheForm.reset();
 
-        let dateFin = addDureeToDate(
-            dateDebut,
-            service ? service.duree : 0
-        );
+            // Trier le tableau d'objets par dateDebut
+            this.listeTache.sort((a: any, b: any) => {
+                const dateA = new Date(a.dateDebut);
+                const dateB = new Date(b.dateDebut);
+                return dateA.getTime() - dateB.getTime();
+            });
 
-        let newTache = {
-            dateDebut: dateDebut,
-            dateFin: dateFin,
-            employe: employe,
-            service: service,
-            isDeleted: false,
-            statut: this.statutEnCours,
-        };
-
-        // console.log('new tache:', newTache);
-
-        this.listeTache.push(newTache);
-        this.tacheForm.reset();
-
-        // Trier le tableau d'objets par dateDebut
-        this.listeTache.sort((a: any, b: any) => {
-            const dateA = new Date(a.dateDebut);
-            const dateB = new Date(b.dateDebut);
-            return dateA.getTime() - dateB.getTime();
-        });
-        this.rdvForm = new FormGroup({
-            dateRdv: new FormControl(
-                moment(this.listeTache[0].dateDebut).format(
-                    'YYYY-MM-DD HH:mm'
+            this.rdvForm = new FormGroup({
+                dateRdv: new FormControl(
+                    moment(this.listeTache[0].dateDebut).format(
+                        'YYYY-MM-DD HH:mm'
+                    ),
+                    Validators.required
                 ),
-                Validators.required
-            ),
-        });
+            });
 
-        // Filtrer les services à retirer de listeService
-        let servicesToRemove = this.listeTache.map((tache: any) => {
-            return tache.service._id;
-        });
-        this.listeService = this.listeService.filter((service) => {
-            return !servicesToRemove.includes(service._id);
-        });
+            // Filtrer les services à retirer de listeService
+            let servicesToRemove = this.listeTache.map((tache: any) => {
+                return tache.service._id;
+            });
+            this.listeService = this.listeService.filter((service) => {
+                return !servicesToRemove.includes(service._id);
+            });
 
-        (<any>window).closeModal();
-        // }
+            this.total = this.listeTache.reduce((total:any ,value:any)=>total += value.service.prix, 0);
+
+            (<any>window).closeModal();
+        }
     };
 
     changerListeEmployeDispo = () => {
@@ -383,6 +382,10 @@ export class TakerdvComponent implements OnInit {
                 statut: data.statut._id,
                 isDeleted: false
             })),
+            paiement:{
+                ...this.paiementForm.value,
+                montant: this.total
+            },
             isDeleted: false,
         };
 
@@ -412,5 +415,10 @@ export class TakerdvComponent implements OnInit {
         this.listeTache = this.listeTache.filter((element:any, index:any)=>{
             return index != indexTache
         });
+    }
+
+    onSubmitPayement() {
+        // console.log(this.paiementForm.value);
+        this.validerRDV();
     }
 }
