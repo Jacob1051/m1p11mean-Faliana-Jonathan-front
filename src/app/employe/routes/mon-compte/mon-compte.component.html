@@ -1,0 +1,260 @@
+@if(isLoading){
+    <div id="loading-area"></div>
+}
+
+    <!-- <div class="section-full content-inner-2 bg-white hair-services"> -->
+    <div class="content-inner-2 bg-white hair-services soft-background">
+        <div class="container">
+            <div class="text-left pb-4">
+                <button class="btn btn-danger btn-light-pink" routerLink="/manager/emp/list"><i class="fa fa-arrow-left"></i></button>
+            </div>
+            <div class="section-head text-black text-center">
+                <h2 class="text-primary m-b10">Modifier votre profil</h2>
+                <div class="dlab-separator-outer m-b0">
+                    <div class="dlab-separator text-primary style-icon">
+                        <i class="flaticon-spa text-primary"></i>
+                    </div>
+                </div>
+            </div>
+
+            <div class="shop-account w-100 p-0">
+                <!-- Product -->
+                <div class="container">
+                    <div class="row">
+                        <div class="max-w500 m-auto m-b30">
+                            <div class="p-a30 border-1 seth">
+                                <div class="tab-content nav">
+                                    <form
+                                        enctype="multipart/form-data"
+                                        [formGroup]="addEmployeForm"
+                                        (ngSubmit)="onSubmit()"
+                                        class="w-100"
+                                    >
+                                        <div class="form-group">
+                                            <label class="font-weight-700"
+                                                >Nom *</label
+                                            >
+                                            <input
+                                                id="nom"
+                                                class="form-control"
+                                                placeholder="Nom de l'employé"
+                                                type="text"
+                                                formControlName="nomEmploye"
+                                            />
+                                            @if(formControl['nomEmploye'].touched ||
+                                            submitted){
+                                            @if(formControl['nomEmploye'].errors?.['required']){
+                                            <span class="text-danger"
+                                                >Nom requis.</span
+                                            >
+                                            } }
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="font-weight-700"
+                                                >Prénom *</label
+                                            >
+                                            <input
+                                                id="prenom"
+                                                class="form-control"
+                                                placeholder="Prenom de l'employé"
+                                                type="text"
+                                                formControlName="prenomEmploye"
+                                            />
+                                            @if(formControl['prenomEmploye'].touched
+                                            || submitted){
+                                            @if(formControl['prenomEmploye'].errors?.['required']){
+                                            <span class="text-danger"
+                                                >Prénom requis.</span
+                                            >
+                                            } }
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="font-weight-700"
+                                                >E-Mail *</label
+                                            >
+                                            <input
+                                                id="mail"
+                                                required=""
+                                                class="form-control"
+                                                placeholder="Votre Email"
+                                                type="email"
+                                                formControlName="email"
+                                            />
+                                            @if(formControl['email'].touched ||
+                                            submitted){
+                                            @if(formControl['email'].errors?.['required']){
+                                            <span class="text-danger"
+                                                >E-mail requis.</span
+                                            >
+                                            }
+                                            @if(formControl['email'].errors?.['email']){
+                                            <span class="text-danger"
+                                                >Pas un format d'e-mail
+                                                valide.</span
+                                            >
+                                            } }
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="font-weight-700"
+                                                >Mot de Passe *</label
+                                            >
+                                            <input
+                                                id="mdp"
+                                                required=""
+                                                class="form-control"
+                                                placeholder="Votre Mot de Passe"
+                                                type="password"
+                                                formControlName="password"
+                                            />
+                                            @if(formControl['password'].touched ||
+                                            submitted){
+                                            @if(formControl['password'].errors?.['required']){
+                                            <span class="text-danger"
+                                                >Mot de passe requis.</span
+                                            >
+                                            } }
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="font-weight-700"
+                                                >Confirmez votre Mot de Passe</label
+                                            >
+                                            <input
+                                                formControlName="confirmPassword"
+                                                class="form-control"
+                                                placeholder="Mot de Passe"
+                                                type="password"
+                                            />
+                                            @if(formControl['confirmPassword'].touched
+                                            || submitted){
+                                            @if(addEmployeForm.hasError('PasswordNoMatch')){
+                                            <span class="text-danger"
+                                                >Mot de passe ne correspond
+                                                pas.</span
+                                            >
+                                            } }
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="font-weight-700"
+                                                >Affecter service</label
+                                            >
+                                            <app-multi-dropdown
+                                                [items]="listItems"
+                                                [showSearch]="true"
+                                                [showAll]="true"
+                                                [showStatus]="true"
+                                                [showError]="false"
+                                                placeholder="Service"
+                                                (itemChange)="onItemChange($event)">
+                                            </app-multi-dropdown>
+                                        </div>
+
+                                        @if(submitted && !hasServices){
+                                            <div class="pb-4">
+                                                <span class="text-danger pb-4"
+                                                    >Veillez sélectionner au moins un service</span
+                                                >
+                                            </div>
+                                        }
+
+
+                                        <div class="row">
+                                            <div class="form-group col-md-6">
+                                                <label class="font-weight-700"
+                                                    >Date de début de service</label
+                                                >
+                                                <input
+                                                    name="dzName"
+                                                    class="form-control"
+                                                    type="time"
+                                                    formControlName="debutHeure"
+                                                />
+                                            </div>
+
+                                            <div class="form-group col-md-6">
+                                                <label class="font-weight-700"
+                                                    >Date fin de service</label
+                                                >
+                                                <input
+                                                    name="dzName"
+                                                    class="form-control"
+                                                    type="time"
+                                                    formControlName="finHeure"
+                                                />
+                                            </div>
+                                        </div>
+
+                                        <label class="font-weight-700">Jour à travailler</label>
+
+                                        <div formGroupName="jourSemaine">
+                                            <div class="table-responsive">
+                                                <table class="table table-bordered">
+                                                    <tr>
+                                                        <th>Lun</th>
+                                                        <th>Mar</th>
+                                                        <th>Mer</th>
+                                                        <th>Jeu</th>
+                                                        <th>Ven</th>
+                                                        <th>Sam</th>
+                                                        <th>Dim</th>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <input type="checkbox" formControlName="1">
+                                                        </td>
+                                                        <td>
+                                                            <input type="checkbox" formControlName="2">
+                                                        </td>
+                                                        <td>
+                                                            <input type="checkbox" formControlName="3">
+                                                        </td>
+                                                        <td>
+                                                            <input type="checkbox" formControlName="4">
+                                                        </td>
+                                                        <td>
+                                                            <input type="checkbox" formControlName="5">
+                                                        </td>
+                                                        <td>
+                                                            <input type="checkbox" formControlName="6">
+                                                        </td>
+                                                        <td>
+                                                            <input type="checkbox" formControlName="0">
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="font-weight-700"
+                                                >Image</label
+                                            >
+                                            <app-upload-images
+                                                [formData]="addEmployeForm"
+                                                [formField]="'image'"
+                                            ></app-upload-images>
+                                        </div>
+
+                                        <div class="text-left">
+                                            <button
+                                                class="btn btn-danger btn-light-pink p-3"
+                                                [disabled]="loading"
+                                            >
+                                                <span
+                                                    class="spinner-border spinner-border-sm"
+                                                    role="status"
+                                                    aria-hidden="true"
+                                                    *ngIf="loading && submitted"
+                                                ></span>
+                                                Modifier
+                                            </button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Product END -->
+            </div>
+        </div>
+    </div>

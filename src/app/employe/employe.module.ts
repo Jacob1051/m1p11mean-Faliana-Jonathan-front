@@ -11,6 +11,7 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { ListeTacheComponent } from './routes/liste-tache/liste-tache.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
+import { MonCompteComponent } from './routes/mon-compte/mon-compte.component';
 
 @NgModule({
     declarations: [
@@ -18,7 +19,8 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
         LayoutComponent,
         HeaderComponent,
         HeureTravailComponent,
-        ListeTacheComponent
+        ListeTacheComponent,
+        MonCompteComponent
     ],
     imports: [
         SharedModule,
