@@ -127,3 +127,8 @@
 .modalChoixService{
     margin-top: 100px !important;
 }
+
+.modalPaiement{
+    max-height: calc(70vh - 82.5px);
+    overflow: auto;
+}

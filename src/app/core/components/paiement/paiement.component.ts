@@ -1,5 +1,6 @@
-import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormGroup } from '@angular/forms';
+import Scrollbar from "smooth-scrollbar";
 
 @Component({
     selector: 'app-paiement',
@@ -19,6 +20,10 @@ export class PaiementComponent {
     @Input() total = 0;
     @Input() paiementForm!: FormGroup;
     @Output() formSubmitted = new EventEmitter<void>();
+
+    ngOnInit() {
+        Scrollbar.init((<any>document.querySelector(".modalPaiement")));
+    }
 
     get formControl() { return this.paiementForm.controls; }
 
