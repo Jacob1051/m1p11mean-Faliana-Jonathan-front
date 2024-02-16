@@ -17,4 +17,5 @@ export const MANAGER_ROUTING = {
   LISTE_SERVICE: 'list',
   ADD_SERVICE: 'add',
   UPDATE_SERVICE: 'edit/:id',
+  OFFRE_LIST: 'list'
 };
