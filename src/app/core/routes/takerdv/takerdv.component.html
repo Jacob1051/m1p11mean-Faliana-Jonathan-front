@@ -2,6 +2,25 @@
 <div id="loading-area"></div>
 }
 
+<!-- Modal Paiement -->
+<div class="modal fade" id="modalPaiement" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-xl">
+        <div class="modal-content">
+            <div class="modal-header d-flex align-items-center">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">
+                    Paiement
+                </h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <div class="modal-body">
+                <app-paiement [listeTache]="listeTache" [total]="total" [paiementForm]="paiementForm" (formSubmitted)="onSubmitPayement()"></app-paiement>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal Paiement -->
+
 <div
     class="section-full content-inner-2 bg-white hair-services soft-background"
     style="min-height: calc(100vh - 82.5px)"
@@ -181,35 +200,16 @@
                                                             {{ $index }}
                                                         } -->
 
-                                                        @if(listeService.length>0){
+                                                        <!-- @if(listeService.length>0){ -->
                                                         <app-dropdown
-                                                            [items]="
-                                                                listeServiceAsItem
-                                                            "
+                                                            [items]="listeServiceAsItem"
                                                             [showSearch]="true"
                                                             [showStatus]="true"
                                                             [showError]="false"
-                                                            (itemChange)="
-                                                                onItemChange(
-                                                                    $event
-                                                                )
-                                                            "
+                                                            (itemChange)="onItemChange($event)"
                                                         >
                                                         </app-dropdown>
-
-                                                        <!-- <select name="" id="" class="form-control selectService" style="width: 100% !important;" formControlName="service" (change)="changerListeEmployeDispo()">
-
-                                                                @for(service of listeService; track $index){
-                                                                    <option [value]="service._id">{{ service.nomService }}</option>
-                                                                }
-
-                                                                </select>
-                                                                @if(tacheForm.controls['service'].touched || isSubmitted){
-                                                                    @if(tacheForm.controls['service'].errors?.['required']){
-                                                                        <span class="text-danger">Ce champ est requis</span>
-                                                                    }
-                                                                } -->
-                                                        }
+                                                        <!-- } -->
                                                     </div>
 
                                                     <div class="form-group">
@@ -299,11 +299,16 @@
                             <div class="text-left">
                                 <button
                                     class="site-button button-lg radius-no outline outline-2"
+                                    data-bs-toggle="modal"
+                                    data-bs-target="#modalPaiement"
+                                >
+                                <!-- <button
+                                    class="site-button button-lg radius-no outline outline-2"
                                     (click)="validerRDV()"
                                     [disabled]="
                                         listeTache.length == 0 || loading
                                     "
-                                >
+                                > -->
                                     <span
                                         class="spinner-border spinner-border-sm"
                                         role="status"
