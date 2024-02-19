@@ -76,7 +76,15 @@
                             <a routerLink="/manager/emp/edit/{{ employee._id }}">> Modifier l'employé</a>
                         </div> -->
 
+                        @if(offreStatus(offre)){
+                            <span class="badge badge-success">En Cours</span>
+                        }
+                        @else{
+                            <span class="badge badge-warning">Termine</span>
+                        }
+
                         <p class="text-right d-flex gap-2 justify-content-end pt-5">
+
                             <button
                                 class="btn btn-danger btn-light-pink"
                                 routerLink="/manager/offre/edit/{{ offre._id }}"

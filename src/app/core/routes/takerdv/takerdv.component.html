@@ -191,6 +191,15 @@
                                                 (ngSubmit)="tacheFormSubmit()"
                                             >
                                                 <div class="modal-body">
+
+                                                    @if(currentSelectedItem){
+                                                        @if(currentSelectedItem.data.prixAvantRemise != currentSelectedItem.data.prix){
+                                                            <div class="alert alert-info" role="alert">
+                                                                Économisez $ {{currentSelectedItem.data.prixAvantRemise.toFixed(2) - currentSelectedItem.data.prix.toFixed(2)}} sur ce service.
+                                                            </div>
+                                                        }
+                                                    }
+
                                                     <div class="form-group">
                                                         <label
                                                             class="font-weight-700"
@@ -232,21 +241,6 @@
                                                             "
                                                         >
                                                         </app-dropdown>
-
-                                                        <!-- @if(listeEmployeDispo.length>0){
-                                                            <select name="" id="" class="form-control selectEmploye" style="width: 100% !important;" formControlName="employe">
-
-                                                                @for(employe of listeEmployeDispo; track $index){
-                                                                    <option [value]="employe._id">{{ employe.nomEmploye }} {{ employe.prenomEmploye }}</option>
-                                                                }
-
-                                                                </select>
-                                                                @if(tacheForm.controls['employe'].touched || isSubmitted){
-                                                                    @if(tacheForm.controls['employe'].errors?.['required']){
-                                                                        <span class="text-danger">Ce champ est requis</span>
-                                                                    }
-                                                                }
-                                                        } -->
                                                     </div>
 
                                                     <div class="form-group">
