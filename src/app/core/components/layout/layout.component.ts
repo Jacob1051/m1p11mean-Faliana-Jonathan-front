@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import Scrollbar from 'smooth-scrollbar';
 
 @Component({
     selector: 'app-layout',
@@ -8,6 +7,6 @@ import Scrollbar from 'smooth-scrollbar';
 })
 export class LayoutComponent {
     ngOnInit() {
-        Scrollbar.init(<any>document.querySelector('body'));
+        // Scrollbar.init(<any>document.querySelector('body'));
     }
 }

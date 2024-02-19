@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import Scrollbar from 'smooth-scrollbar';
 
 @Component({
     selector: 'app-layout-manager',
@@ -11,7 +10,7 @@ export class LayoutComponent {
     constructor(private router: Router) {}
 
     ngOnInit() {
-        Scrollbar.init(<any>document.querySelector('body'));
+        // Scrollbar.init(<any>document.querySelector('body'));
         // console.log(this.router.url);
         if (this.router.url == '/manager') {
             this.router.navigateByUrl('/manager/login');
