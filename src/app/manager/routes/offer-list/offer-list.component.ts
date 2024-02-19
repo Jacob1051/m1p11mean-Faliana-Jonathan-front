@@ -3,6 +3,7 @@ import { ToastrService } from 'ngx-toastr';
 import { environment } from 'src/environments/environment';
 import { OffreService } from '../../services/offre/offre.service';
 import { TOAST_OPTIONS_BOTTOM_RIGHT } from 'src/app/_utils/toast/toast-options';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-offer-list',
@@ -18,6 +19,8 @@ export class OfferListComponent {
     apiUrl: string = environment.apiUrl;
 
     isLoading: boolean = false;
+
+    dateNow = moment();
 
     searchInsideOfferList() {
         if (this.searchText) {
@@ -86,5 +89,9 @@ export class OfferListComponent {
                 this.isLoading = false;
             },
         });
+    }
+
+    offreStatus(offre: any) {
+        return moment(offre.dateDebut).toDate() <= moment().toDate() && moment().toDate() <= moment(offre.dateFin).toDate();
     }
 }
