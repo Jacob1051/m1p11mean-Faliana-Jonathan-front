@@ -1,0 +1,29 @@
+<!-- @if(isLoading){
+    <div id="loading-area"></div>
+} -->
+
+<!-- <div class="section-full content-inner-2 bg-white hair-services"> -->
+<div class="content-inner-2 bg-white hair-services soft-background">
+    <div class="container">
+        <div class="text-left pb-4">
+            <button class="btn btn-danger btn-light-pink" routerLink="/manager/offre/list"><i
+                    class="fa fa-arrow-left"></i></button>
+        </div>
+        <div class="section-head text-black text-center">
+            <h2 class="text-primary m-b10">Ajouter une offre</h2>
+            <div class="dlab-separator-outer m-b0">
+                <div class="dlab-separator text-primary style-icon">
+                    <i class="flaticon-spa text-primary"></i>
+                </div>
+            </div>
+        </div>
+
+        @if(listeService.length > 0) {
+            <app-offer-form
+                [buttonLabel]="'Ajouter une offre'"
+                [listeService]="listeService"
+                (itemChange)="submit($event)"
+            ></app-offer-form>
+        }
+    </div>
+</div>
