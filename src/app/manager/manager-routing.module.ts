@@ -11,13 +11,15 @@ import { ServiceListComponent } from './routes/service-list/service-list.compone
 import { OfferListComponent } from './routes/offer-list/offer-list.component';
 import { OfferAddComponent } from './routes/offer-add/offer-add.component';
 import { OfferEditComponent } from './routes/offer-edit/offer-edit.component';
+import { DashboardComponent } from './routes/dashboard/dashboard.component';
 
 const routes: Routes = [
     {
         path: '',
         component: LayoutComponent,
         children: [
-            { path: MANAGER_ROUTING.INDEX, component: EmpListComponent, canActivate: [authGuard] },
+            { path: MANAGER_ROUTING.INDEX, component: DashboardComponent, canActivate: [authGuard] },
+            { path: MANAGER_ROUTING.DASHBOARD, component: DashboardComponent, canActivate: [authGuard] },
             { path: MANAGER_ROUTING.LOGIN, component: LoginComponent }
         ],
     },
@@ -47,7 +49,7 @@ const routes: Routes = [
             { path: MANAGER_ROUTING.OFFRE_ADD, component: OfferAddComponent, canActivate: [authGuard] },
             { path: MANAGER_ROUTING.OFFRE_EDIT, component: OfferEditComponent, canActivate: [authGuard] },
         ],
-    },
+    }
 ];
 
 @NgModule({

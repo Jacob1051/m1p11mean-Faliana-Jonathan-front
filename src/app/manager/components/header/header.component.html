@@ -36,6 +36,12 @@
 
                     <ul class="nav navbar-nav">
                         <li routerLinkActive="active" [class.d-block]="user" [class.d-none]="!user">
+                            <a [routerLink]="['/manager/dashboard']" routerLinkActive="active"
+                                >Dashboard
+                            </a>
+                        </li>
+
+                        <li routerLinkActive="active" [class.d-block]="user" [class.d-none]="!user">
                             <a
                                 >Nos employés <i class="fa fa-chevron-down"></i
                             ></a>

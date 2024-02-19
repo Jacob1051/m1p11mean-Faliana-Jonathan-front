@@ -15,6 +15,8 @@ import { OfferListComponent } from './routes/offer-list/offer-list.component';
 import { OfferAddComponent } from './routes/offer-add/offer-add.component';
 import { OfferFormComponent } from './components/offer-form/offer-form.component';
 import { OfferEditComponent } from './routes/offer-edit/offer-edit.component';
+import { DashboardComponent } from './routes/dashboard/dashboard.component';
+import { BarChartComponent } from './components/bar-chart/bar-chart.component';
 
 
 @NgModule({
@@ -30,7 +32,9 @@ import { OfferEditComponent } from './routes/offer-edit/offer-edit.component';
         OfferListComponent,
         OfferAddComponent,
         OfferFormComponent,
-        OfferEditComponent
+        OfferEditComponent,
+        DashboardComponent,
+        BarChartComponent
     ],
     imports: [
         SharedModule,
