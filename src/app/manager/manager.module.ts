@@ -11,6 +11,10 @@ import { ServiceListComponent } from './routes/service-list/service-list.compone
 import { ServiceAddComponent } from './routes/service-add/service-add.component';
 import { ServiceListModalComponent } from './components/service-list-modal/service-list-modal/service-list-modal.component';
 import { SharedModule } from '../shared/shared.module';
+import { OfferListComponent } from './routes/offer-list/offer-list.component';
+import { OfferAddComponent } from './routes/offer-add/offer-add.component';
+import { OfferFormComponent } from './components/offer-form/offer-form.component';
+import { OfferEditComponent } from './routes/offer-edit/offer-edit.component';
 
 
 @NgModule({
@@ -23,6 +27,10 @@ import { SharedModule } from '../shared/shared.module';
         ServiceListComponent,
         ServiceAddComponent,
         ServiceListModalComponent,
+        OfferListComponent,
+        OfferAddComponent,
+        OfferFormComponent,
+        OfferEditComponent
     ],
     imports: [
         SharedModule,

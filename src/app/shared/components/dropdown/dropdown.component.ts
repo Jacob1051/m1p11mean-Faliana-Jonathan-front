@@ -20,11 +20,17 @@ export class DropdownComponent {
 
     @Input('items')
     set items(items: Item[]) {
+        var selected = items.find( (element: any) => ( element.checked == true ));
+
         this._items = items;
         this._items.map(item => {
             item.visible = item.visible || true;
         });
         this.filtered = [...this._items];
+
+        if(selected){
+            this.item = selected;
+        }
     }
 
     filtered: Item[] = [];

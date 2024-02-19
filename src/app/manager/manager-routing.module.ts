@@ -8,6 +8,9 @@ import { EmpListComponent } from './routes/emp-list/emp-list.component';
 import { LoginComponent } from './routes/login/login.component';
 import { ServiceAddComponent } from './routes/service-add/service-add.component';
 import { ServiceListComponent } from './routes/service-list/service-list.component';
+import { OfferListComponent } from './routes/offer-list/offer-list.component';
+import { OfferAddComponent } from './routes/offer-add/offer-add.component';
+import { OfferEditComponent } from './routes/offer-edit/offer-edit.component';
 
 const routes: Routes = [
     {
@@ -34,6 +37,15 @@ const routes: Routes = [
             { path: MANAGER_ROUTING.LISTE_SERVICE, component: ServiceListComponent, canActivate: [authGuard] },
             { path: MANAGER_ROUTING.ADD_SERVICE, component: ServiceAddComponent, canActivate: [authGuard] },
             { path: MANAGER_ROUTING.UPDATE_SERVICE, component: ServiceAddComponent, canActivate: [authGuard] },
+        ],
+    },
+    {
+        path: 'offre',
+        component: LayoutComponent,
+        children: [
+            { path: MANAGER_ROUTING.OFFRE_LIST, component: OfferListComponent, canActivate: [authGuard] },
+            { path: MANAGER_ROUTING.OFFRE_ADD, component: OfferAddComponent, canActivate: [authGuard] },
+            { path: MANAGER_ROUTING.OFFRE_EDIT, component: OfferEditComponent, canActivate: [authGuard] },
         ],
     },
 ];

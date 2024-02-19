@@ -83,6 +83,30 @@
                             </ul>
                         </li>
 
+                        <li routerLinkActive="active" [class.d-block]="user" [class.d-none]="!user">
+                            <a
+                                >Nos Offres <i class="fa fa-chevron-down"></i
+                            ></a>
+                            <ul class="sub-menu">
+                                <li>
+                                    <a
+                                        [routerLink]="['/manager/offre/list']"
+                                        class="dez-page"
+                                        routerLinkActive="active"
+                                        >Liste des offres</a
+                                    >
+                                </li>
+                                <li routerLinkActive="active">
+                                    <a
+                                        [routerLink]="['/manager/offre/add']"
+                                        class="dez-page"
+                                        routerLinkActive="active"
+                                        >Ajouter une offre</a
+                                    >
+                                </li>
+                            </ul>
+                        </li>
+
                         <li [class.d-block]="user" [class.d-none]="!user">
                             <a
                                 ><i class="fa fa-user pe-1"></i> Mon compte
@@ -106,7 +130,7 @@
                                         }}
                                     </b></span
                                 >
-                                
+
                                 <!-- <li>
                                     <a
                                         href="shop-register.html"

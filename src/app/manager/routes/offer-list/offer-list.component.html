@@ -1,0 +1,157 @@
+@if(isLoading){
+    <div id="loading-area"></div>
+}
+
+    <!-- <div class="section-full content-inner-2 bg-white hair-services"> -->
+    <div class="content-inner-2 bg-white hair-services soft-background">
+        <div class="container">
+            <div class="section-head text-black text-center">
+                <h2 class="text-primary m-b10">Liste des offres</h2>
+                <div class="dlab-separator-outer m-b0">
+                    <div class="dlab-separator text-primary style-icon">
+                        <i class="flaticon-spa text-primary"></i>
+                    </div>
+                </div>
+
+                <div class="d-flex align-items-center py-2 justify-content-center">
+                    <input
+                        type="search"
+                        class="form-control"
+                        name=""
+                        id=""
+                        placeholder="Rechercher une offre..."
+                        style="
+                            text-align: center;
+                            border-top: none;
+                            border-left: none;
+                            border-right: none;
+                            max-width: 500px;
+                        "
+                        (input)="searchInsideOfferList()"
+                        [(ngModel)]="searchText"
+                    />
+                    <i class="fa fa-search text-body-tertiary"></i>
+                </div>
+            </div>
+
+            <div class="row d-flex">
+                @if(listeOffre){ @for(offre of listeOffre; track $index){
+                <div class="col-lg-4 col-md-6 col-sm-6 p-lr0">
+                    <div class="icon-bx-wraper center p-a30 h-100">
+                        <div
+                            class="icon-lg radius m-b20 d-flex align-items-center justify-content-center w-100"
+                            style="min-height: 90.5px"
+                        >
+                            <a
+                                routerLink="/manager/offre/edit/{{ offre._id }}"
+                                class="icon-cell"
+                            >
+                                <div class="circledImageContainer">
+                                    <!-- <img
+                                        src="{{ apiUrl }}/Employe/{{
+                                            employee.image
+                                        }}"
+                                        alt=""
+                                        width="84px"
+                                    /> -->
+                                </div>
+                            </a>
+                        </div>
+
+                        <div class="icon-content">
+                            <h5 class="dez-tilte">
+                                <a
+                                    [routerLink]="[
+                                        '/manager/offre/edit',
+                                        offre._id
+                                    ]"
+                                    >{{
+                                        offre.nomOffre
+                                    }}</a
+                                >
+                            </h5>
+                        </div>
+
+                        <!-- <div class="text-right pt-4">
+                            <a routerLink="/manager/emp/edit/{{ employee._id }}">> Modifier l'employé</a>
+                        </div> -->
+
+                        <p class="text-right d-flex gap-2 justify-content-end pt-5">
+                            <button
+                                class="btn btn-danger btn-light-pink"
+                                routerLink="/manager/offre/edit/{{ offre._id }}"
+                            >
+                                <i class="fa fa-edit"></i>
+                            </button>
+                            <button
+                                class="btn btn-danger btn-pink"
+                                style="border-radius: 0"
+                                data-bs-toggle="modal"
+                                [attr.data-bs-target]="
+                                    '#exampleModal' + offre._id
+                                "
+                            >
+                                <i class="fa fa-trash"></i>
+                            </button>
+                        </p>
+                    </div>
+                </div>
+
+                } @for(offre of listeOffre; track $index){
+
+                <div
+                    class="modal fade"
+                    id="exampleModal{{ offre._id }}"
+                    tabindex="-1"
+                    aria-labelledby="exampleModalLabel"
+                    aria-hidden="true"
+                >
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header d-flex align-items-center">
+                                <h1 class="modal-title fs-5" id="exampleModalLabel">
+                                    Suppression d'offre
+                                </h1>
+                                <button
+                                    type="button"
+                                    class="btn-close"
+                                    data-bs-dismiss="modal"
+                                    aria-label="Close"
+                                ></button>
+                            </div>
+                            <div class="modal-body">
+                                Êtes-vous sûr de vouloir supprimer l'offre:
+                                <b class="text-pink"
+                                    >{{ offre.nomOffre }}</b
+                                >
+                                ?
+                            </div>
+                            <div class="modal-footer">
+                                <button
+                                    type="button"
+                                    class="btn btn-secondary"
+                                    data-bs-dismiss="modal"
+                                >
+                                    Fermer
+                                </button>
+                                <button
+                                    type="button"
+                                    class="btn btn-danger btn-pink"
+                                    (click)="deleteOffre(offre._id)"
+                                >
+                                    Supprimer
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                } }@else{
+                <div class="text-center">
+                    <div class="spinner-border" role="status">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                </div>
+                }
+            </div>
+        </div>
+    </div>
