@@ -12,8 +12,8 @@ export class LayoutComponent {
 
     ngOnInit() {
         // console.log(this.router.url);
-        if (this.router.url == "/manager") {
-            this.router.navigateByUrl("/manager/login");
-        }
+        // if (this.router.url == "/manager") {
+        //     this.router.navigateByUrl("/manager/login");
+        // }
     }
 }

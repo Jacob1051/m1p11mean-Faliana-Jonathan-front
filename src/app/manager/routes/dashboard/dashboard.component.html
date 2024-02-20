@@ -1,13 +1,56 @@
-<div class="row">
-    <div class="col-md-6">
-        <p>Temps moyen de travail</p>
+<div class="container-fluid">
+    <div class="row">
 
-        @if(listeEmployeAsItem.length > 0 && tempsMoyen.length > 0) {
-        <app-dropdown [items]="listeEmployeAsItem" [showSearch]="true" [showStatus]="true" [showError]="false"
-            (itemChange)="onItemChange($event)">
-        </app-dropdown>
-        }
-        <app-bar-chart [divName]="'listeEmpDiv'" [categoryName]="'employe'" [data]="tempsMoyen"></app-bar-chart>
+        <div class="col-md-4 container">
+            <div class="content">
+                <p style="text-align: center;">Temps moyen de travail</p>
 
+                @if(listeEmployeAsItem.length > 0 && tempsMoyen.length > 0) {
+                    <app-dropdown [items]="listeEmployeAsItem" [showSearch]="true" [showStatus]="true" [showError]="false"
+                        (itemChange)="onItemChange($event)">
+                    </app-dropdown>
+                }
+
+                <app-bar-chart [divName]="'listeEmpDiv'" [categoryName]="'employe'" [data]="tempsMoyen"></app-bar-chart>
+            </div>
+
+            @if(isLoadingTempsMoyen){
+                <div class="overlay"></div>
+            }
+        </div>
+
+        <div class="col-md-8 container">
+            <div class="content">
+                <p style="text-align: center;">Nb reservation</p>
+
+                    <app-dropdown [items]="choix" [showSearch]="false" [showStatus]="true" [showError]="false"
+                        (itemChange)="OnChoiceItemNbReservationChange($event)">
+                    </app-dropdown>
+                <app-bar-chart [divName]="'nbReservation'" [categoryName]="'label'" [data]="nbReservation"></app-bar-chart>
+            </div>
+
+            @if(isLoadingNbReservation){
+                <div class="overlay"></div>
+            }
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-8 container">
+            <div class="content">
+                <p style="text-align: center;">Chiffre d'affaire</p>
+
+                <app-dropdown [items]="choix" [showSearch]="false" [showStatus]="true" [showError]="false"
+                    (itemChange)="OnChoiceItemRevenueChange($event)">
+                </app-dropdown>
+
+                <app-bar-chart [divName]="'revenue'" [categoryName]="'label'" [data]="revenue"></app-bar-chart>
+            </div>
+
+            @if(isLoadingRevenue){
+                <div class="overlay"></div>
+            }
+        </div>
     </div>
 </div>
+

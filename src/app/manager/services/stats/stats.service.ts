@@ -16,4 +16,20 @@ export class StatsService {
     getTempsMoyenEmploye(id: string) {
         return this.http.get(`${this.apiUrl}/Statistique/getTempsMoyenEmploye/${id}`);
     }
+
+    getRdvReservationParMois(){
+        return this.http.get(`${this.apiUrl}/Statistique/getRdvReservationParMois`);
+    }
+
+    getRdvReservationParJour(){
+        return this.http.get(`${this.apiUrl}/Statistique/getRdvReservationParJour`);
+    }
+
+    getChiffreAffaireParMois(){
+        return this.http.get(`${this.apiUrl}/Statistique/getChiffreAffaireParMois`);
+    }
+
+    getChiffreAffaireParJour(){
+        return this.http.get(`${this.apiUrl}/Statistique/getChiffreAffaireParJour`);
+    }
 }
