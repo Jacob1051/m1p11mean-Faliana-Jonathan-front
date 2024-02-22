@@ -6,6 +6,8 @@ import { Component } from '@angular/core';
     styleUrl: './layout.component.scss',
 })
 export class LayoutComponent {
+    constructor() {}
+
     ngOnInit() {
         // Scrollbar.init(<any>document.querySelector('body'));
     }

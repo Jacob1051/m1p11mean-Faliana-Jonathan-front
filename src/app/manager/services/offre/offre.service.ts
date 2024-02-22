@@ -1,6 +1,5 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Employe } from 'src/app/shared/models/employe';
 import { environment } from 'src/environments/environment.development';
 
 @Injectable({
@@ -31,5 +30,9 @@ export class OffreService {
 
     deleteOffre(id: string) {
         return this.http.delete(`${this.apiUrl}/Offre/deleteOffre/${id}`);
+    }
+
+    getOffreEnCours() {
+        return this.http.get(`${this.apiUrl}/Offre/getOffreEnCours`);
     }
 }

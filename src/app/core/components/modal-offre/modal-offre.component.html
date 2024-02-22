@@ -32,9 +32,7 @@
                 z-index: 20;
             "
         >
-            <div
-                class="modal-header d-flex align-items-center border-radius-0"
-            >
+            <div class="modal-header d-flex align-items-center border-radius-0">
                 <h1 class="modal-title fs-5" id="exampleModalLabel"></h1>
                 <button
                     type="button"
@@ -49,7 +47,7 @@
                     <div class="col-md-6">
                         <img src="/assets/images/offre.webp" alt="" />
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-6 p-4">
                         <h4 class="text-pink">
                             Découvrez notre nouvelle offre !
                         </h4>
@@ -63,15 +61,27 @@
                                 font-family: Nunito;
                             "
                         >
-                            Lorem ipsum dolor sit amet consectetur, adipisicing
-                            elit. Ducimus sit quam nemo, numquam magnam
-                            assumenda hic quia reiciendis ad, exercitationem
-                            praesentium. Esse corrupti maxime maiores explicabo
-                            eius accusamus reprehenderit consectetur.
+                            Du
+                            <span class="text-pink fw-bold">{{
+                                formatDate(offreEnCours?.dateDebut)
+                            }}</span>
+                            au
+                            <span class="text-pink fw-bold">{{
+                                formatDate(offreEnCours?.dateFin)
+                            }}</span>, 
+                            notre service de 
+                            <span class="text-pink fw-bold">"{{
+                                offreEnCours?.service.nomService
+                            }}"</span> 
+                            est disponible avec une remise de seulement 
+                            <span class="text-pink fw-bold">{{
+                                offreEnCours?.remise*100
+                            }}%</span>. 
                         </p>
                         <button
                             class="btn btn-danger btn-light-pink"
                             style="height: 50px"
+                            (click)="goToServices()"
                         >
                             Consulter nos services
                             <i class="fa-solid fa-chevron-right"></i>
