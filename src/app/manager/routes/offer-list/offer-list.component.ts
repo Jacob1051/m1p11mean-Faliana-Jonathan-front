@@ -1,14 +1,16 @@
 import { Component } from '@angular/core';
+import * as moment from 'moment';
+import 'moment-timezone';
 import { ToastrService } from 'ngx-toastr';
+import { TOAST_OPTIONS_BOTTOM_RIGHT } from 'src/app/_utils/toast/toast-options';
+import { LocalTimezoneService } from 'src/app/core/services/localTimezone/local-timezone.service';
 import { environment } from 'src/environments/environment';
 import { OffreService } from '../../services/offre/offre.service';
-import { TOAST_OPTIONS_BOTTOM_RIGHT } from 'src/app/_utils/toast/toast-options';
-import * as moment from 'moment';
 
 @Component({
-  selector: 'app-offer-list',
-  templateUrl: './offer-list.component.html',
-  styleUrl: './offer-list.component.scss'
+    selector: 'app-offer-list',
+    templateUrl: './offer-list.component.html',
+    styleUrl: './offer-list.component.scss',
 })
 export class OfferListComponent {
     searchText: string = '';
@@ -24,8 +26,10 @@ export class OfferListComponent {
 
     searchInsideOfferList() {
         if (this.searchText) {
-            this.listeOffre = this.listeOffre.filter(offre =>
-                offre.nomOffre.toLowerCase().includes(this.searchText.toLowerCase())
+            this.listeOffre = this.listeOffre.filter((offre) =>
+                offre.nomOffre
+                    .toLowerCase()
+                    .includes(this.searchText.toLowerCase())
             );
         } else {
             this.listeOffre = this.listeOffreBackup;
@@ -34,22 +38,25 @@ export class OfferListComponent {
 
     constructor(
         private service: OffreService,
-        private toastr: ToastrService
-    ) {}
+        private toastr: ToastrService,
+        private localTimezoneService: LocalTimezoneService
+    ) {
+        localTimezoneService.setDefaultTimezone();
+    }
 
     ngOnInit(): void {
         this.isLoading = true;
-        this.service.getListeOffre()
-            .subscribe({
-                next: (data: any) => {
-                    this.listeOffre = data.data;
-                    this.listeOffreBackup = this.listeOffre;
-                    this.isLoading = false;
-                }
-            })
-    };
+        this.service.getListeOffre().subscribe({
+            next: (data: any) => {
+                this.listeOffre = data.data;
+                console.log(this.listeOffre);
+                this.listeOffreBackup = this.listeOffre;
+                this.isLoading = false;
+            },
+        });
+    }
 
-    deleteOffre = (id: string) =>{
+    deleteOffre = (id: string) => {
         this.service.deleteOffre(id).subscribe({
             next: (response: any) => {
                 if (response.status == 200) {
@@ -61,14 +68,13 @@ export class OfferListComponent {
                     (<any>window).closeModal();
 
                     this.isLoading = true;
-                    this.service.getListeOffre()
-                        .subscribe({
-                            next: (data: any) => {
-                                this.listeOffre = data.data;
-                                this.listeOffreBackup = this.listeOffre;
-                                this.isLoading = false;
-                            }
-                        })
+                    this.service.getListeOffre().subscribe({
+                        next: (data: any) => {
+                            this.listeOffre = data.data;
+                            this.listeOffreBackup = this.listeOffre;
+                            this.isLoading = false;
+                        },
+                    });
                 } else {
                     console.error(response.message);
                     this.toastr.error(
@@ -89,9 +95,16 @@ export class OfferListComponent {
                 this.isLoading = false;
             },
         });
-    }
+    };
 
     offreStatus(offre: any) {
-        return moment(offre.dateDebut).toDate() <= moment().toDate() && moment().toDate() <= moment(offre.dateFin).toDate();
+        return (
+            moment(offre.dateDebut).toDate() <= moment().toDate() &&
+            moment().toDate() <= moment(offre.dateFin).toDate()
+        );
     }
+    formatDate = (date: Date) => {
+        moment.locale('fr');
+        return moment(date).format('Do-MM-YYYY hh:mm');
+    };
 }
