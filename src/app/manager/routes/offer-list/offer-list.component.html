@@ -56,8 +56,10 @@
 
                     @if(offreStatus(offre)){
                     <span class="badge badge-success">En Cours</span>
-                    } @else{
-                    <span class="badge badge-warning">Termine</span>
+                    } @else if(isProgrammed(offre.dateDebut)){
+                        <span class="badge badge-info">Programmé</span>
+                    } @else {
+                        <span class="badge badge-warning">Termine</span>
                     }
 
                     <div class="py-3">

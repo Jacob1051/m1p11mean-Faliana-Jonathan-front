@@ -107,4 +107,14 @@ export class OfferListComponent {
         moment.locale('fr');
         return moment(date).format('Do-MM-YYYY hh:mm');
     };
+
+    isProgrammed(date:string){
+        let dateToCompare = new Date(date);
+
+        if(dateToCompare>new Date()){
+            return true;
+        }
+        
+        return false;
+    }
 }
