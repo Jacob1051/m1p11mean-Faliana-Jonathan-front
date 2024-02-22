@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { StatsService } from '../../services/stats/stats.service';
-import { EmployeService } from 'src/app/shared/services/employe/employe.service';
-import { Employe } from 'src/app/shared/models/employe';
 import { firstValueFrom } from 'rxjs';
+import { Employe } from 'src/app/shared/models/employe';
 import { Item } from 'src/app/shared/models/multi-dropdown';
+import { EmployeService } from 'src/app/shared/services/employe/employe.service';
+import { StatsService } from '../../services/stats/stats.service';
 
 @Component({
     selector: 'app-dashboard',
@@ -13,7 +13,7 @@ import { Item } from 'src/app/shared/models/multi-dropdown';
 export class DashboardComponent implements OnInit{
     listeEmploye: Employe[] = [];
     listeEmployeAsItem: Item[] = [];
-    choix: Item[] = [{id: 0, name:'Par Mois'}, {id: 1, name:'Par Jouir'}];
+    choix: Item[] = [{id: 0, name:'Par mois'}, {id: 1, name:'Par jour'}];
 
 
     //---------------------loading variable---------------------//
