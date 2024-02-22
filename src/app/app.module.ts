@@ -16,6 +16,7 @@ import { HeaderComponent } from './core/components/header/header.component';
 import { LandingComponent } from './core/components/landing/landing.component';
 import { LayoutComponent } from './core/components/layout/layout.component';
 import { ModalOffreComponent } from './core/components/modal-offre/modal-offre.component';
+import { ModalRappelComponent } from './core/components/modal-rappel/modal-rappel.component';
 import { PaiementComponent } from './core/components/paiement/paiement.component';
 import { ServiceListComponent } from './core/components/service-list/service-list.component';
 import { HistoRdvComponent } from './core/routes/histo-rdv/histo-rdv.component';
@@ -51,7 +52,8 @@ registerLocaleData(localeFr);
         EmpListComponent,
         HistoRdvComponent,
         PaiementComponent,
-        ModalOffreComponent
+        ModalOffreComponent,
+        ModalRappelComponent
     ],
     imports: [
         CommonModule,
