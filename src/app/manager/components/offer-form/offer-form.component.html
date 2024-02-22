@@ -4,54 +4,94 @@
             <div class="max-w500 m-auto m-b30">
                 <div class="p-a30 border-1 seth">
                     <div class="tab-content nav">
-                        <form [formGroup]="offerForm" (ngSubmit)="submit()" class="w-100">
+                        <form
+                            [formGroup]="offerForm"
+                            (ngSubmit)="submit()"
+                            class="w-100"
+                        >
                             <div class="form-group">
                                 <label class="font-weight-700">Nom *</label>
-                                <input id="nom" class="form-control" placeholder="Nom de l'offre" type="text" formControlName="nomOffre" />
-                                    @if(formControl['nomOffre'].touched || submitted){
-                                        @if(formControl['nomOffre'].errors?.['required']){
-                                        <span class="text-danger">Nom requis.</span>
-                                        }
-                                    }
+                                <input
+                                    id="nom"
+                                    class="form-control"
+                                    placeholder="Nom de l'offre"
+                                    type="text"
+                                    formControlName="nomOffre"
+                                />
+                                @if(formControl['nomOffre'].touched ||
+                                submitted){
+                                @if(formControl['nomOffre'].errors?.['required']){
+                                <span class="text-danger">Nom requis.</span>
+                                } }
                             </div>
 
                             <div class="form-group">
                                 <label class="font-weight-700">Service *</label>
                                 <!-- @if(listeService.length < 0){ -->
-                                    <app-dropdown
-                                        [items]="listeService"
-                                        [showSearch]="true"
-                                        [showStatus]="true"
-                                        [showError]="false"
-                                        (itemChange)="onItemServiceChange($event)"
-                                    ></app-dropdown>
+                                <app-dropdown
+                                    [items]="listeService"
+                                    [showSearch]="true"
+                                    [showStatus]="true"
+                                    [showError]="false"
+                                    (itemChange)="onItemServiceChange($event)"
+                                ></app-dropdown>
                                 <!-- } -->
                             </div>
 
                             <div class="form-group">
                                 <label class="font-weight-700">Remise *</label>
-                                <input id="duree" required="" class="form-control" placeholder="Remise en pourcentage" type="number" formControlName="remise" />
+                                <input
+                                    id="duree"
+                                    required=""
+                                    class="form-control"
+                                    placeholder="Remise en pourcentage"
+                                    type="number"
+                                    formControlName="remise"
+                                    max="100"
+                                    min="1"
+                                    step="1"
+                                />
                                 @if(formControl['remise'].touched || submitted){
-                                    @if(formControl['remise'].errors?.['required']){
-                                        <span class="text-danger">Remise requis.</span>
-                                    }
-                                }
+                                @if(formControl['remise'].errors?.['required']){
+                                <span class="text-danger">Remise requis.</span>
+                                } }
                             </div>
                             <div class="form-group">
-                                <label class="font-weight-700">Date Debut</label>
-                                <input id="mdp" required="" class="form-control" type="datetime-local" formControlName="dateDebut" />
+                                <label class="font-weight-700"
+                                    >Date Debut</label
+                                >
+                                <input
+                                    id="mdp"
+                                    required=""
+                                    class="form-control"
+                                    type="datetime-local"
+                                    formControlName="dateDebut"
+                                />
                             </div>
 
                             <div class="form-group">
                                 <label class="font-weight-700">Date Fin</label>
-                                <input id="mdp" required="" class="form-control" type="datetime-local" formControlName="dateFin" />
+                                <input
+                                    id="mdp"
+                                    required=""
+                                    class="form-control"
+                                    type="datetime-local"
+                                    formControlName="dateFin"
+                                />
                             </div>
 
                             <div class="text-left">
-                                <button class="btn btn-danger btn-light-pink p-3" [disabled]="loading"
-                                    type="submit">
-                                    <span class="spinner-border spinner-border-sm" role="status"
-                                        aria-hidden="true" *ngIf="loading && submitted"></span>
+                                <button
+                                    class="btn btn-danger btn-light-pink p-3"
+                                    [disabled]="loading"
+                                    type="submit"
+                                >
+                                    <span
+                                        class="spinner-border spinner-border-sm"
+                                        role="status"
+                                        aria-hidden="true"
+                                        *ngIf="loading && submitted"
+                                    ></span>
                                     {{ buttonLabel }}
                                 </button>
                             </div>

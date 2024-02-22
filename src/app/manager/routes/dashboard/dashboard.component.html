@@ -1,27 +1,91 @@
-<div class="container-fluid">
-    <div class="row">
+<div class="section-full content-inner-2 bg-white hair-services">
+    <div class="container">
 
-        <div class="col-md-4 container">
-            <div class="content">
-                <p style="text-align: center;">Temps moyen de travail</p>
-
-                @if(listeEmployeAsItem.length > 0 && tempsMoyen.length > 0) {
-                <app-dropdown [items]="listeEmployeAsItem" [showSearch]="true" [showStatus]="true" [showError]="false"
-                    (itemChange)="onItemChange($event)">
-                </app-dropdown>
-                }
-
-                <app-bar-chart [divName]="'listeEmpDiv'" [categoryName]="'employe'" [data]="tempsMoyen"></app-bar-chart>
+        <div class="section-head text-black text-center">
+            <h2 class="text-primary m-b10">Tableau de bord</h2>
+            <div class="dlab-separator-outer m-b0">
+                <div class="dlab-separator text-primary style-icon">
+                    <i class="flaticon-spa text-primary"></i>
+                </div>
             </div>
-
-            @if(isLoadingTempsMoyen){
-            <div class="overlay"></div>
-            }
         </div>
 
-        <div class="col-md-8 container">
-            <div class="content">
-                <p style="text-align: center;">Nb reservation</p>
+        <div class="row">
+            <div class="col-md-4 container">
+                <div class="card">
+                    <div class="card-body p-5">
+                        <div class="content">
+                            <h5 class="card-title text-center mb-4">
+                                Temps moyen de travail
+                            </h5>
+
+                            @if(listeEmployeAsItem.length > 0 &&
+                            tempsMoyen.length > 0) {
+                            <app-dropdown
+                                [items]="listeEmployeAsItem"
+                                [showSearch]="true"
+                                [showStatus]="true"
+                                [showError]="false"
+                                (itemChange)="onItemChange($event)"
+                            >
+                            </app-dropdown>
+                            }
+
+                            <app-bar-chart
+                                [divName]="'listeEmpDiv'"
+                                [categoryName]="'employe'"
+                                [data]="tempsMoyen"
+                            ></app-bar-chart>
+                        </div>
+                    </div>
+                </div>
+
+                @if(isLoadingTempsMoyen){
+                <div class="overlay"></div>
+                }
+            </div>
+
+            <div class="col-md-8 container">
+                <div class="card">
+                    <div class="card-body p-5">
+                        <div class="content">
+                            <h5 class="card-title text-center mb-4">
+                                Nombre de réservations
+                            </h5>
+
+                            <app-dropdown
+                                [items]="choix"
+                                [showSearch]="false"
+                                [showStatus]="true"
+                                [showError]="false"
+                                (itemChange)="
+                                    OnChoiceItemNbReservationChange($event)
+                                "
+                            >
+                            </app-dropdown>
+                            <app-bar-chart
+                                [divName]="'nbReservation'"
+                                [categoryName]="'label'"
+                                [data]="nbReservation"
+                            ></app-bar-chart>
+                        </div>
+                    </div>
+                </div>
+
+                @if(isLoadingNbReservation){
+                <div class="overlay"></div>
+                }
+            </div>
+        </div>
+
+        <div class="row py-5">
+            <div class="col-md-8 container">
+                <div class="card">
+                    <div class="card-body p-5">
+                        <div class="content">
+                            <h5 class="card-title text-center mb-4">
+                                Chiffre d'affaire
+                            </h5>
 
                 <app-dropdown [items]="choix" [showSearch]="false" [showStatus]="true" [showError]="false"
                     (itemChange)="OnChoiceItemNbReservationChange($event)">

@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { StatsService } from '../../services/stats/stats.service';
-import { EmployeService } from 'src/app/shared/services/employe/employe.service';
-import { Employe } from 'src/app/shared/models/employe';
 import { firstValueFrom } from 'rxjs';
+import { Employe } from 'src/app/shared/models/employe';
 import { Item } from 'src/app/shared/models/multi-dropdown';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import * as _ from 'lodash';
+import { EmployeService } from 'src/app/shared/services/employe/employe.service';
+import { StatsService } from '../../services/stats/stats.service';
 
 @Component({
     selector: 'app-dashboard',
@@ -15,7 +15,7 @@ import * as _ from 'lodash';
 export class DashboardComponent implements OnInit{
     listeEmploye: Employe[] = [];
     listeEmployeAsItem: Item[] = [];
-    choix: Item[] = [{id: 0, name:'Par Mois'}, {id: 1, name:'Par Jouir'}];
+    choix: Item[] = [{id: 0, name:'Par Mois'}, {id: 1, name:'Par Jour'}];
     beneficeForm!: FormGroup;
 
     monthsArray = [
