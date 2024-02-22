@@ -45,8 +45,6 @@ export class HistoRdvComponent {
                 next: (response: any) => {
                     if(response.status == 200){
                         this.userRDV = response.data;
-
-                        console.log(this.userRDV);
                     }
                     else{
                         console.error(response.message);

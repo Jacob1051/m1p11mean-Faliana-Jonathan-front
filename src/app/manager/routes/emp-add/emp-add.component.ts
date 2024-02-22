@@ -126,12 +126,13 @@ export class EmpAddComponent implements OnInit {
 
     onSubmit() {
         this.submitted = true;
+        var selectedService = this.listItems.filter((item: any) => item.checked);
 
-        if (this.addEmployeForm.valid) {
+        if (this.addEmployeForm.valid && selectedService.length > 0) {
             this.loading = true;
 
             const auth = this.addEmployeForm.value;
-            var selectedService = this.listItems.filter((item: any) => item.checked);
+
 
             if (selectedService.length > 0) {
                 const workHour = this.buildWorkHour(auth);

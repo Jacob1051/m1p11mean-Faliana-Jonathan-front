@@ -43,7 +43,7 @@ export class ModalRappelComponent {
                 next: (response: any) => {
                     if (response.status == 200) {
                         this.userInformation = response.data;
-                        console.log(response.data);
+                        // console.log(response.data);
                         this.getRappelRendezVous(response.data._id);
                     } else {
                         console.error(response.message);
@@ -71,7 +71,7 @@ export class ModalRappelComponent {
             next: (response: any) => {
                 if (response.status == 200) {
                     this.rappelRdv = response.data;
-                    console.log(response.data);
+                    // console.log(response.data);
 
                     response.data ? this.triggerModalRappel() : null;
                 } else {

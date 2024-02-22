@@ -59,6 +59,7 @@
                                             type="number"
                                             formControlName="prix"
                                             step="0.1"
+                                            min="1"
                                         />
                                         @if(formControl['prix'].touched ||
                                         submitted){
@@ -78,6 +79,7 @@
                                             class="form-control"
                                             placeholder="Duree en minute"
                                             type="number"
+                                            min="1"
                                             formControlName="duree"
                                         />
                                         @if(formControl['duree'].touched ||
@@ -100,6 +102,7 @@
                                             type="number"
                                             formControlName="commission"
                                             step="0.1"
+                                            min="1"
                                         />
                                         @if(formControl['commission'].touched ||
                                         submitted){

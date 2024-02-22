@@ -371,6 +371,7 @@ export class TakerdvComponent implements OnInit {
 
         const rdv = {
             client: clientId.user_id,
+            clientEmail: clientId.email,
             dateDebutRdv: this.listeTache[0].dateDebut,
             dateFinRdv: this.listeTache[this.listeTache.length -1].dateFin,
             listeTaches: this.listeTache.map((data:any)=> ({
@@ -413,14 +414,12 @@ export class TakerdvComponent implements OnInit {
     }
 
     enleverTache(indexTache:any){
-        // console.log("hello", indexTache);
         this.listeTache = this.listeTache.filter((element:any, index:any)=>{
             return index != indexTache
         });
     }
 
     onSubmitPayement() {
-        // console.log(this.paiementForm.value);
         this.validerRDV();
     }
 }
