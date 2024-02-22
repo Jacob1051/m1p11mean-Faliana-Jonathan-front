@@ -6,16 +6,16 @@
                 <p style="text-align: center;">Temps moyen de travail</p>
 
                 @if(listeEmployeAsItem.length > 0 && tempsMoyen.length > 0) {
-                    <app-dropdown [items]="listeEmployeAsItem" [showSearch]="true" [showStatus]="true" [showError]="false"
-                        (itemChange)="onItemChange($event)">
-                    </app-dropdown>
+                <app-dropdown [items]="listeEmployeAsItem" [showSearch]="true" [showStatus]="true" [showError]="false"
+                    (itemChange)="onItemChange($event)">
+                </app-dropdown>
                 }
 
                 <app-bar-chart [divName]="'listeEmpDiv'" [categoryName]="'employe'" [data]="tempsMoyen"></app-bar-chart>
             </div>
 
             @if(isLoadingTempsMoyen){
-                <div class="overlay"></div>
+            <div class="overlay"></div>
             }
         </div>
 
@@ -23,14 +23,15 @@
             <div class="content">
                 <p style="text-align: center;">Nb reservation</p>
 
-                    <app-dropdown [items]="choix" [showSearch]="false" [showStatus]="true" [showError]="false"
-                        (itemChange)="OnChoiceItemNbReservationChange($event)">
-                    </app-dropdown>
-                <app-bar-chart [divName]="'nbReservation'" [categoryName]="'label'" [data]="nbReservation"></app-bar-chart>
+                <app-dropdown [items]="choix" [showSearch]="false" [showStatus]="true" [showError]="false"
+                    (itemChange)="OnChoiceItemNbReservationChange($event)">
+                </app-dropdown>
+                <app-bar-chart [divName]="'nbReservation'" [categoryName]="'label'"
+                    [data]="nbReservation"></app-bar-chart>
             </div>
 
             @if(isLoadingNbReservation){
-                <div class="overlay"></div>
+            <div class="overlay"></div>
             }
         </div>
     </div>
@@ -48,9 +49,44 @@
             </div>
 
             @if(isLoadingRevenue){
-                <div class="overlay"></div>
+            <div class="overlay"></div>
+            }
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-8 container">
+            <div class="content">
+                <p style="text-align: center;">Bénéfice</p>
+
+                <form [formGroup]="beneficeForm" (ngSubmit)="onSubmitBeneficeForm()">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <select class="form-control" formControlName="month" (change)="testChange($event)">
+                                <option *ngFor="let month of monthsArray" [ngValue]="month">
+                                    {{ month.name }}
+                                </option>
+                            </select>
+                        </div>
+                        <input type="number" step="0.1" class="form-control" placeholder="Salaire" title="Salaire" formControlName="salary">
+                        <input type="number" step="0.1" class="form-control" placeholder="Loyer" title="Loyer" formControlName="rent">
+                        <input type="number" step="0.1" class="form-control" placeholder="Pieces" title="Pieces" formControlName="pieces">
+                        <input type="number" step="0.1" class="form-control" placeholder="Autres" title="Autres" formControlName="other">
+                        <div class="input-group-prepend">
+                            <button class="btn btn-primary" type="submit">Valider</button>
+                        </div>
+                        <div class="input-group-prepend">
+                            <button class="btn btn-primary" type="button" (click)="resetBenefice()">Reunitialiser</button>
+                        </div>
+                    </div>
+                </form>
+
+                <app-bar-chart [divName]="'benefice'" [categoryName]="'label'" [data]="benefice"></app-bar-chart>
+            </div>
+
+            @if(isLoadingRevenue){
+            <div class="overlay"></div>
             }
         </div>
     </div>
 </div>
-
