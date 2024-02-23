@@ -2,8 +2,13 @@
 <div id="loading-area"></div>
 }
 
-<div class="section-full content-inner-2 bg-white hair-services">
+<div class="section-full content-inner-2 bg-white hair-services soft-background" style="min-height:100vh">
     <div class="container">
+        <div class="text-left pb-4">
+            <button class="btn btn-danger btn-light-pink" routerLink="/takerdv">
+                <i class="fa fa-arrow-left"></i>
+            </button>
+        </div>
         <div class="section-head text-black text-center">
             <h2 class="text-primary m-b10">Mes historiques de rendez-vous</h2>
             <div class="dlab-separator-outer m-b0">
@@ -29,53 +34,89 @@
                     </thead>
                     <tbody>
                         @for(rdv of userRDV; track $index){
-                            @if(rdv.listeTaches.length > 0){
-                                <tr>
-                                    <!-- <th [attr.rowspan]="rdv.listeTaches.length">{{rdv.dateDebutRdv | date : "dd-MM-YYYY hh:mm"}} - {{rdv.dateFinRdv | date : "dd-MM-YYYY hh:mm"}}</th>
+                        @if(rdv.listeTaches.length > 0){
+                        <tr>
+                            <!-- <th [attr.rowspan]="rdv.listeTaches.length">{{rdv.dateDebutRdv | date : "dd-MM-YYYY hh:mm"}} - {{rdv.dateFinRdv | date : "dd-MM-YYYY hh:mm"}}</th>
                                     <td>{{rdv.listeTaches[0].service.nomService}}</td>
                                     <td>{{rdv.listeTaches[0].employe.nomEmploye+' '+rdv.listeTaches[0].employe.prenomEmploye}}</td>
                                     <td>{{rdv.listeTaches[0].dateDebut | date : "dd-MM-YYYY hh:mm" +' - '+(rdv.listeTaches[0].dateFin | date : "dd-MM-YYYY hh:mm")}}</td>
                                     <td>{{rdv.listeTaches[0].service.prix}}</td>
                                     <td>{{rdv.listeTaches[0].statut.nomStatut}}</td> -->
-                                    <th [attr.rowspan]="rdv.listeTaches.length">{{ formatDate(rdv.dateDebutRdv) }} - {{ formatDate(rdv.dateFinRdv)}}</th>
-                                    <td>{{rdv.listeTaches[0].service.nomService}}</td>
-                                    <td>{{rdv.listeTaches[0].employe.nomEmploye+' '+ rdv.listeTaches[0].employe.prenomEmploye}}</td>
-                                    <td>{{ formatDate(rdv.listeTaches[0].dateDebut) +' - '+(formatDate(rdv.listeTaches[0].dateFin) )}}</td>
-                                    @if(rdv.listeTaches[0].prix != rdv.listeTaches[0].prixAvantRemise){
-                                        <td>
-                                            <span style="text-decoration: line-through;"> {{rdv.listeTaches[0].prixAvantRemise}} </span> |
-                                            <span style="font-size: larger;">{{rdv.listeTaches[0].prix}}</span>
-                                        </td>
-                                    }@else{
-                                        <td>
-                                            {{rdv.listeTaches[0].prix}}
-                                        </td>
-                                    }
-                                    <td>{{rdv.listeTaches[0].statut.nomStatut}}</td>
-                                </tr>
-                                @for(tache of rdv.listeTaches; track $index){
-                                    @if($index>0){
-                                        <tr>
-                                            <td>{{tache.service.nomService}}</td>
-                                            <td>{{tache.employe.nomEmploye+' '+tache.employe.prenomEmploye}}</td>
-                                            <td>{{ formatDate(tache.dateDebut) +' - '+( formatDate(tache.dateFin) )}}</td>
-
-                                            @if(rdv.listeTaches[0].prix != rdv.listeTaches[0].prixAvantRemise){
-                                                <td>
-                                                    <span style="text-decoration: line-through;"> {{tache.prixAvantRemise}} </span> |
-                                                    <span style="font-size: larger;">{{tache.prix}}</span>
-                                                </td>
-                                            }@else{
-                                                <td>
-                                                    {{tache.prix}}
-                                                </td>
-                                            }
-                                            <td>{{tache.statut.nomStatut}}</td>
-                                        </tr>
-                                    }
-                                }
+                            <th [attr.rowspan]="rdv.listeTaches.length">
+                                {{ formatDate(rdv.dateDebutRdv) }} -
+                                {{ formatDate(rdv.dateFinRdv) }}
+                            </th>
+                            <td>{{ rdv.listeTaches[0].service.nomService }}</td>
+                            <td>
+                                {{
+                                    rdv.listeTaches[0].employe.nomEmploye +
+                                        " " +
+                                        rdv.listeTaches[0].employe.prenomEmploye
+                                }}
+                            </td>
+                            <td>
+                                {{
+                                    formatDate(rdv.listeTaches[0].dateDebut) +
+                                        " - " +
+                                        formatDate(rdv.listeTaches[0].dateFin)
+                                }}
+                            </td>
+                            @if(rdv.listeTaches[0].prix !=
+                            rdv.listeTaches[0].prixAvantRemise){
+                            <td>
+                                <span style="text-decoration: line-through">
+                                    {{ rdv.listeTaches[0].prixAvantRemise }}
+                                </span>
+                                |
+                                <span style="font-size: larger">{{
+                                    rdv.listeTaches[0].prix
+                                }}</span>
+                            </td>
+                            }@else{
+                            <td>
+                                {{ rdv.listeTaches[0].prix }}
+                            </td>
                             }
-                        }
+                            <td>{{ rdv.listeTaches[0].statut.nomStatut }}</td>
+                        </tr>
+                        @for(tache of rdv.listeTaches; track $index){
+                        @if($index>0){
+                        <tr>
+                            <td>{{ tache.service.nomService }}</td>
+                            <td>
+                                {{
+                                    tache.employe.nomEmploye +
+                                        " " +
+                                        tache.employe.prenomEmploye
+                                }}
+                            </td>
+                            <td>
+                                {{
+                                    formatDate(tache.dateDebut) +
+                                        " - " +
+                                        formatDate(tache.dateFin)
+                                }}
+                            </td>
+
+                            @if(rdv.listeTaches[0].prix !=
+                            rdv.listeTaches[0].prixAvantRemise){
+                            <td>
+                                <span style="text-decoration: line-through">
+                                    {{ tache.prixAvantRemise }}
+                                </span>
+                                |
+                                <span style="font-size: larger">{{
+                                    tache.prix
+                                }}</span>
+                            </td>
+                            }@else{
+                            <td>
+                                {{ tache.prix }}
+                            </td>
+                            }
+                            <td>{{ tache.statut.nomStatut }}</td>
+                        </tr>
+                        } } } }
                     </tbody>
                 </table>
             </div>
