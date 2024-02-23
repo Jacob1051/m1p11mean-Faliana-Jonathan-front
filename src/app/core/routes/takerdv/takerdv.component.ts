@@ -171,7 +171,7 @@ export class TakerdvComponent implements OnInit {
     };
 
     changerListeEmployeDispo = () => {
-        // if (this.tacheForm.value.service) {
+        if (this.currentSelectedItem) {
         // console.log("ok?")
 
         // this.listeEmployeDispo = this.listeEmploye.filter((employe) => {
@@ -214,6 +214,7 @@ export class TakerdvComponent implements OnInit {
         // }
 
         // this.tacheForm.value.employe = null; //Il faut reset la valeur sinon faut cliquer 2 fois
+        }
     };
 
     is2DateOverlap(start1: Date, end1: Date, start2: Date, end2: Date) {
