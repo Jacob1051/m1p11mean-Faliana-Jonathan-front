@@ -91,7 +91,10 @@
                             class="text-pink"
                             routerLink="/service/{{ service._id }}"
                         > -->
-                            <p class="text-pink text-right" (click)="onClick(service)">> Sélectionner</p>
+                            <!-- <p class="text-pink text-right" (click)="onClick(service)">> Sélectionner</p> -->
+                            <div class="text-right">
+                                <button class="btn btn-danger btn-light-pink" (click)="onClick(service)">Sélectionner <i class="fa-solid fa-chevron-right"></i></button>
+                            </div>
                         <!-- </a> -->
                     </div>
                 </div>

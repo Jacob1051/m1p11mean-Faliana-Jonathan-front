@@ -33,8 +33,15 @@
                     class="header-nav navbar-collapse collapse justify-content-end"
                     id="navbarNavDropdown"
                 >
+
                     <ul class="nav navbar-nav">
-                        <li routerLinkActive="active">
+                        <li routerLinkActive="active" [class.d-block]="user" [class.d-none]="!user">
+                            <a [routerLink]="['/manager/dashboard']" routerLinkActive="active"
+                                >Tableau de bord
+                            </a>
+                        </li>
+
+                        <li routerLinkActive="active" [class.d-block]="user" [class.d-none]="!user">
                             <a
                                 >Nos employés <i class="fa fa-chevron-down"></i
                             ></a>
@@ -58,7 +65,7 @@
                             </ul>
                         </li>
 
-                        <li routerLinkActive="active">
+                        <li routerLinkActive="active" [class.d-block]="user" [class.d-none]="!user">
                             <a
                                 >Nos Services <i class="fa fa-chevron-down"></i
                             ></a>
@@ -82,6 +89,30 @@
                             </ul>
                         </li>
 
+                        <li routerLinkActive="active" [class.d-block]="user" [class.d-none]="!user">
+                            <a
+                                >Nos Offres <i class="fa fa-chevron-down"></i
+                            ></a>
+                            <ul class="sub-menu">
+                                <li>
+                                    <a
+                                        [routerLink]="['/manager/offre/list']"
+                                        class="dez-page"
+                                        routerLinkActive="active"
+                                        >Liste des offres</a
+                                    >
+                                </li>
+                                <li routerLinkActive="active">
+                                    <a
+                                        [routerLink]="['/manager/offre/add']"
+                                        class="dez-page"
+                                        routerLinkActive="active"
+                                        >Ajouter une offre</a
+                                    >
+                                </li>
+                            </ul>
+                        </li>
+
                         <li [class.d-block]="user" [class.d-none]="!user">
                             <a
                                 ><i class="fa fa-user pe-1"></i> Mon compte
@@ -93,35 +124,27 @@
                                     <b class="text-pink"
                                         ><span class="text-uppercase">
                                             {{
-                                                user && user.role == "Client"
-                                                    ? userInformation?.nomClient
+                                                user && user.role == "Manager"
+                                                    ? userInformation?.nomManager
                                                     : ""
                                             }}
                                         </span>
                                         {{
-                                            user && user.role == "Client"
-                                                ? userInformation?.prenomClient
+                                            user && user.role == "Manager"
+                                                ? userInformation?.prenomManager
                                                 : ""
                                         }}
                                     </b></span
                                 >
-                                <li>
-                                    <a href="shop-columns.html" class="dez-page"
-                                        >Shop Columns</a
-                                    >
-                                </li>
-                                <li>
-                                    <a href="shop-login.html" class="dez-page"
-                                        >Shop Login</a
-                                    >
-                                </li>
-                                <li>
+
+                                <!-- <li>
                                     <a
                                         href="shop-register.html"
                                         class="dez-page"
                                         >Shop Register</a
                                     >
-                                </li>
+                                </li> -->
+
                                 <li role="button">
                                     <a
                                         (click)="logout()"

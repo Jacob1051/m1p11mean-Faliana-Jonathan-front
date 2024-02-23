@@ -7,13 +7,13 @@ import { Router } from '@angular/router';
     styleUrl: './layout.component.scss',
 })
 export class LayoutComponent {
-  constructor(private router: Router){
-  }
-
-  ngOnInit(){
-    // console.log(this.router.url);
-    if(this.router.url == "/manager"){
-      this.router.navigateByUrl("/manager/login");
+    constructor(private router: Router) {
     }
-  }
+
+    ngOnInit() {
+        // console.log(this.router.url);
+        // if (this.router.url == "/manager") {
+        //     this.router.navigateByUrl("/manager/login");
+        // }
+    }
 }

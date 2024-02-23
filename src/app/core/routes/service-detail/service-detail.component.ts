@@ -34,7 +34,6 @@ export class ServiceDetailComponent {
                 next: (response: any) => {
                     if (response.status == 200) {
                         this.service = response.data;
-                        console.log(response.data);
                     } else {
                         console.error(response.message);
                         this.toastr.error(

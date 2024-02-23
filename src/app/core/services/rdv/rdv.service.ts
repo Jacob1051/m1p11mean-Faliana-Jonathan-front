@@ -16,4 +16,8 @@ export class RdvService {
     addRendezvous(rdvData: any) {
         return this.http.post(`${this.apiUrl}/Rendezvous/addRendezvous/`, rdvData);
     }
+
+    getListeRdvParClient(idClient: any) {
+        return this.http.get(`${this.apiUrl}/Rendezvous/getListeRdvParClient/${idClient}`);
+    }
 }

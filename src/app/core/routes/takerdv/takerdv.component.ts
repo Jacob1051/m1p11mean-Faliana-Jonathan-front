@@ -5,6 +5,7 @@ import {
     FormGroup,
     Validators,
 } from '@angular/forms';
+import { Router } from '@angular/router';
 import * as moment from 'moment';
 import 'moment-timezone';
 import { ToastrService } from 'ngx-toastr';
@@ -19,12 +20,11 @@ import { Service } from 'src/app/shared/models/service';
 import { Statut } from 'src/app/shared/models/statut';
 import { environment } from 'src/environments/environment';
 import { EmployeService } from '../../../shared/services/employe/employe.service';
-import { LocalTimezoneService } from '../../services/localTimezone/local-timezone.service';
-import { ServiceService } from '../../services/service/service.service';
 import { StatutService } from '../../../shared/services/statut/statut.service';
 import { AuthService } from '../../services/client/auth/auth.service';
+import { LocalTimezoneService } from '../../services/localTimezone/local-timezone.service';
 import { RdvService } from '../../services/rdv/rdv.service';
-import { Router } from '@angular/router';
+import { ServiceService } from '../../services/service/service.service';
 
 @Component({
     selector: 'app-takerdv',
@@ -35,6 +35,10 @@ export class TakerdvComponent implements OnInit {
 
     currentSelectedItem!: Item;
     currentSelectedEmpItem!: Item;
+
+    total: number = 0;
+
+    paiementForm!: FormGroup;
 
     constructor(
         private serviceService: ServiceService,
@@ -54,6 +58,14 @@ export class TakerdvComponent implements OnInit {
         this.getListeService();
         this.getListeEmploye();
         this.getStatutEnCours();
+
+
+        this.paiementForm = new FormGroup({
+            nomSurCarte: new FormControl('', Validators.required),
+            numeroCarte: new FormControl('0000-0000-0000-0000', [Validators.required, Validators.pattern(/^(?:\d{4}-){3}\d{4}$/)]),
+            cvv: new FormControl('123', [Validators.required, Validators.pattern(/^\d{3}$/)]),
+            dateExpiration: new FormControl('', [Validators.required, Validators.pattern(/^(0[1-9]|1[0-2])\/([0-9]{2})$/)]),
+        });
     }
 
     onItemChange(item: Item): void {
@@ -100,75 +112,62 @@ export class TakerdvComponent implements OnInit {
     tacheFormSubmit = () => {
         this.isSubmitted = true;
 
-        // if (this.tacheForm.valid) {
+        if (this.currentSelectedItem && this.currentSelectedEmpItem) {
 
-        let dateDebut = new Date(
-            this.tacheForm.value.dateDebut
-                ? this.tacheForm.value.dateDebut
-                : ''
-        );
+            let dateDebut = new Date(
+                this.tacheForm.value.dateDebut
+                    ? this.tacheForm.value.dateDebut
+                    : ''
+            );
 
-        // let service: Service | undefined = this.listeServiceBackup.find(
-        //     (element) => {
-        //         return this.tacheForm.value.service == element._id;
-        //     }
-        // );
-        // // console.log(service);
+            let service: Service = this.currentSelectedItem.data;
+            let employe: Employe = this.currentSelectedEmpItem.data;
 
-        // let employe: Employe | undefined = this.listeEmploye.find(
-        //     (element) => {
-        //         return this.tacheForm.value.employe == element._id;
-        //     }
-        // );
+            let dateFin = addDureeToDate(
+                dateDebut,
+                service ? service.duree : 0
+            );
 
-        let service: Service = this.currentSelectedItem.data;
+            let newTache = {
+                dateDebut: dateDebut,
+                dateFin: dateFin,
+                employe: employe,
+                service: service,
+                isDeleted: false,
+                statut: this.statutEnCours,
+            };
 
-        let employe: Employe = this.currentSelectedEmpItem.data;
+            this.listeTache.push(newTache);
+            this.tacheForm.reset();
 
-        let dateFin = addDureeToDate(
-            dateDebut,
-            service ? service.duree : 0
-        );
+            // Trier le tableau d'objets par dateDebut
+            this.listeTache.sort((a: any, b: any) => {
+                const dateA = new Date(a.dateDebut);
+                const dateB = new Date(b.dateDebut);
+                return dateA.getTime() - dateB.getTime();
+            });
 
-        let newTache = {
-            dateDebut: dateDebut,
-            dateFin: dateFin,
-            employe: employe,
-            service: service,
-            isDeleted: false,
-            statut: this.statutEnCours,
-        };
-
-        // console.log('new tache:', newTache);
-
-        this.listeTache.push(newTache);
-        this.tacheForm.reset();
-
-        // Trier le tableau d'objets par dateDebut
-        this.listeTache.sort((a: any, b: any) => {
-            const dateA = new Date(a.dateDebut);
-            const dateB = new Date(b.dateDebut);
-            return dateA.getTime() - dateB.getTime();
-        });
-        this.rdvForm = new FormGroup({
-            dateRdv: new FormControl(
-                moment(this.listeTache[0].dateDebut).format(
-                    'YYYY-MM-DD HH:mm'
+            this.rdvForm = new FormGroup({
+                dateRdv: new FormControl(
+                    moment(this.listeTache[0].dateDebut).format(
+                        'YYYY-MM-DD HH:mm'
+                    ),
+                    Validators.required
                 ),
-                Validators.required
-            ),
-        });
+            });
 
-        // Filtrer les services à retirer de listeService
-        let servicesToRemove = this.listeTache.map((tache: any) => {
-            return tache.service._id;
-        });
-        this.listeService = this.listeService.filter((service) => {
-            return !servicesToRemove.includes(service._id);
-        });
+            // Filtrer les services à retirer de listeService
+            let servicesToRemove = this.listeTache.map((tache: any) => {
+                return tache.service._id;
+            });
+            this.listeService = this.listeService.filter((service) => {
+                return !servicesToRemove.includes(service._id);
+            });
 
-        (<any>window).closeModal();
-        // }
+            this.total = this.listeTache.reduce((total: any, value: any) => total += value.service.prix, 0);
+
+            (<any>window).closeModal();
+        }
     };
 
     changerListeEmployeDispo = () => {
@@ -186,8 +185,9 @@ export class TakerdvComponent implements OnInit {
         // });
 
         // this.isLoading = true;
+        const dateHeureDebut = new Date(this.tacheForm.value.dateDebut);
 
-        this.employeService.getListeEmployeLibre({ idService: this.currentSelectedItem.data._id, dateHeureDebut: new Date(this.tacheForm.value.dateDebut) })
+        this.employeService.getListeEmployeLibre({ idService: this.currentSelectedItem.data._id, dateHeureDebut: dateHeureDebut })
             .subscribe({
                 next: (response: any) => {
                     const dateDeb = moment(this.tacheForm.value.dateDebut, 'YYYY-MM-DD HH:mm');
@@ -196,6 +196,10 @@ export class TakerdvComponent implements OnInit {
                     var listeEmploye = response.data;
 
                     listeEmploye = listeEmploye.filter((emp: any) => (!this.checkIfOverlap(emp, this.currentSelectedItem.data, dateDeb.toDate(), dateFin.toDate())));
+
+                    listeEmploye = listeEmploye.filter((emp: any) => (
+                        !emp.taches.some((task: any) => new Date(task.dateDebut) < dateHeureDebut && new Date(task.dateFin) > dateHeureDebut)
+                    ))
 
                     this.listeEmployeAsItem = listeEmploye.map(
                         (employe: Employe) => (
@@ -365,13 +369,17 @@ export class TakerdvComponent implements OnInit {
     };
 
     validerRDV() {
+        this.isSubmitted = true;
+        this.loading = true;
+
         const clientId = this.authService.userValue;
 
         const rdv = {
             client: clientId.user_id,
+            clientEmail: clientId.email,
             dateDebutRdv: this.listeTache[0].dateDebut,
-            dateFinRdv: this.listeTache[this.listeTache.length -1].dateFin,
-            listeTaches: this.listeTache.map((data:any)=> ({
+            dateFinRdv: this.listeTache[this.listeTache.length - 1].dateFin,
+            listeTaches: this.listeTache.map((data: any) => ({
                 dateDebut: data.dateDebut,
                 dateFin: data.dateFin,
                 employe: data.employe._id,
@@ -380,25 +388,43 @@ export class TakerdvComponent implements OnInit {
                 statut: data.statut._id,
                 isDeleted: false
             })),
+            paiement: {
+                ...this.paiementForm.value,
+                montant: this.total
+            },
             isDeleted: false,
         };
 
         this.rdvService.addRendezvous(rdv)
-        .subscribe({
-            next: (response: any) => {
-                if(response.status==200){
-                    this.toastr.success('Vous vous êtes connecté avec succès!', 'Succès!',  TOAST_OPTIONS_BOTTOM_RIGHT);
-                    this.router.navigateByUrl('/takerdv');
-                }else{
-                    this.toastr.error(`Une erreur s'est produite!`, 'Erreur!', TOAST_OPTIONS_BOTTOM_RIGHT);
-                }
-                this.loading = false;
-            },
-            error: (error) => {
-                this.loading = false;
-                console.error(error);
-                this.toastr.error(`Une erreur s'est produite`, 'Erreur!', TOAST_OPTIONS_BOTTOM_RIGHT);
-            },
+            .subscribe({
+                next: (response: any) => {
+                    if (response.status == 200) {
+                        this.toastr.success('Votre rendez-vous a été enregistré!', 'Succès!', TOAST_OPTIONS_BOTTOM_RIGHT);
+
+                        (<any>window).closeModal();
+                        this.router.navigateByUrl('/histoRdv');
+                    } else {
+                        this.toastr.error(`Une erreur s'est produite!`, 'Erreur!', TOAST_OPTIONS_BOTTOM_RIGHT);
+                    }
+                    this.isSubmitted = false;
+                    this.loading = false;
+                },
+                error: (error) => {
+                    this.isSubmitted = false;
+                    this.loading = false;
+                    console.error(error);
+                    this.toastr.error(`Une erreur s'est produite`, 'Erreur!', TOAST_OPTIONS_BOTTOM_RIGHT);
+                },
+            });
+    }
+
+    enleverTache(indexTache: any) {
+        this.listeTache = this.listeTache.filter((element: any, index: any) => {
+            return index != indexTache
         });
+    }
+
+    onSubmitPayement() {
+        this.validerRDV();
     }
 }

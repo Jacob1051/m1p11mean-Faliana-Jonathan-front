@@ -10,7 +10,7 @@
     aria-labelledby="exampleModalLabel"
     aria-hidden="true"
 >
-    <div class="modal-dialog modal-dialog-centered modal-xl">
+    <div class="modal-dialog modal-dialog-centered modal-xl modalChoixService">
         <div class="modal-content">
             <div class="modal-header d-flex align-items-center">
                 <h1 class="modal-title fs-5" id="exampleModalLabel">
@@ -42,7 +42,7 @@
     aria-labelledby="exampleModalLabel"
     aria-hidden="true"
 >
-    <div class="modal-dialog modal-dialog-centered modal-xl">
+    <div class="modal-dialog modal-dialog-centered modal-xl modalChoixService">
         <div class="modal-content">
             <div class="modal-header d-flex align-items-center">
                 <h1 class="modal-title fs-5" id="exampleModalLabel">
@@ -78,8 +78,8 @@
         </div>
 
         <div class="row">
-            <div class="col-md-6 m-b30 m-auto">
-                <div class="tab-content">Service préféré</div>
+            <div class="col-md-6">
+                <div class="tab-content pb-5">Service préféré</div>
 
                 @if(!preferedService){
                 <div class="card" style="width: 15rem">
@@ -164,11 +164,11 @@
 
                         <button
                             type="button"
-                            class="btn btn-info"
+                            class="btn btn-danger btn-light-pink"
                             data-bs-toggle="modal"
                             data-bs-target="#modalService"
                         >
-                        Modifier
+                        <i class="fa fa-edit"></i> Modifier
                         </button>
                     </div>
                 </div>
@@ -176,8 +176,8 @@
                 }
             </div>
 
-            <div class="col-md-6 m-b30 m-auto">
-                <div class="tab-content">Employé préféré</div>
+            <div class="col-md-6">
+                <div class="tab-content pb-5">Employé préféré</div>
 
                 @if(!preferedEmploye){
 
@@ -211,9 +211,20 @@
                         class="icon-lg radius m-b20 d-flex align-items-center justify-content-center w-100"
                         style="min-height: 90.5px"
                     >
-                        <a routerLink="" class="icon-cell">
-                            <img src="" alt="" width="84px"
-                        /></a>
+                        <a
+                            role="button"
+                            class="icon-cell"
+                        >
+                            <div class="circledImageContainer">
+                                <img
+                                    src="{{ apiUrl }}/Employe/{{
+                                        preferedEmploye.image
+                                    }}"
+                                    alt=""
+                                    width="84px"
+                                />
+                            </div>
+                        </a>
                     </div>
 
                     <div class="icon-content">
@@ -227,11 +238,11 @@
                     </div>
                     <button
                             type="button"
-                            class="btn btn-info"
+                            class="btn btn-danger btn-light-pink"
                             data-bs-toggle="modal"
                             data-bs-target="#modalEmploye"
                         >
-                        Modifier
+                        <i class="fa fa-edit"></i> Modifier
                         </button>
 
                 </div>
@@ -241,8 +252,8 @@
         </div>
 
         @if(preferedEmploye || preferedService){
-        <div class="row">
-            <div class="text-center pt-5">
+        <div class="row pt-5">
+            <div class="col-md-12 pt-5 text-center">
                 <button
                     class="site-button button-lg radius-no outline outline-2"
                     (click)="savePreference()"

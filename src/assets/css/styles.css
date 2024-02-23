@@ -119,3 +119,31 @@
 .seth{
     background: white;
 }
+
+#navbarNavDropdown ul.nav.navbar-nav li:has(button.btn.btn-danger.btn-light-pink){
+    min-height: 82.5px;
+}
+
+.modalChoixService{
+    margin-top: 100px !important;
+}
+
+.modalPaiement{
+    max-height: calc(70vh - 82.5px);
+    overflow: auto;
+}
+
+.modalPopup{
+
+}
+
+.modalPopup .modal-header,
+.modalPopup .modal-footer,
+.modalPopup .modal-content{
+    border-radius: 0;
+    border: 0;
+}
+
+.modalPopup .modal-header{
+    background-color: transparent;
+}

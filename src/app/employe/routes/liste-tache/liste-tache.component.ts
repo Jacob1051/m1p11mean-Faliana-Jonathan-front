@@ -20,17 +20,19 @@ export class ListeTacheComponent implements OnInit {
     statutEnCours!: any;
     statutTermine!: any;
 
+    commission: number = 0;
+
     constructor(
         private tacheService: TacheService,
         private authService: AuthService,
         private toastr: ToastrService,
         private statutService: StatutService
-    ) { }
+    ) {
+        this.setStatutEnCours();
+    }
 
     ngOnInit(): void {
         this.isLoading = true;
-
-        this.setStatutEnCours();
 
         this.tacheService.getTacheByEmpToday(this.authService.userValue.user_id).subscribe({
             next: (response: any) => {
@@ -43,6 +45,8 @@ export class ListeTacheComponent implements OnInit {
                     this.finishedTask = response.data.filter((task: any) => (
                         task.statut._id != this.statutEnCours._id
                     ));
+
+                    this.commission = this.finishedTask.reduce((total ,value)=>total += (value.prix * (value.service.commission / 100)), 0);
 
                 } else {
                     console.error(response.message);
@@ -84,13 +88,15 @@ export class ListeTacheComponent implements OnInit {
                 event.previousIndex,
                 event.currentIndex,
             );
+            this.commission = this.finishedTask.reduce((total ,value)=>total += (value.prix * (value.service.commission / 100)), 0);
         }
     }
 
     saveTodayWork() {
         this.isLoading = true;
 
-        this.tacheService.updateTache({listeTache: this.finishedTask}, this.authService.userValue.token)
+        if(this.finishedTask.length > 0){
+            this.tacheService.updateTache({listeTache: this.finishedTask}, this.authService.userValue.token)
             .subscribe({
                 next: (response: any) => {
                     if (response.status == 200) {
@@ -119,5 +125,6 @@ export class ListeTacheComponent implements OnInit {
                     this.isLoading = false;
                 },
             });
+        }
     }
 }

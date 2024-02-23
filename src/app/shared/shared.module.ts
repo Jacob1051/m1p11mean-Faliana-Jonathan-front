@@ -3,11 +3,13 @@ import { MultiDropdownComponent } from './components/multi-dropdown/multi-dropdo
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DropdownComponent } from './components/dropdown/dropdown.component';
+import { UploadImagesComponent } from './components/upload-images/upload-images.component';
 
 @NgModule({
     declarations: [
         MultiDropdownComponent,
-        DropdownComponent
+        DropdownComponent,
+        UploadImagesComponent
     ],
     imports: [
         CommonModule,
@@ -16,7 +18,8 @@ import { DropdownComponent } from './components/dropdown/dropdown.component';
     ],
     exports: [
         MultiDropdownComponent,
-        DropdownComponent
+        DropdownComponent,
+        UploadImagesComponent
     ]
 })
 export class SharedModule { }

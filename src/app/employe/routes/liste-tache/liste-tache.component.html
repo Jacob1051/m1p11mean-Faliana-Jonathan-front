@@ -14,6 +14,15 @@
         </div>
 
         <div class="row">
+            <div class="pb-5">
+                <div class="card">
+                    <div class="card-body">
+                        <h6>Commission pour la journée:</h6> {{commission}} $
+                    </div>
+                </div>
+            </div>
+
+
             <div class="col-md-6">
                 <h2>À réaliser</h2>
 
@@ -30,7 +39,7 @@
                         <div class="example-box" cdkDrag>
                             {{ item.client.nomClient + " " + item.client.prenomClient }} |
                             {{ item.service.nomService }} |
-                            {{ item.dateDebut | date : "fullTime" }}
+                            {{ item.dateDebut | date : "h:mm" }}
                         </div>
                     }
                 </div>
@@ -52,7 +61,7 @@
                         <div class="example-box" cdkDragDisabled>
                             {{ item.client.nomClient + " " + item.client.prenomClient }} |
                             {{ item.service.nomService }} |
-                            {{ item.dateDebut | date : "fullTime" }}
+                            {{ item.dateDebut | date : "h:mm" }}
                         </div>
                     }
                 </div>

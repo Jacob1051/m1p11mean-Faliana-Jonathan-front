@@ -22,7 +22,7 @@
                                 (ngSubmit)="onSubmit()"
                                 class="w-100"
                             >
-                                <h4 class="font-weight-700">SE CONNECTER (Employé)</h4>
+                                <h4 class="font-weight-700">SE CONNECTER <span class="fs-5">(Employé)</span></h4>
                                 @if(error){
                                 <div class="alert alert-danger" role="alert">
                                     {{ error }}
@@ -73,14 +73,12 @@
                                     >
                                     } }
                                 </div>
-                                <div class="pb-3">
-                                    <a routerLink="/register" class="m-l5"
-                                        >Vous n'avez pas de compte ?</a
-                                    >
-                                </div>
+
+                                
+                                
                                 <div class="text-left">
                                     <button
-                                        class="btn btn-danger btn-pink"
+                                        class="btn btn-danger btn-light-pink py-3 px-4"
                                         [disabled]="loading"
                                     >
                                         <span
