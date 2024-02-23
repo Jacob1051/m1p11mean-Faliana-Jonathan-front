@@ -39,7 +39,7 @@
                         <div class="example-box" cdkDrag>
                             {{ item.client.nomClient + " " + item.client.prenomClient }} |
                             {{ item.service.nomService }} |
-                            {{ item.dateDebut | date : "fullTime" }}
+                            {{ item.dateDebut | date : "h:mm" }}
                         </div>
                     }
                 </div>
@@ -61,7 +61,7 @@
                         <div class="example-box" cdkDragDisabled>
                             {{ item.client.nomClient + " " + item.client.prenomClient }} |
                             {{ item.service.nomService }} |
-                            {{ item.dateDebut | date : "fullTime" }}
+                            {{ item.dateDebut | date : "h:mm" }}
                         </div>
                     }
                 </div>

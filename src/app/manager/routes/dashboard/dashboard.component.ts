@@ -18,19 +18,19 @@ export class DashboardComponent implements OnInit{
     choix: Item[] = [{id: 0, name:'Par Mois'}, {id: 1, name:'Par Jour'}];
     beneficeForm!: FormGroup;
 
-    monthsArray = [
-        { month: 0, name: "Janvier" },
-        { month: 1, name: "Fevrier" },
-        { month: 2, name: "Mars" },
-        { month: 3, name: "Avril" },
-        { month: 4, name: "Mai" },
-        { month: 5, name: "Juin" },
-        { month: 6, name: "Juillet" },
-        { month: 7, name: "Aout" },
-        { month: 8, name: "Septembre" },
-        { month: 9, name: "Octobre" },
-        { month: 10, name: "Novembre" },
-        { month: 11, name: "Decembre" }
+    monthsArray: Item[] = [
+        { id: 0, name: "Janvier" },
+        { id: 1, name: "Fevrier" },
+        { id: 2, name: "Mars" },
+        { id: 3, name: "Avril" },
+        { id: 4, name: "Mai" },
+        { id: 5, name: "Juin" },
+        { id: 6, name: "Juillet" },
+        { id: 7, name: "Aout" },
+        { id: 8, name: "Septembre" },
+        { id: 9, name: "Octobre" },
+        { id: 10, name: "Novembre" },
+        { id: 11, name: "Decembre" }
     ];
 
     //---------------------loading variable---------------------//
@@ -56,6 +56,7 @@ export class DashboardComponent implements OnInit{
 
     //---------------------benefice variable---------------------//
     benefice: any = [];
+    selectedMonthBenefice: Item = this.monthsArray[0];
     beneficeBackUp: any = [];
     //---------------------benefice variable---------------------//
 
@@ -203,10 +204,17 @@ export class DashboardComponent implements OnInit{
         this.getChiffreAffaire();
     }
 
+    OnChoiceMonthBenefice(item: Item){
+        this.selectedMonthBenefice = item;
+        console.log(item);
+    }
+
     onSubmitBeneficeForm() {
         const beneficeFormValue = this.beneficeForm.value;
 
-        this.benefice[1].value = this.benefice[1].value - (
+        var index = this.selectedMonthBenefice.id ?? 0;
+
+        this.benefice[index].value = this.benefice[index].value - (
             beneficeFormValue.salary + beneficeFormValue.rent + beneficeFormValue.pieces + beneficeFormValue.other
         );
         this.benefice = [...this.benefice];

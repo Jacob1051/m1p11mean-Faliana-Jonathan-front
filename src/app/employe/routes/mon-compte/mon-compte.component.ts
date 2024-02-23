@@ -129,11 +129,12 @@ export class MonCompteComponent {
     onSubmit() {
         this.submitted = true;
 
-        if (this.addEmployeForm.valid) {
+        var selectedService = this.listItems.filter((item: any) => item.checked);
+
+        if (this.addEmployeForm.valid && selectedService.length > 0) {
             this.loading = true;
 
             const auth = this.addEmployeForm.value;
-            var selectedService = this.listItems.filter((item: any) => item.checked);
 
             if (selectedService.length > 0) {
                 const workHour = this.buildWorkHour(auth);

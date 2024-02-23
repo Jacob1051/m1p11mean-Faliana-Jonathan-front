@@ -27,12 +27,12 @@ export class ListeTacheComponent implements OnInit {
         private authService: AuthService,
         private toastr: ToastrService,
         private statutService: StatutService
-    ) { }
+    ) {
+        this.setStatutEnCours();
+    }
 
     ngOnInit(): void {
         this.isLoading = true;
-
-        this.setStatutEnCours();
 
         this.tacheService.getTacheByEmpToday(this.authService.userValue.user_id).subscribe({
             next: (response: any) => {
@@ -46,7 +46,7 @@ export class ListeTacheComponent implements OnInit {
                         task.statut._id != this.statutEnCours._id
                     ));
 
-                    this.commission = this.finishedTask.reduce((total ,value)=>total += (value.service.prix * (value.service.commission / 100)), 0);
+                    this.commission = this.finishedTask.reduce((total ,value)=>total += (value.prix * (value.service.commission / 100)), 0);
 
                 } else {
                     console.error(response.message);
@@ -88,7 +88,7 @@ export class ListeTacheComponent implements OnInit {
                 event.previousIndex,
                 event.currentIndex,
             );
-            this.commission = this.finishedTask.reduce((total ,value)=>total += (value.service.prix * (value.service.commission / 100)), 0);
+            this.commission = this.finishedTask.reduce((total ,value)=>total += (value.prix * (value.service.commission / 100)), 0);
         }
     }
 
