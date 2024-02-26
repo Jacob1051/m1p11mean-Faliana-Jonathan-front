@@ -74,9 +74,9 @@ export class ModalOffreComponent {
 
     goToServices() {
         this.router.navigateByUrl('/listeService');
-        const closeButton = document.querySelector(
-            '#exampleModalOffreSpeciale .btn-close'
-        ) as HTMLButtonElement;
-        closeButton.click();
+        // const closeButton = document.querySelector(
+        //     '#exampleModalOffreSpeciale .btn-close'
+        // ) as HTMLButtonElement;
+        // closeButton.click();
     }
 }

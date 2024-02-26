@@ -117,4 +117,14 @@ export class ModalRappelComponent {
         moment.locale('fr');
         return moment(date).format('HH[h]mm');
     };
+    triggerModalOffre() {
+        const modalButton = document.querySelector(
+            '#modalOffreSpeciale'
+        ) as HTMLButtonElement;
+        if (modalButton) {
+            modalButton.click();
+        } else {
+            console.error("Le bouton modal n'a pas été trouvé.");
+        }
+    }
 }
