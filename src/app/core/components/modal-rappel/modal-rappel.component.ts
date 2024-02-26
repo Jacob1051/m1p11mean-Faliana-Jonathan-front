@@ -117,7 +117,11 @@ export class ModalRappelComponent {
         moment.locale('fr');
         return moment(date).format('HH[h]mm');
     };
-    triggerModalOffre() {
+
+    triggerModalOffre(event: MouseEvent) {
+        const idBouton = (event.target as HTMLElement).id;
+        console.log("ID de l'élément cliqué :", idBouton);
+
         const modalButton = document.querySelector(
             '#modalOffreSpeciale'
         ) as HTMLButtonElement;
