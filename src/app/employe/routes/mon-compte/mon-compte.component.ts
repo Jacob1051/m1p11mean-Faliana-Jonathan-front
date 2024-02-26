@@ -115,6 +115,7 @@ export class MonCompteComponent {
                     this.listItems.forEach((item: any) => {
                         const found = x.data.mesServices.find((serviceItem: any) => serviceItem._id === item.id);
                         if (found) {
+                            this.hasServices = true;
                             item.checked = true;
                         }
                     });

@@ -108,7 +108,7 @@ export class DashboardComponent implements OnInit{
                 next: (data: any) => {
                     this.tempsMoyen = [{
                         employe: this.selectedEmpTempsMoyenStat.nomEmploye + ' ' + this.selectedEmpTempsMoyenStat.prenomEmploye,
-                        value : data.data ? data.data : 0
+                        value : data.data ? data.data/60 : 0
                     }];
                     this.isLoadingTempsMoyen = false;
                 }

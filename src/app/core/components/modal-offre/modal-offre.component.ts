@@ -5,6 +5,7 @@ import 'moment-timezone';
 import { ToastrService } from 'ngx-toastr';
 import { TOAST_OPTIONS_BOTTOM_RIGHT } from 'src/app/_utils/toast/toast-options';
 import { OffreService } from 'src/app/manager/services/offre/offre.service';
+import { AuthService } from '../../services/client/auth/auth.service';
 import { LocalTimezoneService } from '../../services/localTimezone/local-timezone.service';
 
 @Component({
@@ -17,11 +18,14 @@ export class ModalOffreComponent {
         private OffreService: OffreService,
         private toastr: ToastrService,
         private localTimezoneService: LocalTimezoneService,
-        private router: Router
+        private router: Router,
+        private authService: AuthService
     ) {}
+
     ngOnInit() {
         this.getOffreEnCours();
     }
+
     isLoading = false;
     offreEnCours: any;
 
@@ -74,9 +78,9 @@ export class ModalOffreComponent {
 
     goToServices() {
         this.router.navigateByUrl('/listeService');
-        const closeButton = document.querySelector(
-            '#exampleModalOffreSpeciale .btn-close'
-        ) as HTMLButtonElement;
-        closeButton.click();
+        // const closeButton = document.querySelector(
+        //     '#exampleModalOffreSpeciale .btn-close'
+        // ) as HTMLButtonElement;
+        // closeButton.click();
     }
 }

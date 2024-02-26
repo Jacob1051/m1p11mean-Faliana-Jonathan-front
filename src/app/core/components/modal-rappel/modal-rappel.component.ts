@@ -71,7 +71,7 @@ export class ModalRappelComponent {
             next: (response: any) => {
                 if (response.status == 200) {
                     this.rappelRdv = response.data;
-                    // console.log(response.data);
+                    console.log(response.data);
 
                     response.data ? this.triggerModalRappel() : null;
                 } else {
@@ -95,14 +95,16 @@ export class ModalRappelComponent {
     }
 
     triggerModalRappel() {
-        const modalButton = document.querySelector(
-            '#modalRappelRdv'
-        ) as HTMLButtonElement;
-        if (modalButton) {
-            modalButton.click();
-        } else {
-            console.error("Le bouton modal n'a pas été trouvé.");
-        }
+        setTimeout(() => {
+            const modalButton = document.querySelector(
+                '#modalRappelRdv'
+            ) as HTMLButtonElement;
+            if (modalButton) {
+                modalButton.click();
+            } else {
+                console.error("Le bouton modal n'a pas été trouvé.");
+            }
+        }, 5000);
     }
 
     goToHisto() {
@@ -117,4 +119,18 @@ export class ModalRappelComponent {
         moment.locale('fr');
         return moment(date).format('HH[h]mm');
     };
+
+    triggerModalOffre(event: MouseEvent) {
+        const idBouton = (event.target as HTMLElement).id;
+        console.log("ID de l'élément cliqué :", idBouton);
+
+        const modalButton = document.querySelector(
+            '#modalOffreSpeciale'
+        ) as HTMLButtonElement;
+        if (modalButton) {
+            modalButton.click();
+        } else {
+            console.error("Le bouton modal n'a pas été trouvé.");
+        }
+    }
 }
