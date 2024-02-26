@@ -95,14 +95,16 @@ export class ModalRappelComponent {
     }
 
     triggerModalRappel() {
-        const modalButton = document.querySelector(
-            '#modalRappelRdv'
-        ) as HTMLButtonElement;
-        if (modalButton) {
-            modalButton.click();
-        } else {
-            console.error("Le bouton modal n'a pas été trouvé.");
-        }
+        setTimeout(() => {
+            const modalButton = document.querySelector(
+                '#modalRappelRdv'
+            ) as HTMLButtonElement;
+            if (modalButton) {
+                modalButton.click();
+            } else {
+                console.error("Le bouton modal n'a pas été trouvé.");
+            }
+        }, 5000);
     }
 
     goToHisto() {
