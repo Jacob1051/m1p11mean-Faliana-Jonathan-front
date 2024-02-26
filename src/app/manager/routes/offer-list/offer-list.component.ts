@@ -49,7 +49,7 @@ export class OfferListComponent {
         this.service.getListeOffre().subscribe({
             next: (data: any) => {
                 this.listeOffre = data.data;
-                console.log(this.listeOffre);
+                // console.log(this.listeOffre);
                 this.listeOffreBackup = this.listeOffre;
                 this.isLoading = false;
             },
@@ -114,7 +114,7 @@ export class OfferListComponent {
         if(dateToCompare>new Date()){
             return true;
         }
-        
+
         return false;
     }
 }

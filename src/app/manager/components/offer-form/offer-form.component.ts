@@ -57,6 +57,7 @@ export class OfferFormComponent implements OnInit{
         );
 
         if(this.offreData){
+            this.offerForm.patchValue({'service': this.offreData.service._id});
             this.offerForm.patchValue({'nomOffre': this.offreData.nomOffre});
             this.offerForm.patchValue({'remise': this.offreData.remise});
             this.offerForm.patchValue({'dateDebut': moment(this.offreData.dateDebut).format('YYYY-MM-DD HH:mm')});
