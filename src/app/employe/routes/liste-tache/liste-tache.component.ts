@@ -28,11 +28,16 @@ export class ListeTacheComponent implements OnInit {
         private toastr: ToastrService,
         private statutService: StatutService
     ) {
-        this.setStatutEnCours();
+
     }
 
     ngOnInit(): void {
         this.isLoading = true;
+        this.initializeData();
+    }
+
+    async initializeData() {
+        await this.setStatutEnCours();
 
         this.tacheService.getTacheByEmpToday(this.authService.userValue.user_id).subscribe({
             next: (response: any) => {
