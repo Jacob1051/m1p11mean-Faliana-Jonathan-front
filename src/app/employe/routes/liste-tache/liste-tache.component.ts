@@ -28,11 +28,52 @@ export class ListeTacheComponent implements OnInit {
         private toastr: ToastrService,
         private statutService: StatutService
     ) {
-        this.setStatutEnCours();
+
     }
 
     ngOnInit(): void {
         this.isLoading = true;
+        this.initializeData();
+        // this.setStatutEnCours();
+
+        // this.tacheService.getTacheByEmpToday(this.authService.userValue.user_id).subscribe({
+        //     next: (response: any) => {
+        //         if (response.status == 200) {
+
+        //             this.pendingTask = response.data.filter((task: any) => (
+        //                 task.statut._id === this.statutEnCours._id
+        //             ));
+
+        //             this.finishedTask = response.data.filter((task: any) => (
+        //                 task.statut._id != this.statutEnCours._id
+        //             ));
+
+        //             this.commission = this.finishedTask.reduce((total ,value)=>total += (value.prix * (value.service.commission / 100)), 0);
+
+        //         } else {
+        //             console.error(response.message);
+        //             this.toastr.error(
+        //                 `Une erreur s'est produite!`,
+        //                 'Erreur!',
+        //                 TOAST_OPTIONS_BOTTOM_RIGHT
+        //             );
+        //         }
+        //         this.isLoading = false;
+        //     },
+        //     error: (error) => {
+        //         console.error(error);
+        //         this.toastr.error(
+        //             `Une erreur s'est produite`,
+        //             'Erreur!',
+        //             TOAST_OPTIONS_BOTTOM_RIGHT
+        //         );
+        //         this.isLoading = false;
+        //     },
+        // });
+    }
+
+    async initializeData() {
+        await this.setStatutEnCours(); // Wait for setStatutEnCours() to finish before continuing
 
         this.tacheService.getTacheByEmpToday(this.authService.userValue.user_id).subscribe({
             next: (response: any) => {
